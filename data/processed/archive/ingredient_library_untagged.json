@@ -1,0 +1,543 @@
+{
+  "base_resins": [
+    {
+      "name": "PP ICP Virgin",
+      "type": "PP-ICP",
+      "family": "Polypropylene",
+      "mfr_range": [
+        10,
+        40
+      ],
+      "cost_usd_per_kg": 1.5,
+      "ef_kgCO2e_per_kg": 1.85,
+      "notes": "Virgin Polypropylene Impact Copolymer",
+      "sustainability": {
+        "origin": "fossil",
+        "bio_content_pct": 0,
+        "recycled_content_pct": 0
+      },
+      "compatibility": {
+        "elastomer_types": ["POE", "PBE"],
+        "compatibilizer_types": ["PP-g-MAH"],
+        "filler_types": ["Talc", "CaCO3", "SGF"]
+      }
+    },
+    {
+      "name": "rPP ICP (injection grade)",
+      "type": "rPP-ICP",
+      "family": "Polypropylene",
+      "cost_usd_per_kg": 1.22,
+      "ef_kgCO2e_per_kg": 0.7,
+      "notes": "Recycled Polypropylene Impact Copolymer. EF can vary based on source.",
+      "sustainability": {
+        "origin": "recycled",
+        "bio_content_pct": 0,
+        "recycled_content_pct": 100
+      },
+      "compatibility": {
+        "elastomer_types": ["POE", "PBE"],
+        "compatibilizer_types": ["PP-g-MAH"],
+        "filler_types": ["Talc", "CaCO3", "SGF"]
+      }
+    },
+    {
+      "name": "Mass-Balance Bio-PP ICP",
+      "type": "Bio-PP-ICP",
+      "family": "Polypropylene",
+      "cost_usd_per_kg": 2.1,
+      "ef_kgCO2e_per_kg": 1.85,
+      "notes": "ISCC+ certified mass-balance bio-attributed PP. Track bio-content separately.",
+      "sustainability": {
+        "origin": "bio-attributed",
+        "recycled_content_pct": 0,
+        "scheme": "ISCC+ mass balance",
+        "notes": "Bio-attributed via mass balance; effective biogenic content allocated by certificate."
+      },
+      "compatibility": {
+        "elastomer_types": ["POE", "PBE"],
+        "compatibilizer_types": ["PP-g-MAH"],
+        "filler_types": ["Talc", "CaCO3", "SGF"]
+      }
+    },
+    {
+      "name": "PLA (general-purpose)",
+      "type": "PLA",
+      "family": "biopolymer",
+      "mfr_range": [
+        3,
+        30
+      ],
+      "cost_usd_per_kg": 2.6,
+      "ef_kgCO2e_per_kg": 1.83,
+      "sustainability": {
+        "origin": "bio-based",
+        "bio_content_pct": 100,
+        "recycled_content_pct": 0
+      },
+      "compatibility": {
+        "elastomer_types": ["PBAT", "PHA"],
+        "compatibilizer_types": ["PLA-g-MAH", "Joncryl"],
+        "filler_types": ["Talc", "CaCO3", "BioFiber", "Biochar", "Cellulose"]
+      },
+      "notes": "Polylactic Acid; high stiffness, low impact; Tg~60\u00b0C, Tm~160-170\u00b0C.",
+      "automotive": {
+        "interior_suitability": "Interior trim in low-heat zones; use stabilized blends.",
+        "odor_vda270_target": "Aim \u22643 at 60\u00b0C (OEM-dependent); use low-lactide grades and drying.",
+        "fogging_vda278_guideline": "Select low-VOC additives; verify per VDA 278 / ISO 6452; avoid excess waxes.",
+        "heat_aging_guideline": "Stabilize with AO/HALS; verify 80\u201390\u00b0C for 500\u20131000 h; monitor embrittlement/cracking.",
+        "uv_guideline": "Use UV absorber + HALS; consider pigment package for lightfastness.",
+        "scratch_mar": "Mineral/bio fillers raise stiffness but can reduce mar resistance; consider slip or coatings.",
+        "squeak_rattle": "Control friction at interfaces; surface texture helpful; avoid stick-slip.",
+        "recyclability": "Mechanical recycling feasible as dedicated PLA stream; segregate from PP/ABS.",
+        "processing_notes": "Dry to \u22640.02% moisture; avoid long residence; watch hydrolysis above ~200\u00b0C."
+      },
+      "meta": {
+        "last_updated": "2025-08-29",
+        "sources_hint": [
+          "NatureWorks 2015 Ingeo EcoProfile",
+          "IMARC/PriceWatch 2025"
+        ]
+      }
+    },
+    {
+      "name": "PHA (copolymer grade)",
+      "type": "PHA",
+      "family": "biopolymer",
+      "mfr_range": [
+        2,
+        8
+      ],
+      "cost_usd_per_kg": 3.5,
+      "ef_kgCO2e_per_kg": 3.0,
+      "sustainability": {
+        "origin": "bio-based",
+        "bio_content_pct": 100,
+        "recycled_content_pct": 0
+      },
+      "notes": "Polyhydroxyalkanoate; ductility depends on comonomer; biodegradable; thermal stability lower than PLA.",
+      "automotive": {
+        "interior_suitability": "Interior trim where ductility is engineered via blends; avoid sustained high-heat zones.",
+        "odor_vda270_target": "Aim \u22643 at 60\u00b0C; manage residual monomers/volatiles; thorough drying.",
+        "fogging_vda278_guideline": "Use low-volatility additives; confirm fogging/FOG per VDA 278.",
+        "heat_aging_guideline": "Thermal stability lower than PLA; verify 70\u201385\u00b0C aging; add AO package.",
+        "uv_guideline": "UV stabilization recommended; copolymers may discolor without protection.",
+        "scratch_mar": "Similar guidance to PLA; blend design and fillers influence mar.",
+        "squeak_rattle": "Ensure interface control; consider texture and low-friction skins.",
+        "recyclability": "Dedicated PHA stream recommended; blending with PLA common but manage sorting.",
+        "processing_notes": "Dry thoroughly; minimize shear/hold-up; avoid long residence to limit degradation."
+      },
+      "meta": {
+        "last_updated": "2025-08-29",
+        "sources_hint": [
+          "PHA LCA reviews (1\u20136 kgCO2e/kg)",
+          "IMARC 2025"
+        ]
+      }
+    },
+    {
+      "name": "PHB (homopolymer)",
+      "type": "PHB",
+      "family": "biopolymer",
+      "mfr_range": [
+        0.5,
+        5
+      ],
+      "cost_usd_per_kg": 5.0,
+      "ef_kgCO2e_per_kg": 3.0,
+      "sustainability": {
+        "origin": "bio-based",
+        "bio_content_pct": 100,
+        "recycled_content_pct": 0
+      },
+      "notes": "Poly(3-hydroxybutyrate); high crystallinity, brittle; often blended or copolymerized for toughness.",
+      "automotive": {
+        "interior_suitability": "Use mainly in blends/copolymers (e.g., PHBV) due to brittleness; low-heat interior areas.",
+        "odor_vda270_target": "Aim \u22643 at 60\u00b0C; select low-odor grades; drying critical.",
+        "fogging_vda278_guideline": "Limit low-MW additives; verify per VDA 278.",
+        "heat_aging_guideline": "High crystallinity leads to embrittlement; test 70\u201380\u00b0C aging; strong AO needed.",
+        "uv_guideline": "UV sensitive; must use HALS/UV absorber.",
+        "scratch_mar": "Stiffness high; can be prone to brittle mar; consider elastomer toughening.",
+        "squeak_rattle": "Similar to PLA; manage interface; avoid stick-slip.",
+        "recyclability": "Prefer blending with PLA/PBAT for processability; track stream separately.",
+        "processing_notes": "Lower processing temp window; careful with shear; avoid prolonged melt residence."
+      },
+      "meta": {
+        "last_updated": "2025-08-29",
+        "sources_hint": [
+          "PHA/PHB LCA range; mid-point assumption"
+        ]
+      }
+    }
+  ],
+  "elastomers": [
+    {
+      "name": "ENGAGE\u2122 POE (e.g., 8180)",
+      "type": "POE",
+      "cost_usd_per_kg": 2.65,
+      "ef_kgCO2e_per_kg": 2.0,
+      "range_wt_pct": [
+        8,
+        18
+      ],
+      "notes": "Polyolefin Elastomer",
+      "sustainability": {
+        "origin": "fossil",
+        "bio_content_pct": 0,
+        "recycled_content_pct": 0
+      }
+    },
+    {
+      "name": "Vistamaxx\u2122 (e.g., 6102FL)",
+      "type": "PBE",
+      "cost_usd_per_kg": 2.41,
+      "ef_kgCO2e_per_kg": 1.8,
+      "range_wt_pct": [
+        8,
+        18
+      ],
+      "notes": "Propylene-Based Elastomer",
+      "sustainability": {
+        "origin": "fossil",
+        "bio_content_pct": 0,
+        "recycled_content_pct": 0
+      }
+    },
+    {
+      "name": "PBAT (impact modifier)",
+      "type": "PBAT",
+      "cost_usd_per_kg": 1.53,
+      "ef_kgCO2e_per_kg": 5.89,
+      "range_wt_pct": [
+        10,
+        30
+      ],
+      "notes": "Biodegradable elastomer; toughens PLA/PHA blends; reduces brittleness; current PBAT is fossil-derived.",
+      "automotive": {
+        "role": "Impact modifier for PLA/PHA; maintains compostability but reduces bio-content.",
+        "interior_suitability": "Good for ductility in interior trim away from high-heat sources.",
+        "odor_vda270_target": "Aim \u22643 at 60\u00b0C; select low-odor grades; control residuals.",
+        "fogging_vda278_guideline": "Keep loading in target range; select low-volatility stabilizers.",
+        "heat_aging_guideline": "Lower heat resistance than PLA; validate 70\u201380\u00b0C aging when PBAT \u226515\u201320%.",
+        "uv_guideline": "Add UV stabilization; PBAT can yellow under UV without package.",
+        "recyclability": "Mechanically recyclable as PLA/PBAT stream; label clearly to avoid PP contamination.",
+        "processing_notes": "Typical use 10\u201330 wt%; compatibilization with PLA/PHA helps dispersion."
+      },
+      "sustainability": {
+        "origin": "fossil",
+        "bio_content_pct": 0,
+        "recycled_content_pct": 0,
+        "notes": "Biodegradable elastomer; fossil-sourced unless stated bio-based"
+      },
+      "meta": {
+        "last_updated": "2025-08-29",
+        "sources_hint": [
+          "2024 PBAT LCA fossil=5.89 kgCO2e/kg",
+          "ChemAnalyst 2025 price"
+        ]
+      }
+    }
+  ],
+  "compatibilizers": [
+    {
+      "name": "Fusabond\u00ae P (PP-g-MAH)",
+      "type": "PP-g-MAH",
+      "mah_pct": 0.8,
+      "cost_usd_per_kg": 4.46,
+      "ef_kgCO2e_per_kg": 2.0,
+      "range_wt_pct": [
+        0.5,
+        2.0
+      ]
+    },
+    {
+      "name": "PLA-g-MAH (generic)",
+      "type": "PLA-g-MAH",
+      "mah_pct": 1.0,
+      "cost_usd_per_kg": 5.5,
+      "ef_kgCO2e_per_kg": 2.5,
+      "range_wt_pct": [
+        0.5,
+        2.0
+      ]
+    }
+  ],
+  "nucleators": [
+    {
+      "name": "Hyperform\u00ae HPN-715",
+      "type": "HPN",
+      "cost_usd_per_kg": 8.8,
+      "ef_kgCO2e_per_kg": 3.0,
+      "range_ppm": [
+        300,
+        1500
+      ],
+      "notes": "High performance nucleator. EF is high but mass is tiny."
+    },
+    {
+      "name": "Millad\u00ae NX\u2122 8000",
+      "type": "Sorbitol",
+      "cost_usd_per_kg": 17.6,
+      "ef_kgCO2e_per_kg": 6.0,
+      "range_wt_pct": [
+        0.05,
+        0.3
+      ]
+    }
+  ],
+  "mineral_fillers": [
+    {
+      "name": "Talc (e.g., Mistron\u00ae)",
+      "type": "Talc",
+      "particle_size_um": 5,
+      "aspect_ratio": 10,
+      "cost_usd_per_kg": 0.4,
+      "ef_kgCO2e_per_kg": 0.3,
+      "range_wt_pct": [
+        10,
+        20
+      ]
+    },
+    {
+      "name": "CaCO3 (e.g., Omyacarb\u00ae)",
+      "type": "CaCO3",
+      "particle_size_um": 3,
+      "aspect_ratio": 1,
+      "cost_usd_per_kg": 0.3,
+      "ef_kgCO2e_per_kg": 0.3,
+      "range_wt_pct": [
+        10,
+        20
+      ],
+      "notes": "Cost from costs.csv ($7.70/kg) was anomalous; a more typical market value is used."
+    }
+  ],
+  "fibrous_fillers": [
+    {
+      "name": "Short Glass Fiber",
+      "type": "SGF",
+      "cost_usd_per_kg": 2.0,
+      "ef_kgCO2e_per_kg": 1.5,
+      "range_wt_pct": [
+        10,
+        30
+      ],
+      "notes": "Use requires higher compatibilizer loading."
+    },
+    {
+      "name": "Hemp Fiber",
+      "type": "BioFiber",
+      "density_gcc": 1.45,
+      "aspect_ratio": 60,
+      "Ef_GPa": 35.0,
+      "sustainability": {
+        "origin": "bio-based",
+        "bio_content_pct": 100,
+        "recycled_content_pct": 0
+      },
+      "range_wt_pct": [
+        0,
+        20
+      ],
+      "cost_usd_per_kg": 1.8,
+      "ef_kgCO2e_per_kg": 0.15,
+      "notes": "Natural bast fiber; dry; couple with PP-g-MAH."
+    },
+    {
+      "name": "Flax Fiber",
+      "type": "BioFiber",
+      "density_gcc": 1.5,
+      "aspect_ratio": 70,
+      "Ef_GPa": 45.0,
+      "sustainability": {
+        "origin": "bio-based",
+        "bio_content_pct": 100,
+        "recycled_content_pct": 0
+      },
+      "range_wt_pct": [
+        0,
+        20
+      ],
+      "cost_usd_per_kg": 2.0,
+      "ef_kgCO2e_per_kg": 0.15,
+      "notes": "Natural bast fiber; higher modulus; dry; couple with PP-g-MAH."
+    }
+  ],
+  "stabilizers": [
+    {
+      "name": "Generic AO/UV Package",
+      "type": "StabPackage",
+      "cost_usd_per_kg": 15.0,
+      "ef_kgCO2e_per_kg": 5.0,
+      "range_wt_pct": [
+        0.1,
+        0.6
+      ],
+      "notes": "Represents a typical blend of AO/HALS. Cost is an estimate."
+    },
+    {
+      "name": "Irganox\u00ae 1010",
+      "type": "PrimaryAO",
+      "cost_usd_per_kg": 17.82,
+      "ef_kgCO2e_per_kg": 6.0,
+      "range_wt_pct": [
+        0.05,
+        0.3
+      ],
+      "notes": "Primary antioxidant (phenolic)"
+    },
+    {
+      "name": "Irgafos\u00ae 168",
+      "type": "SecondaryAO",
+      "cost_usd_per_kg": 10.01,
+      "ef_kgCO2e_per_kg": 5.0,
+      "range_wt_pct": [
+        0.05,
+        0.3
+      ],
+      "notes": "Secondary antioxidant (phosphite)"
+    },
+    {
+      "name": "Tinuvin\u00ae 770",
+      "type": "HALS",
+      "cost_usd_per_kg": 29.92,
+      "ef_kgCO2e_per_kg": 8.0,
+      "range_wt_pct": [
+        0.1,
+        0.5
+      ],
+      "notes": "Hindered Amine Light Stabilizer (UV)"
+    },
+    {
+      "name": "DHT-4A (Hydrotalcite)",
+      "type": "AcidScavenger",
+      "cost_usd_per_kg": 0.4,
+      "ef_kgCO2e_per_kg": 1.2,
+      "range_wt_pct": [
+        0.05,
+        0.2
+      ],
+      "notes": "Acid scavenger"
+    }
+  ],
+  "bio_extenders": [
+    {
+      "name": "Cellulose Fiber",
+      "type": "Cellulose",
+      "cost_usd_per_kg": 2.25,
+      "ef_kgCO2e_per_kg": 0.1,
+      "range_wt_pct": [
+        5,
+        25
+      ],
+      "sustainability": {
+        "origin": "bio-based",
+        "bio_content_pct": 100,
+        "recycled_content_pct": 0
+      },
+      "notes": "Biogenic carbon content should be tracked. Check moisture sensitivity."
+    }
+  ],
+  "colorants": [
+    {
+      "name": "Carbon Black",
+      "type": "Colorant",
+      "cost_usd_per_kg": 1.83,
+      "ef_kgCO2e_per_kg": 3.0,
+      "range_wt_pct": [
+        0.2,
+        2.0
+      ],
+      "notes": "Also provides UV protection."
+    }
+  ],
+  "bio_fillers": [
+    {
+      "name": "Biochar (fine, <10 \u00b5m)",
+      "type": "Biochar",
+      "density_gcc": 1.8,
+      "aspect_ratio": 1,
+      "Ef_GPa": 10.0,
+      "sustainability": {
+        "origin": "bio-based",
+        "bio_content_pct": 100,
+        "recycled_content_pct": 0,
+        "notes": "Carbonized biomass; sequesters biogenic carbon; EF may be near-zero or negative depending on system boundaries."
+      },
+      "range_wt_pct": [
+        0,
+        15
+      ],
+      "cost_usd_per_kg": 0.9,
+      "ef_kgCO2e_per_kg": 0.1,
+      "notes": "Carbonized biomass; filler + black colorant."
+    },
+    {
+      "name": "Microcrystalline Cellulose (MCC)",
+      "type": "Cellulose",
+      "density_gcc": 1.5,
+      "aspect_ratio": 1,
+      "Ef_GPa": 10.0,
+      "sustainability": {
+        "origin": "bio-based",
+        "bio_content_pct": 100,
+        "recycled_content_pct": 0
+      },
+      "range_wt_pct": [
+        1,
+        20
+      ],
+      "cost_usd_per_kg": 2.2,
+      "ef_kgCO2e_per_kg": 1.0,
+      "notes": "Cellulosic particulate filler; dry thoroughly; improves stiffness; watch moisture for PLA/PHA/PHB.",
+      "automotive": {
+        "interior_suitability": "Weight-saving, stiffness-boosting bio-filler for interior trim; use in low-heat areas.",
+        "odor_vda270_target": "Aim \u22643 at 60\u00b0C; ensure fiber is clean/low-odor; avoid residual volatiles.",
+        "fogging_vda278_guideline": "Low volatility; main risk from moisture; dry fully pre-compounding.",
+        "heat_aging_guideline": "Monitor embrittlement due to moisture uptake; validate 70\u201385\u00b0C aging.",
+        "uv_guideline": "Cellulose discolors under UV; protect via pigment/UV package and skin layers.",
+        "scratch_mar": "Particulate filler may reduce mar resistance; tune surface and additive package.",
+        "moisture_management": "Dry to \u22640.1% moisture; store sealed; consider coupling agent for adhesion.",
+        "processing_notes": "Pre-dry; add compatibilizer (e.g., MAH-grafted) when in non-polar matrices."
+      },
+      "meta": {
+        "last_updated": "2025-08-29",
+        "sources_hint": [
+          "US pulp/paper average ~0.94 kgCO2e/kg"
+        ]
+      }
+    }
+  ],
+  "processing_aids": [
+    {
+      "name": "EBS (Ethylene Bis Stearamide)",
+      "type": "Lubricant",
+      "cost_usd_per_kg": 2.2,
+      "ef_kgCO2e_per_kg": 3.5,
+      "range_wt_pct": [
+        0.2,
+        1.0
+      ],
+      "sustainability": {
+        "origin": "bio-based",
+        "bio_content_pct": 100,
+        "recycled_content_pct": 0
+      },
+      "notes": "High-mp lubricant/flow aid; improves dispersion and mold release; suitable for durable parts.",
+      "automotive": {
+        "function": "Internal/external lubricant; flow/dispersant aid for compounding and molding.",
+        "odor_vda270_target": "Use low-odor grades; keep within 0.2\u20130.5 wt% when odor is critical.",
+        "fogging_vda278_guideline": "EBS can contribute to FOG if overdosed; verify per VDA 278; prefer higher mp grades.",
+        "paint_adhesion_risk": true,
+        "paint_adhesion_note": "Surface bloom may reduce paint/adhesion; evaluate if painting/printing is required.",
+        "squeak_rattle": "Can reduce stick-slip; validate in BSR tests.",
+        "processing_notes": "Add at hopper or side-feed with fillers to aid dispersion; avoid excess to limit mar/fogging."
+      },
+      "meta": {
+        "last_updated": "2025-08-29",
+        "sources_hint": [
+          "Fatty-acid derivative LCIs; conservative estimate"
+        ]
+      }
+    }
+  ]
+}

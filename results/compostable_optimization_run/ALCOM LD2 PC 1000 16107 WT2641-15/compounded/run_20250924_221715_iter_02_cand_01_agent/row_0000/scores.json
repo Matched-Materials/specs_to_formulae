@@ -1,0 +1,50 @@
+{
+  "literature_consistency_score": 0.55,
+  "realism_penalty": 0.2,
+  "recommended_bo_weight": 0.11,
+  "confidence": "High",
+  "confidence_factor": 1.0,
+  "property_scores": {
+    "rho_gcc": {
+      "score": 0.1,
+      "notes": "Predicted density (0.894 g/cc) is physically unrealistic. It is lower than pure PP (~0.905 g/cc) despite the inclusion of 3.5 wt% of an unspecified mineral filler, which should significantly increase density above 0.91 g/cc."
+    },
+    "Tm_C": {
+      "score": 0.0,
+      "notes": "Predicted melting point (213\u00b0C) is far outside the typical range for polypropylene (160-170\u00b0C). The model appears to be incorrectly predicting the process melt temperature as a material property, indicating a severe model flaw."
+    },
+    "Torque_Nm": {
+      "score": 0.1,
+      "notes": "Predicted torque (0.25 Nm) is unrealistically low for a twin-screw extrusion process, likely by one or two orders of magnitude. This suggests the model does not capture process physics correctly."
+    },
+    "HDT_C": {
+      "score": 0.6,
+      "notes": "The HDT (82.8\u00b0C) is optimistic for a material with a modulus of 808 MPa. While high crystallinity could contribute, it is on the upper edge of plausibility for such a flexible material."
+    },
+    "E_GPa": {
+      "score": 0.8,
+      "notes": "Modulus (808 MPa) is plausible for a PP blend with ~14% elastomer, representing a flexible TPO grade."
+    },
+    "MFI_g10min": {
+      "score": 0.9,
+      "notes": "MFI of 25 is a reasonable value for a medium-high flow injection molding grade."
+    },
+    "sigma_y_MPa": {
+      "score": 0.9,
+      "notes": "Yield strength (20.4 MPa) is consistent with literature values for PP-elastomer blends."
+    },
+    "Izod_23_kJm2": {
+      "score": 0.9,
+      "notes": "Room temperature impact strength (26.9 kJ/m\u00b2) is a typical and desirable value for a TPO."
+    },
+    "Izod_m20_kJm2": {
+      "score": 0.8,
+      "notes": "Low-temperature impact (4.6 kJ/m\u00b2) shows a realistic ductile-to-brittle transition below room temperature, typical for standard TPOs."
+    }
+  },
+  "r2_izod_vs_elastomer": null,
+  "r2_modulus_vs_elastomer": null,
+  "outlier_fraction": null,
+  "notes": "### Evaluation Report\n\n**Overall Assessment:** The prediction contains multiple critical, physically unrealistic values that indicate severe model deficiencies. The recommendation is to heavily penalize this result to guide the optimizer away from this region.\n\n**1. Critical Failures:**\n- **Density (`rho_gcc`):** The predicted density of 0.894 g/cc is physically impossible. The addition of 3.5% mineral filler (typically >2.5 g/cc) to a PP/elastomer base (~0.90 g/cc) must result in a final density greater than the base polymer. The prediction violates the rule of mixtures.\n- **Melting Point (`Tm_C`):** A `Tm` of 213\u00b0C is not characteristic of any standard polypropylene, which melts at 160-170\u00b0C. The model is likely confusing the process setpoint with the intrinsic material property, a fundamental error.\n- **Torque (`Torque_Nm`):** The predicted torque of 0.25 Nm is orders of magnitude too low for a real-world twin-screw extrusion process, bordering on idle/noise levels.\n- **Formulation Inconsistency:** The `filler_wtpct` is 3.51% while all specific filler types (`talc_wtpct`, `phi_f_talc`, etc.) are zero. This ambiguity makes a full evaluation difficult and points to a data inconsistency.\n\n**2. Plausible Aspects:**\n- The trade-off between stiffness (`E_GPa` = 808 MPa) and room-temperature impact (`Izod_23_kJm2` = 26.9 kJ/m\u00b2) is reasonable for a thermoplastic olefin (TPO).\n- MFI, yield strength, and the drop in low-temperature impact strength are all within expected ranges for this type of formulation.\n\n**3. Confidence:**\nConfidence is **High** due to the clear violations of fundamental principles of polymer physics and processing.",
+  "extras": null
+}

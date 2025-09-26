@@ -1,0 +1,50 @@
+{
+  "literature_consistency_score": 0.85,
+  "realism_penalty": 0.4,
+  "recommended_bo_weight": 0.221,
+  "confidence": "Medium",
+  "confidence_factor": 0.65,
+  "property_scores": {
+    "E_GPa": {
+      "score": 0.9,
+      "notes": "Plausible reduction in modulus from a standard PP matrix (~1.5 GPa) with ~13% elastomer content."
+    },
+    "MFI_g10min": {
+      "score": 0.9,
+      "notes": "A value of 25 is common for general-purpose injection molding PP grades. Plausible final MFI for the blend."
+    },
+    "sigma_y_MPa": {
+      "score": 0.9,
+      "notes": "Consistent reduction in yield strength from a PP homopolymer baseline (~30-35 MPa) due to the addition of elastomer."
+    },
+    "Izod_23_kJm2": {
+      "score": 0.8,
+      "notes": "High value, indicating 'super-tough' performance. Optimistic for 13% elastomer but achievable with excellent dispersion and compatibilization."
+    },
+    "Izod_m20_kJm2": {
+      "score": 0.85,
+      "notes": "Significant drop from room temperature is expected. The value is typical for a toughened PP with a ductile-brittle transition above -20\u00b0C."
+    },
+    "HDT_C": {
+      "score": 0.9,
+      "notes": "Expected decrease in heat deflection temperature for an unfilled PP upon addition of an amorphous elastomer phase."
+    },
+    "rho_gcc": {
+      "score": 1.0,
+      "notes": "Density is consistent with the rule of mixtures for a PP/elastomer blend."
+    },
+    "Xc": {
+      "score": 0.9,
+      "notes": "Plausible reduction in overall crystallinity due to the presence of the amorphous elastomer phase."
+    },
+    "Torque_Nm": {
+      "score": 0.1,
+      "notes": "Extremely low and physically unrealistic value for a twin-screw extruder at the specified throughput and screw speed. This may indicate a model error or incorrect units."
+    }
+  },
+  "r2_izod_vs_elastomer": null,
+  "r2_modulus_vs_elastomer": null,
+  "outlier_fraction": null,
+  "notes": "### Evaluation Report\n\n**1. Overall Assessment**\nThe predicted material properties are largely self-consistent and align with established literature trends for polypropylene-elastomer thermoplastic olefins (TPOs). The classic trade-off between stiffness and toughness is well-represented. However, a critical process parameter (`Torque_Nm`) is highly unrealistic, which significantly lowers the overall realism score.\n\n**2. Property Analysis**\n- **Mechanical Properties:** The formulation shows good toughening. The modulus (0.85 GPa) and yield strength (22.1 MPa) are appropriately reduced for a blend with 13 wt% elastomer. The room temperature Izod impact (54.5 kJ/m\u00b2) is very high, classifying it as a 'super-tough' PP, which is optimistic but plausible given the 2.5% compatibilizer. The low-temperature Izod (9.3 kJ/m\u00b2) indicates the expected embrittlement, with a ductile-to-brittle transition temperature (DBTT) clearly above -20\u00b0C, which is common for such systems.\n- **Physical & Thermal Properties:** Density (0.895 g/cm\u00b3), crystallinity (40%), and HDT (84.4 \u00b0C) are all within plausible ranges for this type of unfilled formulation.\n\n**3. Process Parameter Realism**\n- **Torque:** The predicted torque of 0.25 Nm is physically implausible for a twin-screw extruder operating at ~6 kg/h and 480 rpm. Real-world torque values would be substantially higher. This single data point severely undermines the credibility of the process simulation aspect of the prediction and is the primary reason for the low `realism_penalty`.\n\n**4. Confidence**\nConfidence is 'Medium' because while the material property interdependencies are correctly modeled, the glaring error in a key process parameter suggests potential flaws in the underlying simulation's process-property linkage.",
+  "extras": null
+}

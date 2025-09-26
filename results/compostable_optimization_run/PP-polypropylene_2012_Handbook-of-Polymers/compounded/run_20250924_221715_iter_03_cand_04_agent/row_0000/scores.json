@@ -1,0 +1,49 @@
+{
+  "literature_consistency_score": 0.7,
+  "realism_penalty": 0.5,
+  "recommended_bo_weight": 0.2275,
+  "confidence": "Medium",
+  "confidence_factor": 0.65,
+  "property_scores": {
+    "E_GPa": {
+      "score": 0.8,
+      "notes": "Plausible but on the low side (893 MPa) for a PP with ~9.4% elastomer, assuming no filler. Consistent with a soft, ductile material."
+    },
+    "MFI_g10min": {
+      "score": 0.9,
+      "notes": "A value of 25 is a common and realistic MFI for an injection molding grade PP compound."
+    },
+    "sigma_y_MPa": {
+      "score": 0.9,
+      "notes": "Yield strength of 21.3 MPa is consistent with the predicted low modulus, following expected trends for elastomer-modified PP."
+    },
+    "Izod_23_kJm2": {
+      "score": 0.8,
+      "notes": "High impact strength (44.2 kJ/m^2) is a primary goal of elastomer addition. The value is high but achievable in well-compatibilized systems."
+    },
+    "Izod_m20_kJm2": {
+      "score": 0.9,
+      "notes": "Good low-temperature toughness (7.6 kJ/m^2) is a key performance indicator for automotive grades. This value is realistic for an impact-modified PP."
+    },
+    "HDT_C": {
+      "score": 0.8,
+      "notes": "An HDT of 85.8 C is reasonable for an unfilled, elastomer-modified block copolymer. This value would be unrealistically low if 20% mineral filler were present."
+    },
+    "rho_gcc": {
+      "score": 0.2,
+      "notes": "Major inconsistency. A density of 0.896 g/cc is physically impossible for a blend with 20 wt% mineral filler (expected >1.0 g/cc). The value only makes sense if the system is unfilled, contradicting the formulation."
+    },
+    "Torque_Nm": {
+      "score": 0.1,
+      "notes": "The predicted torque of 0.25 Nm is extremely low and physically unrealistic for a lab-scale twin-screw extruder processing a PP compound. It is likely off by one or more orders of magnitude."
+    }
+  },
+  "r2_izod_vs_elastomer": null,
+  "r2_modulus_vs_elastomer": null,
+  "outlier_fraction": null,
+  "notes": "### Evaluation Report\n\n**Summary:** The predicted material properties exhibit some internally consistent trade-offs (e.g., lower modulus for higher impact), but the overall prediction suffers from major realism issues, primarily related to composition and process parameters.\n\n**1. Major Inconsistencies:**\n- **Composition vs. Density:** There is a fundamental contradiction between the specified `filler_wtpct` of 20% and the predicted `rho_gcc` of 0.896 g/cc. A 20% loading of any common mineral filler (talc, CaCO3) would increase density to >1.0 g/cc, not decrease it below that of pure PP (~0.905 g/cc). This suggests the model is not correctly handling filler effects, and the properties were likely predicted for an unfilled system.\n- **Process Torque:** The predicted `Torque_Nm` of 0.25 is physically unrealistic and orders of magnitude too low for melt compounding, indicating a severe flaw in the process model.\n\n**2. Property Evaluation (Assuming Unfilled System):**\n- **Mechanical Properties:** The balance of properties (Modulus: 893 MPa, Yield Strength: 21.3 MPa, RT Izod: 44.2 kJ/m^2) describes a soft, very tough material. This profile is plausible for a PP/elastomer blend, though the modulus is on the lower end.\n- **Thermal & Flow:** MFI (25) is appropriate for injection molding. HDT (85.8 C) is consistent with an unfilled, non-reinforced PP copolymer.\n\n**3. Confidence:**\nConfidence is **Medium**. While the relationships between the predicted mechanical properties are logical, the glaring contradictions in density and process torque undermine the credibility of the entire prediction. The evaluation proceeds by assuming the filler content is an artifact, but this ambiguity prevents high confidence.",
+  "extras": {
+    "contradiction_filler_vs_density": "filler_wtpct is 19.99% but rho_gcc is 0.896 g/cc, which is lower than base PP. This is physically impossible for mineral fillers.",
+    "unrealistic_process_parameter": "Torque_Nm of 0.25 is several orders of magnitude too low for polymer extrusion."
+  }
+}

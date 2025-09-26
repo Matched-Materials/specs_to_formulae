@@ -1,0 +1,50 @@
+{
+  "literature_consistency_score": 0.4,
+  "realism_penalty": 0.2,
+  "recommended_bo_weight": 0.08,
+  "confidence": "High",
+  "confidence_factor": 1.0,
+  "property_scores": {
+    "Tm_C": {
+      "score": 0.2,
+      "notes": "Predicted melt temperature of 219.5\u00b0C is high for a low-shear process (Q=1.6 kg/h), suggesting potential degradation. If interpreted as melting point, it is physically incorrect for any PP grade (typically 130-165\u00b0C)."
+    },
+    "Torque_Nm": {
+      "score": 0.1,
+      "notes": "Extremely low torque (0.25 Nm) is inconsistent with a formulation containing 16.6 wt% elastomer, which should significantly increase melt viscosity and thus torque. This value suggests an almost empty extruder."
+    },
+    "rho_gcc": {
+      "score": 0.0,
+      "notes": "Physically impossible. The predicted density (0.893 g/cc) is below that of the PP matrix (~0.905 g/cc) despite the inclusion of 6.8 wt% filler, which is invariably denser than PP. This indicates a fundamental model failure."
+    },
+    "E_GPa": {
+      "score": 0.8,
+      "notes": "The modulus (0.72 GPa) is a plausible value for a PP copolymer containing ~17 wt% elastomer, reflecting the expected stiffness reduction."
+    },
+    "MFI_g10min": {
+      "score": 0.5,
+      "notes": "The value (25 g/10min) is typical for an injection molding grade, but it contradicts the high elastomer content, which should decrease MFI (increase viscosity). It is only consistent with the unrealistically low torque."
+    },
+    "sigma_y_MPa": {
+      "score": 0.8,
+      "notes": "Yield strength (21 MPa) is within the expected range for a toughened PP, showing a realistic decrease from the base polymer."
+    },
+    "Izod_23_kJm2": {
+      "score": 0.7,
+      "notes": "Very high impact strength (58 kJ/m\u00b2), characteristic of a 'super-tough' PP. While achievable, it is optimistic for this elastomer content and suggests highly effective compatibilization."
+    },
+    "Izod_m20_kJm2": {
+      "score": 0.7,
+      "notes": "Good low-temperature toughness (9.97 kJ/m\u00b2), consistent with well-formulated thermoplastic olefins (TPOs) for automotive use. The drop from room temperature is expected."
+    },
+    "HDT_C": {
+      "score": 0.6,
+      "notes": "The Heat Deflection Temperature (79.5\u00b0C) is plausible, balancing the negative effect of the elastomer with the positive effect of the filler. However, its realism is undermined by the density contradiction."
+    }
+  },
+  "r2_izod_vs_elastomer": null,
+  "r2_modulus_vs_elastomer": null,
+  "outlier_fraction": null,
+  "notes": "### Evaluation Report\n\n**Overall Assessment:** The prediction is highly unrealistic and likely stems from a flawed model. While some predicted mechanical properties (modulus, strength, impact) are individually plausible, they are built upon a physically impossible foundation.\n\n**Critical Flaws:**\n1.  **Density (`rho_gcc`):** The model predicts a density of 0.893 g/cc for a compound containing 6.8 wt% filler. Adding any conventional filler (e.g., talc, CaCO3, with density > 2.5 g/cc) to polypropylene (density ~0.905 g/cc) must increase the overall density. The predicted value is physically impossible and represents a critical model failure.\n2.  **Process Torque (`Torque_Nm`):** The predicted torque of 0.25 Nm is extremely low and contradicts the presence of 16.6 wt% elastomer, which is known to substantially increase melt viscosity. This suggests a severe disconnect between composition and predicted processing behavior.\n3.  **Melt Temperature (`Tm_C`):** A value of 219.5\u00b0C is very high for a low throughput process, indicating high specific mechanical energy input or external heating that risks polymer degradation. If it represents the crystalline melting point, it is incorrect for polypropylene.\n\n**Secondary Inconsistencies:**\n-   The high MFI (25 g/10min) is inconsistent with the high elastomer content but aligns with the unrealistically low torque, pointing to a systemic issue in how the model handles viscosity.\n-   The input `filler_wtpct` is 6.8%, yet all specific filler volume fractions (`phi_f_*`) are zero, indicating a data inconsistency.\n\n**Conclusion:** Due to fundamental physical and process-related contradictions, this candidate should be heavily penalized. The model appears unable to correctly capture basic principles like the rule of mixtures for density and the effect of elastomers on viscosity.",
+  "extras": null
+}

@@ -1,0 +1,57 @@
+{
+  "literature_consistency_score": 0.4,
+  "realism_penalty": 0.2,
+  "recommended_bo_weight": 0.08,
+  "confidence": "High",
+  "confidence_factor": 1.0,
+  "property_scores": {
+    "E_GPa": {
+      "score": 0.3,
+      "notes": "Very low for a compound with 14.5 wt% filler. Expected >1.2 GPa, but predicted 0.78 GPa. Suggests the model is not capturing filler reinforcement."
+    },
+    "MFI_g10min": {
+      "score": 0.9,
+      "notes": "Plausible MFI for an injection molding grade PP copolymer blend."
+    },
+    "sigma_y_MPa": {
+      "score": 0.8,
+      "notes": "Reasonable yield strength for a PP impact copolymer with this level of elastomer."
+    },
+    "Izod_23_kJm2": {
+      "score": 0.8,
+      "notes": "High, but achievable room temperature impact strength for a well-compatibilized TPO."
+    },
+    "Izod_m20_kJm2": {
+      "score": 0.7,
+      "notes": "Plausible low-temperature impact strength, showing an expected ductile-to-brittle transition."
+    },
+    "HDT_C": {
+      "score": 0.3,
+      "notes": "Unrealistically low for a 14.5 wt% filled compound. Filler should significantly increase HDT above this value (81.7\u00b0C)."
+    },
+    "rho_gcc": {
+      "score": 0.0,
+      "notes": "Physically impossible. Predicted density (0.894 g/cc) is lower than base PP (~0.905 g/cc) despite containing 14.5 wt% of a much denser (unspecified) mineral filler. Expected density >1.0 g/cc."
+    },
+    "Tm_C": {
+      "score": 0.2,
+      "notes": "Predicted melt temperature (227.5\u00b0C) is excessively high for polypropylene and risks thermal degradation. Typical processing is below 220\u00b0C."
+    },
+    "Torque_Nm": {
+      "score": 0.1,
+      "notes": "Extremely low torque (0.25 Nm) is unrealistic for a twin-screw extruder processing a filled polymer compound, even at lab scale."
+    }
+  },
+  "r2_izod_vs_elastomer": null,
+  "r2_modulus_vs_elastomer": null,
+  "outlier_fraction": null,
+  "notes": "### Evaluation Report\n\n**Overall Assessment:** The prediction is highly unrealistic and inconsistent with fundamental materials science principles and processing knowledge. Confidence in this negative evaluation is high.\n\n**Critical Flaws:**\n1.  **Formulation Contradiction:** The formulation specifies `filler_wtpct` of 14.5% but all specific filler types (`talc_wtpct`, etc.) and volume fractions (`phi_f_*`) are zero. The filler identity is unknown, making a valid assessment difficult.\n2.  **Impossible Density:** The predicted density (`rho_gcc` = 0.894) is physically impossible. Adding any common mineral filler (density > 2.5 g/cc) to PP (density ~0.9 g/cc) must increase the compound's density. The prediction shows a decrease.\n3.  **Unrealistic Processing Parameters:** The melt temperature (`Tm_C` = 227.5\u00b0C) is in the degradation range for PP. The extruder torque (`Torque_Nm` = 0.25) is far too low to be credible for this type of compound.\n\n**Property Inconsistencies:**\n-   The predicted Modulus (`E_GPa`) and Heat Deflection Temperature (`HDT_C`) are far too low for a compound with 14.5% filler, indicating the model fails to capture the stiffening effect of fillers, which is a primary reason for their use in automotive parts.\n-   While impact and flow properties (Izod, MFI) are plausible in isolation, they are nonsensical in the context of the flawed density, modulus, and HDT predictions.\n\n**Recommendation:** This result should be heavily penalized by the optimizer. The underlying model appears to have fundamental flaws in its understanding of polymer composite physics.",
+  "extras": {
+    "critical_failures": [
+      "Undefined filler type despite non-zero filler_wtpct.",
+      "Predicted density is physically impossible for a mineral-filled compound.",
+      "Predicted melt temperature is in the degradation range for PP.",
+      "Predicted extruder torque is unrealistically low."
+    ]
+  }
+}

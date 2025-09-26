@@ -1,0 +1,47 @@
+{
+  "literature_consistency_score": 0.4,
+  "realism_penalty": 0.3,
+  "recommended_bo_weight": 0.12,
+  "confidence": "High",
+  "confidence_factor": 1.0,
+  "property_scores": {
+    "E_GPa": {
+      "score": 0.1,
+      "notes": "Predicted modulus is extremely low for a compound with 13.5 wt% mineral filler (assumed talc). Literature values for similar TPOs are typically >1000 MPa, not ~614 MPa."
+    },
+    "MFI_g10min": {
+      "score": 0.8,
+      "notes": "Plausible MFI for a medium-flow, filled TPO suitable for injection molding."
+    },
+    "sigma_y_MPa": {
+      "score": 0.7,
+      "notes": "Reasonable yield strength, correctly capturing the softening effect of the 22.5% elastomer content."
+    },
+    "Izod_23_kJm2": {
+      "score": 0.7,
+      "notes": "High, but achievable room temperature impact strength for a well-compatibilized TPO with this elastomer level."
+    },
+    "Izod_m20_kJm2": {
+      "score": 0.8,
+      "notes": "Good low-temperature impact performance, consistent with requirements for automotive TPOs."
+    },
+    "HDT_C": {
+      "score": 0.1,
+      "notes": "Predicted HDT is unrealistically low. A 13.5 wt% talc loading should increase HDT significantly, likely to >85\u00b0C, not 74\u00b0C."
+    },
+    "rho_gcc": {
+      "score": 0.5,
+      "notes": "The density value is consistent with a ~13.5% mineral-filled formulation, but this contradicts the input `talc_wtpct` of 0.0, indicating a model inconsistency."
+    }
+  },
+  "r2_izod_vs_elastomer": null,
+  "r2_modulus_vs_elastomer": null,
+  "outlier_fraction": null,
+  "notes": "### Evaluation Report\n\n**Overall Assessment:** The predicted property profile is highly questionable and likely unrealistic. The model correctly captures the toughening and softening effects of the elastomer but appears to completely ignore the significant reinforcing effects of the mineral filler.\n\n**1. Key Contradictions & Inconsistencies:**\n- **Filler Effect:** The most significant flaw is the prediction of a very low Flexural Modulus (0.61 GPa) and Heat Deflection Temperature (74\u00b0C). For a formulation with 13.5 wt% mineral filler (implied to be talc), these values should be substantially higher (typically E > 1.0 GPa, HDT > 85\u00b0C). The predictions resemble those of an unfilled TPO.\n- **Input Data Inconsistency:** There is a direct contradiction in the input data. `talc_wtpct` is listed as 0.0, but the derived `phi_f_talc` is 0.048, which corresponds to ~13.2 wt% talc. This suggests a fundamental problem in how the model is interpreting the formulation.\n\n**2. Property-Specific Analysis:**\n- **Plausible Predictions:** Impact properties (`Izod_23`, `Izod_m20`, `Gardner_J`), MFI, and yield strength (`sigma_y_MPa`) are within a plausible range for a soft, tough TPO with ~22.5% elastomer.\n- **Unrealistic Predictions:** Modulus (`E_GPa`) and thermal resistance (`HDT_C`) are severe outliers compared to established literature and industry data for talc-filled PP compounds.\n\n**3. Confidence:**\nConfidence is **High**. The stiffening effect of mineral fillers like talc on polypropylene is a fundamental and well-documented principle in polymer compounding. The model's failure to capture this effect represents a major deviation from known material behavior.",
+  "extras": {
+    "inferred_filler_type": "Talc",
+    "inferred_filler_wtpct": 13.48,
+    "major_discrepancy": "Model appears to ignore the reinforcing effect of the filler on modulus and HDT.",
+    "data_inconsistency_flag": "Contradiction between `talc_wtpct` (0.0) and `phi_f_talc` (0.048)."
+  }
+}

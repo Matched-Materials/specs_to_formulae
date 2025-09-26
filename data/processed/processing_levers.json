@@ -1,0 +1,66 @@
+{
+  "compounding": {
+    "stage": "Twin-screw compounding",
+    "levers": [
+      {
+        "variable": "Melt temp profile",
+        "range": [190, 230],
+        "unit": "°C",
+        "notes": "Morphology, degradation; keep AO/phosphite effective"
+      },
+      {
+        "variable": "Screw speed",
+        "range": [150, 500],
+        "unit": "rpm",
+        "notes": "Shear -> rubber particle size; dispersion vs. chain scission"
+      },
+      {
+        "variable": "Specific energy",
+        "range": [0.05, 0.25],
+        "unit": "kWh/kg",
+        "notes": "Correlate to dispersion & MFI drift"
+      },
+      {
+        "variable": "Feed rate",
+        "residence_time_s_range": [20, 60],
+        "unit": "kg/h",
+        "notes": "Residence time affects oxidation & compatibilization. Range is sized to residence time."
+      }
+    ]
+  },
+  "molding": {
+    "stage": "Injection molding",
+    "levers": [
+      {
+        "variable": "Melt temp",
+        "range": [200, 240],
+        "unit": "°C",
+        "notes": "Flow & weld lines"
+      },
+      {
+        "variable": "Mold temp",
+        "range": [20, 60],
+        "unit": "°C",
+        "notes": "Crystallinity, shrink/warp, gloss"
+      },
+      {
+        "variable": "Injection speed / shear",
+        "range": ["low", "medium", "high"],
+        "unit": "categorical",
+        "notes": "Skin orientation; impact vs. gloss trade"
+      },
+      {
+        "variable": "Pack/hold pressure",
+        "range": [40, 100],
+        "unit": "MPa",
+        "notes": "Void control; shrink"
+      },
+      {
+        "variable": "Cooling time (at 3 mm)",
+        "range": [15, 45],
+        "unit": "s",
+        "notes": "Cycle energy vs. crystallinity"
+      }
+    ]
+  }
+}

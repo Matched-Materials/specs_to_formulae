@@ -1,0 +1,46 @@
+{
+  "literature_consistency_score": 0.95,
+  "realism_penalty": 0.3,
+  "recommended_bo_weight": 0.285,
+  "confidence": "High",
+  "confidence_factor": 1.0,
+  "property_scores": {
+    "E_GPa": {
+      "score": 1.0,
+      "notes": "Value of ~718 MPa is highly consistent with an unfilled PP containing 18 wt% elastomer. This reflects the expected drop in stiffness."
+    },
+    "MFI_g10min": {
+      "score": 0.9,
+      "notes": "A value of 25 is plausible for an injection molding grade. It implies the base resins have a high MFI to counteract the viscosity increase from the elastomer."
+    },
+    "sigma_y_MPa": {
+      "score": 1.0,
+      "notes": "Yield strength of 21.6 MPa is a realistic value for a TPO with 18% elastomer, representing a predictable decrease from a PP homopolymer baseline (~34 MPa)."
+    },
+    "Izod_23_kJm2": {
+      "score": 0.9,
+      "notes": "Very high impact strength (61.6 kJ/m^2), characteristic of a 'super-tough' TPO. Achievable with good compatibilization and elastomer dispersion, but on the upper end of typical values."
+    },
+    "Izod_m20_kJm2": {
+      "score": 0.9,
+      "notes": "Excellent low-temperature impact resistance (10.6 kJ/m^2), a key performance indicator for automotive applications. The drop from RT is steep but typical of the DBTT."
+    },
+    "HDT_C": {
+      "score": 1.0,
+      "notes": "The low HDT (79.3 C) is a direct and expected consequence of the low modulus caused by the high elastomer content. Fully consistent."
+    },
+    "Torque_Nm": {
+      "score": 0.1,
+      "notes": "Critically unrealistic. A torque of 0.25 Nm is orders of magnitude too low for a twin-screw extruder processing this formulation at 375 rpm. This suggests a major flaw in the process model."
+    },
+    "Tm_C": {
+      "score": 0.8,
+      "notes": "Melt temperature of 226 C is high for PP but plausible due to potential shear heating at the given screw speed and compatibilizer level."
+    }
+  },
+  "r2_izod_vs_elastomer": null,
+  "r2_modulus_vs_elastomer": null,
+  "outlier_fraction": null,
+  "notes": "### Evaluation Report\n\n**Overall Assessment:** The predicted material properties for this PP/elastomer blend are largely self-consistent and align well with established literature for thermoplastic olefins (TPOs). The trade-offs between stiffness (E_GPa), strength (sigma_y_MPa), heat resistance (HDT_C), and impact toughness (Izod) are classic and well-represented. The predicted room-temperature and low-temperature impact values are excellent, suggesting a high-performance material suitable for automotive applications.\n\n**Critical Flaw:** The primary and most severe issue is the predicted process torque of **0.25 Nm**. This value is physically unrealistic for a twin-screw extruder under the specified operating conditions (375 rpm, 5.3 kg/h) and formulation. A realistic torque would be at least one to two orders of magnitude higher. This indicates a fundamental error in the process simulation model, which severely undermines the credibility of the overall prediction, despite the plausible material properties.\n\n**Confidence:** Confidence is 'High' because the material property relationships are well-understood and the process torque error is unambiguous.",
+  "extras": null
+}

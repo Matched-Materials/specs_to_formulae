@@ -1,0 +1,55 @@
+{
+  "id": "eval-2ae205dcad9243149643ac85ed68afcf",
+  "app_name": "rtn_evaluator_app",
+  "user_id": "local-user",
+  "state": {},
+  "events": [
+    {
+      "content": {
+        "parts": [
+          {
+            "video_metadata": null,
+            "thought": null,
+            "inline_data": null,
+            "file_data": null,
+            "thought_signature": null,
+            "code_execution_result": null,
+            "executable_code": null,
+            "function_call": null,
+            "function_response": null,
+            "text": "{\"cycle_id\": \"pipeline_run\", \"sample_id\": \"5\", \"predictions\": {\"elastomer_wtpct\": 26.57, \"filler_wtpct\": 24.19, \"talc_wtpct\": 2.72, \"compat_wtpct\": 2.32, \"intune_wtpct\": 0.0, \"stabilizer_wtpct\": 0.41, \"nucleator_ppm\": 800.0, \"baseA_wtpct\": 8.94, \"baseB_wtpct\": 34.86, \"compat_score\": 0.139, \"est_cost_usd_per_kg\": 2.603, \"est_ef_kgCO2e_per_kg\": 2.885, \"est_biogenic_mass_frac\": 0.68, \"E_GPa\": 0.5418274426991211, \"MFI_g10min\": 8.737153167485891, \"sigma_y_MPa\": 20.361283083528182, \"Izod_23_kJm2\": 39.33525617027523, \"Izod_m20_kJm2\": 6.746184061406521, \"HDT_C\": 70.91671628951657, \"rho_gcc\": 0.9982639862638846, \"eps_y_pct\": 10.916657320137906, \"Gardner_J\": 51.464424757856925, \"Xc\": 0.3744557464272112, \"phi_el\": 0.3083863022422341, \"phi_f_talc\": 0.010055579785124327, \"phi_f_caco3\": 0.0, \"phi_f_biofiber\": 0.16652131909376905, \"phi_f_biochar\": 0.0}, \"process\": {\"Torque_Nm\": 100.0, \"N_rps\": 5.0, \"Q_kgh\": 5.0, \"Tm_C\": 220.0, \"tau_s\": 45.0, \"pvac_bar_abs\": 0.1, \"elastomer_wtpct\": 26.57, \"filler_wtpct\": 24.19, \"talc_wtpct\": 2.72, \"compat_wtpct\": 2.32, \"intune_wtpct\": 0.0, \"stabilizer_wtpct\": 0.41, \"nucleator_ppm\": 800.0, \"baseA_wtpct\": 8.94, \"baseB_wtpct\": 34.86}, \"targets_constraints\": {}, \"previous_report_md\": null, \"previous_scores\": null, \"meta\": {\"source\": \"pipeline\", \"row_index\": 5}}"
+          }
+        ],
+        "role": "user"
+      },
+      "grounding_metadata": null,
+      "partial": null,
+      "turn_complete": null,
+      "finish_reason": null,
+      "error_code": null,
+      "error_message": null,
+      "interrupted": null,
+      "custom_metadata": null,
+      "usage_metadata": null,
+      "live_session_resumption_update": null,
+      "input_transcription": null,
+      "output_transcription": null,
+      "invocation_id": "e-2ec46eb2-2f0d-435c-98b9-5a8dd4d0bf57",
+      "author": "user",
+      "actions": {
+        "skip_summarization": null,
+        "state_delta": {},
+        "artifact_delta": {},
+        "transfer_to_agent": null,
+        "escalate": null,
+        "requested_auth_configs": {},
+        "requested_tool_confirmations": {}
+      },
+      "long_running_tool_ids": null,
+      "branch": null,
+      "id": "6ec0cb33-17b8-4cc9-a9fd-95a60bd3f9db",
+      "timestamp": 1758744514.449019
+    }
+  ],
+  "last_update_time": 1758744514.449019
+}

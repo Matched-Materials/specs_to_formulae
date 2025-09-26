@@ -1,0 +1,111 @@
+{
+  "physical_properties": [
+    {
+      "name": "Melt Mass-Flow Rate (MFR)",
+      "conditions": "230°C/2.16 kg",
+      "value": 30,
+      "unit": "g/10 min"
+    },
+    {
+      "name": "Density",
+      "value": 0.900,
+      "unit": "g/cm³"
+    }
+  ],
+  "mechanical_properties": [
+    {
+      "name": "Tensile Strength at Yield",
+      "test_method": "ASTM D638",
+      "value": 20.3,
+      "unit": "MPa"
+    },
+    {
+      "name": "Tensile Stress at Yield",
+      "test_method": "ISO 527-2",
+      "value": 19.9,
+      "unit": "MPa"
+    },
+    {
+      "name": "Elongation at Yield",
+      "test_method": "ASTM D638",
+      "value": 5.7,
+      "unit": "%"
+    },
+    {
+      "name": "Tensile Strain at Yield",
+      "test_method": "ISO 527-2",
+      "value": 5.0,
+      "unit": "%"
+    },
+    {
+      "name": "Flexural Modulus",
+      "conditions": "1% Secant",
+      "test_method": "ASTM D790A",
+      "value": 993,
+      "unit": "MPa"
+    },
+    {
+      "name": "Flexural Modulus",
+      "conditions": "1% Secant",
+      "test_method": "ASTM D790B",
+      "value": 1130,
+      "unit": "MPa"
+    },
+    {
+      "name": "Flexural Modulus",
+      "test_method": "ISO 178",
+      "value": 1.02,
+      "unit": "GPa"
+    }
+  ],
+  "impact_properties": [
+    {
+      "name": "Notched Izod Impact",
+      "test_method": "ASTM D256A",
+      "conditions": "at -18°C",
+      "value": 89,
+      "unit": "J/m"
+    },
+    {
+      "name": "Notched Izod Impact",
+      "test_method": "ASTM D256A",
+      "conditions": "at 23°C",
+      "value": "No Break",
+      "unit": null
+    },
+    {
+      "name": "Notched Izod Impact Strength",
+      "test_method": "ISO 180/1A",
+      "conditions": "at -20°C",
+      "value": 6.8,
+      "unit": "kJ/m²"
+    },
+    {
+      "name": "Notched Izod Impact Strength",
+      "test_method": "ISO 180/1A",
+      "conditions": "at 23°C",
+      "value": 46,
+      "unit": "kJ/m²"
+    },
+    {
+      "name": "Gardner Impact",
+      "conditions": "-29°C",
+      "value": 33.0,
+      "unit": "J"
+    }
+  ],
+  "thermal_properties": [
+    {
+      "name": "Heat Deflection Temperature",
+      "conditions": "0.45 MPa",
+      "value": 82.8,
+      "unit": "°C"
+    },
+    {
+      "name": "Deflection Temperature Under Load (DTUL)",
+      "conditions": "at 66psi",
+      "value": 92.0,
+      "unit": "°C"
+    }
+  ]
+}

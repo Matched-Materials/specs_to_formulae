@@ -1,0 +1,44 @@
+{
+  "literature_consistency_score": 0.6,
+  "realism_penalty": 0.5,
+  "recommended_bo_weight": 0.195,
+  "confidence": "Medium",
+  "confidence_factor": 0.65,
+  "property_scores": {
+    "E_GPa": {
+      "score": 0.7,
+      "notes": "Plausible but on the low side for a compound with 5.8% filler, which should provide some reinforcement. The value is consistent with the high elastomer content."
+    },
+    "MFI_g10min": {
+      "score": 0.9,
+      "notes": "A value of 25 g/10min is a very realistic MFI for an injection molding TPO grade intended for automotive parts."
+    },
+    "sigma_y_MPa": {
+      "score": 0.8,
+      "notes": "The yield strength is appropriately reduced from a typical PP baseline due to the 15% elastomer content. Consistent with the lower modulus."
+    },
+    "Izod_23_kJm2": {
+      "score": 0.7,
+      "notes": "Very high impact strength, characteristic of a 'super-tough' TPO. While optimistic for 15% elastomer, it is achievable with excellent compatibilization and morphology control."
+    },
+    "Izod_m20_kJm2": {
+      "score": 0.7,
+      "notes": "A value >10 kJ/m\u00b2 at -20\u00b0C is excellent and highly desirable for automotive applications. The drop from room temperature is significant but expected."
+    },
+    "HDT_C": {
+      "score": 0.5,
+      "notes": "This value is low for a compound containing 5.8% filler. Fillers are typically added to increase HDT, but this prediction shows only a marginal improvement over an unfilled copolymer."
+    },
+    "rho_gcc": {
+      "score": 0.1,
+      "notes": "Major inconsistency. The predicted density (0.894 g/cc) is below that of base PP (~0.905 g/cc), which is physically unrealistic given the inclusion of 5.8 wt% of any conventional filler (e.g., talc, caco3), which have densities >2.5 g/cc."
+    }
+  },
+  "r2_izod_vs_elastomer": null,
+  "r2_modulus_vs_elastomer": null,
+  "outlier_fraction": null,
+  "notes": "### Evaluation Report\n\n**Overall Assessment:** The predicted mechanical property profile (low modulus, high impact strength) is qualitatively consistent with the development goals for a tough automotive TPO. However, the evaluation is marred by significant, physically unrealistic predictions that undermine confidence in the model's validity.\n\n**Key Observations:**\n\n*   **Positive:** The trade-off between stiffness (`E_GPa` = 0.77 GPa) and toughness (`Izod_23_kJm2` = 59 kJ/m\u00b2, `Gardner_J` = 35 J) is well-represented and aligns with literature for high-performance TPOs. The predicted low-temperature impact (`Izod_m20_kJm2` = 10.1 kJ/m\u00b2) is excellent.\n\n*   **Critical Flaws:**\n    1.  **Density Contradiction:** The most severe issue is the predicted density of 0.894 g/cc. Adding 5.8 wt% of any common mineral filler to a PP base (~0.905 g/cc) must increase the final density. The prediction of a lower density is physically impossible and points to a fundamental flaw in the model.\n    2.  **Unrealistic Process Torque:** A predicted torque of 0.25 Nm is extremely low for a twin-screw extruder processing a filled polymer compound, even at a low throughput of 4.7 kg/h. This value is orders of magnitude lower than expected and suggests a problem with the process simulation.\n    3.  **Ambiguous Filler:** The formulation specifies 5.8 wt% `filler_wtpct`, but all specific filler types (`talc_wtpct`, etc.) are zero. This ambiguity, combined with the low predicted HDT, makes it impossible to properly assess the filler's contribution.\n\n**Confidence:** Confidence is rated 'Medium' because while the mechanical property inter-relationships are plausible, the unrealistic density and process torque predictions indicate potentially serious model deficiencies. The results should be treated with significant caution.",
+  "extras": {
+    "Torque_Nm_realism_note": "Predicted Torque_Nm of 0.25 is unrealistically low for a filled PP compound on a twin-screw extruder. Expected values for a lab-scale machine would be in the 10-50 Nm range, depending on scale and viscosity."
+  }
+}

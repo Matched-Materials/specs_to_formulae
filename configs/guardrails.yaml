@@ -1,0 +1,10 @@
+thresholds:
+  MFI_g10min: 25.0     # absolute delta allowed agent vs baseline
+  sigma_y_MPa: 12.0
+  E_GPa: 0.25
+  Izod_m20_kJm2: 12.0
+  HDT_C: 8.0
+
+blend:
+  enabled: false
+  alpha: 0.7           # final = alpha*agent + (1-alpha)*baseline (per property)

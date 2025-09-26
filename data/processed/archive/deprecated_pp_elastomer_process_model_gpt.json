@@ -1,0 +1,68 @@
+{
+    "inputs": {
+        "formulation": {
+            "phi_PP": "volume_fraction_polypropylene",
+            "phi_el": "volume_fraction_elastomer",
+            "phi_f": "volume_fraction_fillers",
+            "c_nuc": "nucleator_concentration_ppm",
+            "phi_comp": "compatibilizer_fraction_mass_percent",
+            "A_comp": "compatibilizer_functionality",
+            "lambda": "viscosity_ratio_elastomer_to_PP",
+            "sigma": "interfacial_tension",
+            "rho_el": "elastomer_density"
+        },
+        "process": {
+            "Tz": "zone_temperatures_array",
+            "Tm": "melt_temperature",
+            "Td": "die_temperature",
+            "N": "screw_speed_rev_per_sec",
+            "Q": "throughput_kg_per_s",
+            "F": "fill_factor",
+            "P": "motor_power_kW",
+            "pb": "back_pressure_MPa",
+            "pvac": "vacuum_pressure_abs",
+            "L": "screw_length_m"
+        }
+    },
+    "latent_states": {
+        "SEI": "P/Q (specific_energy_input_kWh_per_kg)",
+        "shear_rate": "k_gamma*N*F",
+        "residence_time": "alpha_tau*L/(kv*N*Q)",
+        "oxygen_exposure": "tau*(1-pvac/patm)"
+    },
+    "equations": {
+        "MFI": "ln(MFI_out) = ln(MFI_in) + alpha_MFI*ln(Mw_in/Mw_out)",
+        "Mw_out": "Mw_in/(1+kD*D)",
+        "D": "SEI*[a1+a2*(shear/shear0)^m]*tau^nu*exp(-kappa*(patm-pvac))*exp(beta*(Tm-Tref))",
+        "droplet_size": "dr = dmin + (d0-dmin)*exp(-kd*SEI*Phi)",
+        "compat_index": "Sc = 1 - exp(-kc*phi_comp*A_comp)",
+        "viscosity_eff": "Psi(lambda) = exp(-klambda*(lambda-1)^2)",
+        "Phi": "Phi = (Sc*Psi(lambda)*K*shear_rate)/sigma",
+        "crystallinity": "Xc = Xc0 + alpha_n*ln(1+c_nuc/c50) - alpha_el*phi_el - alphaT*(Tm-Tref)",
+        "modulus_matrix": "Em = Em0*(1+beta_c*(Xc-Xc0))",
+        "modulus_composite": "E = Em*(1-br*phi_el)^p * HalpinTsai(fillers)",
+        "tensile_yield": "sigma_y = sigma_y_m*(1 - ky*phi_el*(dr/(dr+delta)))*(1+ky2*Sc)",
+        "impact": "I(T) = exp(-chi*D)*fT(T)*Imax*(1-exp(-kI*(phi_el*Sc/dr)))",
+        "temperature_factor": "fT(T) = 1/(1+exp(kT*(T0-T)))",
+        "HDT": "HDT = H0 + h1*ln(E) + h2*Xc - h3*phi_el",
+        "shrinkage": "S = S0 + s1*Xc - sum(s2i*phi_f_i) - s3*phi_el",
+        "density": "1/rho = sum(wi/rhoi)"
+    },
+    "constraints": {
+        "signs": {
+            "dMFI/dSEI": ">0",
+            "ddr/dSEI": "<0",
+            "dImpact/dphi_el": ">0 up to saturation",
+            "dE/dphi_f": ">0",
+            "dE/dphi_el": "<0",
+            "dXc/dc_nuc": ">0"
+        }
+    },
+    "scaling": {
+        "lab_to_pilot": {
+            "residence_time": "adjust with L/D ratio and Q",
+            "SEI": "match by screw config and rpm",
+            "temperature": "scale by energy balance, not direct copy"
+        }
+    }
+}

@@ -1,0 +1,193 @@
+{
+  "model_description": "A machine-readable mathematical framework for simulating the twin-screw extrusion of polypropylene composites. It connects formulation and process inputs to final material properties by first calculating intermediate process variables.",
+  "inputs": {
+    "formulation": {
+      "description": "Defines the material composition based on weight fractions (W) from ingredient_library.json. These are converted to volume fractions (V) for property calculations.",
+      "parameters": {
+        "W_PP": {
+          "description": "Weight fraction of PP Impact Copolymer.",
+          "unit": "dimensionless"
+        },
+        "W_Talc": {
+          "description": "Weight fraction of Micronized Talc.",
+          "unit": "dimensionless"
+        },
+        "W_POE": {
+          "description": "Weight fraction of POE Impact Modifier.",
+          "unit": "dimensionless"
+        }
+      },
+      "derived_values": {
+        "volume_fraction_conversion": {
+          "description": "Formula to convert weight fractions to volume fractions using component densities (rho_i).",
+          "formula": "V_i = (W_i / rho_i) / sum(W_j / rho_j)"
+        }
+      }
+    },
+    "process": {
+      "description": "Primary operational parameters of the twin-screw extruder.",
+      "parameters": {
+        "screw_speed_rpm": {
+          "description": "Rotational speed of the screws (N).",
+          "unit": "rpm"
+        },
+        "mass_throughput_kghr": {
+          "description": "Total mass throughput of all components (Q).",
+          "unit": "kg/hr"
+        },
+        "barrel_temperature_profile": {
+          "description": "Array of setpoint temperatures for each barrel zone (T_barrel_i).",
+          "unit": "°C"
+        },
+        "screw_geometry": {
+          "description": "A digital representation of the screw configuration, detailing the type, length, and order of each screw element.",
+          "unit": "object"
+        }
+      }
+    }
+  },
+  "intermediate_process_variables": {
+    "description": "Models that calculate the thermo-mechanical conditions experienced by the material inside the extruder.",
+    "residence_time_distribution": {
+      "model_type": "Ideal Reactor Network Model",
+      "description": "Models the extruder as a series of ideal reactors (Plug Flow for conveying, CSTR for mixing) to calculate mean residence time.",
+      "outputs": {
+        "mean_residence_time_s": {
+          "description": "Mean time a particle spends in a given screw section (t_bar).",
+          "formula": "t_bar = (V_free * f_fill) / (Q / rho_melt)",
+          "variables": {
+            "V_free": "Free geometric volume of the screw section (m^3).",
+            "f_fill": "Degree of fill (dimensionless).",
+            "Q": "Mass throughput (kg/s).",
+            "rho_melt": "Melt density (kg/m^3)."
+          }
+        }
+      }
+    },
+    "shear_rate": {
+      "model_type": "Geometric Shear Rate Approximation",
+      "description": "Calculates the shear rate based on screw geometry and speed.",
+      "outputs": {
+        "peak_shear_rate_kneading_s_inv": {
+          "description": "Peak shear rate in the gap between a kneading element tip and the barrel wall (gamma_dot_peak).",
+          "formula": "gamma_dot_peak = (pi * D * N) / (h * 60)",
+          "variables": {
+            "D": "Screw diameter (m).",
+            "N": "Screw speed (rpm).",
+            "h": "Clearance gap between screw tip and barrel wall (m)."
+          }
+        },
+        "average_shear_rate_conveying_s_inv": {
+          "description": "Average shear rate in a fully filled conveying element (gamma_dot_bar).",
+          "formula": "gamma_dot_bar = ((pi * D * N) / (h * 60)) * k_geom",
+          "variables": {
+            "D": "Screw diameter (m).",
+            "N": "Screw speed (rpm).",
+            "h": "Channel depth (m).",
+            "k_geom": "Geometric factor dependent on screw pitch and channel depth."
+          }
+        }
+      }
+    },
+    "specific_mechanical_energy": {
+      "model_type": "Motor Power Correlation",
+      "description": "Calculates the mechanical energy input from the motor per unit mass of material.",
+      "outputs": {
+        "SME_kWh_kg": {
+          "description": "Specific Mechanical Energy (SME).",
+          "formula": "SME = (P_motor * (%Torque / 100) * eta_gearbox) / Q",
+          "variables": {
+            "P_motor": "Rated motor power (kW).",
+            "%Torque": "Measured motor torque as a percentage of maximum.",
+            "eta_gearbox": "Gearbox efficiency (typically ~0.97).",
+            "Q": "Mass throughput (kg/hr)."
+          }
+        }
+      }
+    }
+  },
+  "final_property_predictions": {
+    "description": "Models that use formulation inputs and intermediate process variables to predict final material properties.",
+    "melt_flow_rate": {
+      "model_type": "Degradation-Based MFR Prediction",
+      "description": "A two-step model that first predicts molecular weight degradation due to thermo-mechanical stress, then converts the final molecular weight to MFR.",
+      "steps": {
+        "molecular_weight_degradation": {
+          "description": "Predicts the final weight-average molecular weight (Mw_f) based on initial molecular weight (Mw_0) and process conditions.",
+          "formula": "Mw_f / Mw_0 = 1 / (exp(T_melt / C1) * (1 + ((gamma_dot_bar * t_bar) / C2)^2) * (t_bar / C3))",
+          "variables": {
+            "T_melt": "Average melt temperature (°C).",
+            "gamma_dot_bar": "Average shear rate (1/s).",
+            "t_bar": "Mean residence time (s).",
+            "C1, C2, C3": "Empirically determined degradation constants for the polymer system."
+          }
+        },
+        "mfr_conversion": {
+          "description": "Converts the final molecular weight to MFR using a Bremner/Rudin-type power-law relationship.",
+          "formula": "MFR_predicted = (K_MFR / Mw_f)^(1/a)",
+          "variables": {
+            "Mw_f": "Final weight-average molecular weight (g/mol).",
+            "K_MFR, a": "Empirical constants from MFR vs. Mw correlation for the base polymer."
+          }
+        }
+      }
+    },
+    "flexural_modulus": {
+      "model_type": "Halpin-Tsai Model",
+      "description": "Predicts the composite's flexural modulus based on the properties and volume fractions of the matrix and filler, accounting for filler geometry.",
+      "outputs": {
+        "Ec_MPa": {
+          "description": "Flexural modulus of the composite.",
+          "formula": "Ec = Em * ((1 + xi * eta * V_Talc) / (1 - eta * V_Talc))",
+          "helper_formulas": {
+            "eta": "eta = ((E_Talc / Em) - 1) / ((E_Talc / Em) + xi)"
+          },
+          "variables": {
+            "Em": "Modulus of the PP matrix (MPa).",
+            "E_Talc": "Modulus of the talc filler (MPa).",
+            "V_Talc": "Volume fraction of talc.",
+            "xi": "Geometric factor related to the aspect ratio (l/d) of the talc particles, often xi = 2*(l/d)."
+          }
+        }
+      }
+    },
+    "notched_izod_impact_strength": {
+      "model_type": "Modified Nielsen Model",
+      "description": "Predicts the composite's impact strength, linking the effectiveness of the impact modifier to the process intensity (SME).",
+      "outputs": {
+        "Ic_J_m": {
+          "description": "Impact strength of the composite.",
+          "formula": "Ic = I_matrix * ((1 - V_POE) / (1 - psi * V_POE))",
+          "helper_formulas": {
+            "psi": "psi = 1 + (((1 - phi_max) / phi_max^2) * V_POE)",
+            "phi_max": "phi_max = phi_base + k_disp * (1 - exp(-SME / SME_crit))"
+          },
+          "variables": {
+            "I_matrix": "Impact strength of the talc-filled PP matrix (J/m).",
+            "V_POE": "Volume fraction of the POE impact modifier.",
+            "phi_max": "Maximum packing fraction of dispersed POE particles, modeled as a function of SME.",
+            "phi_base": "Packing fraction with poor mixing.",
+            "k_disp": "Dispersion coefficient.",
+            "SME_crit": "Critical specific energy for achieving good dispersion (kWh/kg)."
+          }
+        }
+      }
+    },
+    "heat_deflection_temperature": {
+      "model_type": "Empirical HDT Model",
+      "description": "An empirical model predicting the Heat Deflection Temperature (HDT) based on the stiffening effect of the talc filler.",
+      "outputs": {
+        "HDT_c_C": {
+          "description": "Heat Deflection Temperature of the composite.",
+          "formula": "HDT_c = HDT_m + (HDT_max - HDT_m) * (1 - exp(-k_HDT * V_Talc))",
+          "variables": {
+            "HDT_m": "HDT of the PP/POE matrix (°C).",
+            "HDT_max": "Theoretical maximum HDT for the highly filled system (°C).",
+            "V_Talc": "Volume fraction of talc.",
+            "k_HDT": "Empirical constant reflecting the stiffening efficiency of the talc."
+          }
+        }
+      }
+    }
+  }
+}

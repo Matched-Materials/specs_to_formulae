@@ -1,0 +1,573 @@
+{
+  "name": "PP_Elastomer_TSE_Hybrid_Model_v1",
+  "purpose": "Realistic-yet-manageable processing model for Bayesian optimization of PP+elastomer compounds (lab-scale TSE).",
+  "design_principles": [
+    "Physics-guided, low-parameter cores with monotone constraints",
+    "Blend-agnostic via descriptors (viscosity ratio, interfacial tension, compatibilization index)",
+    "Machine-aware via SME/torque residence models (Gemini-style pragmatics)",
+    "JSON-executable: equations presented as strings with parameter symbols"
+  ],
+  "inputs": {
+    "formulation": {
+      "phi_PP": {
+        "type": "float",
+        "units": "vol_frac",
+        "bounds": [
+          0.4,
+          1.0
+        ]
+      },
+      "phi_el": {
+        "type": "float",
+        "units": "vol_frac",
+        "bounds": [
+          0.0,
+          0.4
+        ]
+      },
+      "phi_f": [
+        {
+          "name": "talc",
+          "type": "float",
+          "units": "vol_frac",
+          "bounds": [
+            0.0,
+            0.3
+          ],
+          "AR": 10.0,
+          "Ef_GPa": 70.0
+        },
+        {
+          "name": "caco3",
+          "type": "float",
+          "units": "vol_frac",
+          "bounds": [
+            0.0,
+            0.3
+          ],
+          "AR": 2.0,
+          "Ef_GPa": 70.0
+        }
+      ],
+      "c_nuc_ppm": {
+        "type": "float",
+        "units": "ppm",
+        "bounds": [
+          0.0,
+          3000.0
+        ]
+      },
+      "phi_comp": {
+        "type": "float",
+        "units": "mass_frac",
+        "bounds": [
+          0.0,
+          0.03
+        ]
+      },
+      "A_comp": {
+        "type": "float",
+        "units": "dimensionless",
+        "bounds": [
+          0.0,
+          1.0
+        ]
+      },
+      "lambda_visc": {
+        "type": "float",
+        "units": "eta_el/eta_PP",
+        "bounds": [
+          0.1,
+          10.0
+        ]
+      },
+      "sigma_if": {
+        "type": "float",
+        "units": "mN_per_m",
+        "bounds": [
+          1.0,
+          20.0
+        ]
+      },
+      "phi_f_biofiber": {
+        "type": "float",
+        "units": "vol_frac",
+        "bounds": [
+          0.0,
+          0.25
+        ]
+      },
+      "phi_f_biochar": {
+        "type": "float",
+        "units": "vol_frac",
+        "bounds": [
+          0.0,
+          0.15
+        ]
+      }
+    },
+    "process": {
+      "D_mm": {
+        "type": "float",
+        "units": "mm",
+        "bounds": [
+          11.0,
+          27.0
+        ]
+      },
+      "L_over_D": {
+        "type": "float",
+        "units": "ratio",
+        "bounds": [
+          24.0,
+          44.0
+        ]
+      },
+      "Tz_C": {
+        "type": "list[float]",
+        "units": "C",
+        "len": 6
+      },
+      "Td_C": {
+        "type": "float",
+        "units": "C",
+        "bounds": [
+          180.0,
+          250.0
+        ]
+      },
+      "N_rps": {
+        "type": "float",
+        "units": "rev_per_s",
+        "bounds": [
+          1.0,
+          12.0
+        ]
+      },
+      "Q_kgh": {
+        "type": "float",
+        "units": "kg_per_h",
+        "bounds": [
+          0.5,
+          15.0
+        ]
+      },
+      "Torque_Nm": {
+        "type": "float",
+        "units": "Nm",
+        "bounds": [
+          0.0,
+          300.0
+        ]
+      },
+      "gear_eff": {
+        "type": "float",
+        "units": "dimensionless",
+        "bounds": [
+          0.7,
+          0.98
+        ],
+        "default": 0.9
+      },
+      "pb_bar": {
+        "type": "float",
+        "units": "bar",
+        "bounds": [
+          0.0,
+          100.0
+        ]
+      },
+      "pvac_bar_abs": {
+        "type": "float",
+        "units": "bar_abs",
+        "bounds": [
+          0.02,
+          1.0
+        ]
+      },
+      "K_knead": {
+        "type": "float",
+        "units": "index",
+        "bounds": [
+          0.0,
+          10.0
+        ]
+      }
+    }
+  },
+  "latent_states": {
+    "SEI_kWh_per_kg": "SME = (Torque_Nm * 2*pi * N_rps * gear_eff) / (Q_kgh/3600) / 1000",
+    "fill_factor_F": "min(1.0, F0 + beta_p * pb_bar)",
+    "shear_rate_s-1": "k_gamma * N_rps * fill_factor_F",
+    "Tm_C": "sum_wi_Tz + alpha_T * SME + beta_T * pb_bar",
+    "tau_s": "alpha_tau * (L_over_D * D_mm/1000) / (kv * N_rps) * (1.0 / max(Q_kgh,1e-6))",
+    "oxygen_exposure": "tau_s * (1.0 - pvac_bar_abs/1.01325)"
+  },
+  "equations": {
+    "degradation_dose_D": "SME * (a1 + a2*(shear_rate_s-1/shear0)^m) * tau_s**nu * exp(-kappa*(1.01325 - pvac_bar_abs)) * exp(beta*(Tm_C - Tref_C))",
+    "Mw_out": "Mw_in / (1 + kD*degradation_dose_D)",
+    "lnMFI_out": "lnMFI_in + alpha_MFI * ln(Mw_in/Mw_out)",
+    "Sc": "1 - exp(-kc * phi_comp * A_comp)",
+    "Psi_lambda": "exp(-klambda * (lambda_visc - 1.0)**2)",
+    "Phi_stress": "(Sc * Psi_lambda * K_knead * shear_rate_s-1) / max(sigma_if,1e-6)",
+    "dr_um": "dmin_um + (d0_um - dmin_um) * exp(-kd * SME * Phi_stress)",
+    "Xc": "Xc0 + alpha_n * ln(1.0 + c_nuc_ppm/c50_ppm) - alpha_el * phi_el - alphaT*(Tm_C - Tref_C)",
+    "Em_GPa": "Em0_GPa * (1 + beta_c*(Xc - Xc0))",
+    "Erubber_GPa": "Em_GPa * (1 - br*phi_el)**pRub",
+    "E_GPa": "Erubber_GPa * HT_talc * HT_caco3 * HT_biofiber * HT_biochar",
+    "HT_talc": "(1 + eta_talc*phi_f_talc) / (1 - eta_talc*phi_f_talc)",
+    "HT_caco3": "(1 + eta_caco3*phi_f_caco3) / (1 - eta_caco3*phi_f_caco3)",
+    "eta_talc": "(Ef_talc_GPa/Erubber_GPa - 1)/(Ef_talc_GPa/Erubber_GPa + xi_talc)",
+    "eta_caco3": "(Ef_caco3_GPa/Erubber_GPa - 1)/(Ef_caco3_GPa/Erubber_GPa + xi_caco3)",
+    "xi_talc": "2*AR_talc",
+    "xi_caco3": "2*AR_caco3",
+    "sigma_y_MPa": "sigma_y0_MPa * (1 + gamma_c*(Xc - Xc0)) * (1 - ky*phi_el*(dr_um/(dr_um+delta_um))) * (1 + ky2*Sc)",
+    "fT_23": "1.0",
+    "fT_m20": "1.0/(1 + exp(kT*(T0_C - (-20.0))))",
+    "PiD": "exp(-chi * degradation_dose_D)",
+    "Izod23_kJm2": "PiD * fT_23 * Imax_kJm2 * (1 - exp(-kI * (phi_el * Sc / max(dr_um,1e-3))))",
+    "Izodm20_kJm2": "PiD * fT_m20 * Imax_kJm2 * (1 - exp(-kI * (phi_el * Sc / max(dr_um,1e-3))))",
+    "HDT_C": "H0_C + h1 * ln(max(E_GPa,1e-6)) + h2 * Xc - h3 * phi_el",
+    "Shrink_pct": "S0_pct + s1*Xc - s2_talc*phi_f_talc - s2_caco3*phi_f_caco3 - s2_biofiber*phi_f_biofiber - s2_biochar*phi_f_biochar - s3*phi_el",
+    "rho_gcc": "1.0 / ( w_PP/rho_PP + w_el/rho_el + w_talc/rho_talc + w_caco3/rho_caco3 + w_biofiber/rho_biofiber + w_biochar/rho_biochar )",
+    "eps_y_pct": "eps0_pct - k_eps_E * E_GPa + k_eps_el * phi_el",
+    "Gardner_J": "G0_J + G1_J_per_phi * phi_el",
+    "HT_biofiber": "(1 + eta_biofiber*phi_f_biofiber) / (1 - eta_biofiber*phi_f_biofiber)",
+    "HT_biochar": "(1 + eta_biochar*phi_f_biochar) / (1 - eta_biochar*phi_f_biochar)",
+    "eta_biofiber": "(Ef_biofiber_GPa/Erubber_GPa - 1)/(Ef_biofiber_GPa/Erubber_GPa + xi_biofiber)",
+    "eta_biochar": "(Ef_biochar_GPa/Erubber_GPa - 1)/(Ef_biochar_GPa/Erubber_GPa + xi_biochar)",
+    "xi_biofiber": "2*AR_biofiber",
+    "xi_biochar": "2*AR_biochar"
+  },
+  "parameters": {
+    "physical_constants": {
+      "patm_bar": 1.01325,
+      "pi": 3.141592653589793
+    },
+    "known_materials": {
+      "rho_PP": 0.9,
+      "rho_el": 0.86,
+      "rho_talc": 2.7,
+      "rho_caco3": 2.71,
+      "Ef_talc_GPa": 70.0,
+      "Ef_caco3_GPa": 70.0,
+      "AR_talc": 10.0,
+      "AR_caco3": 2.0,
+      "rho_biofiber": 1.45,
+      "rho_biochar": 1.8,
+      "Ef_biofiber_GPa": 35.0,
+      "Ef_biochar_GPa": 10.0,
+      "AR_biofiber": 60.0,
+      "AR_biochar": 1.0
+    },
+    "targets_PP8285E1_like": {
+      "MFI_g10min": 30.0,
+      "sigma_y_MPa": 20.0,
+      "E_GPa": 1.05,
+      "Izod23": "no-break",
+      "Izodm20_kJm2": 6.8,
+      "HDT_C": 90.0
+    },
+    "priors": {
+      "k_gamma": [
+        50.0,
+        200.0
+      ],
+      "alpha_T": [
+        0.1,
+        1.5
+      ],
+      "beta_T": [
+        0.0,
+        0.1
+      ],
+      "alpha_tau": [
+        0.3,
+        1.5
+      ],
+      "kv": [
+        0.5,
+        2.0
+      ],
+      "a1": [
+        0.5,
+        2.0
+      ],
+      "a2": [
+        0.0,
+        2.0
+      ],
+      "m": [
+        0.5,
+        2.0
+      ],
+      "nu": [
+        0.3,
+        1.5
+      ],
+      "kappa": [
+        0.2,
+        2.0
+      ],
+      "beta": [
+        0.005,
+        0.03
+      ],
+      "kD": [
+        0.05,
+        0.8
+      ],
+      "alpha_MFI": [
+        0.8,
+        1.6
+      ],
+      "kc": [
+        10.0,
+        400.0
+      ],
+      "klambda": [
+        0.1,
+        2.0
+      ],
+      "kd": [
+        0.5,
+        10.0
+      ],
+      "d0_um": [
+        2.0,
+        6.0
+      ],
+      "dmin_um": [
+        0.2,
+        0.6
+      ],
+      "Xc0": [
+        0.35,
+        0.55
+      ],
+      "alpha_n": [
+        0.005,
+        0.08
+      ],
+      "c50_ppm": [
+        200.0,
+        1200.0
+      ],
+      "alpha_el": [
+        0.1,
+        0.6
+      ],
+      "alphaT": [
+        0.0,
+        0.01
+      ],
+      "Em0_GPa": [
+        1.1,
+        1.5
+      ],
+      "beta_c": [
+        0.5,
+        2.0
+      ],
+      "br": [
+        0.5,
+        1.8
+      ],
+      "pRub": [
+        1.2,
+        3.0
+      ],
+      "sigma_y0_MPa": [
+        16.0,
+        22.0
+      ],
+      "gamma_c": [
+        0.0,
+        0.5
+      ],
+      "ky": [
+        0.5,
+        2.0
+      ],
+      "ky2": [
+        0.0,
+        0.5
+      ],
+      "delta_um": [
+        0.2,
+        1.5
+      ],
+      "kT": [
+        0.05,
+        0.3
+      ],
+      "T0_C": [
+        -21.0,
+        -1.0
+      ],
+      "chi": [
+        0.1,
+        1.5
+      ],
+      "kI": [
+        0.5,
+        8.0
+      ],
+      "Imax_kJm2": [
+        52.0,
+        92.0
+      ],
+      "H0_C": [
+        60.0,
+        85.0
+      ],
+      "h1": [
+        10.0,
+        25.0
+      ],
+      "h2": [
+        20.0,
+        70.0
+      ],
+      "h3": [
+        10.0,
+        40.0
+      ],
+      "S0_pct": [
+        0.5,
+        1.5
+      ],
+      "s1": [
+        0.2,
+        1.2
+      ],
+      "s2_talc": [
+        0.5,
+        2.0
+      ],
+      "s2_caco3": [
+        0.2,
+        1.2
+      ],
+      "s3": [
+        0.2,
+        1.0
+      ],
+      "shear0": [
+        50.0,
+        500.0
+      ],
+      "F0": [
+        0.3,
+        0.9
+      ],
+      "beta_p": [
+        0.0005,
+        0.01
+      ],
+      "Tref_C": [
+        200.0,
+        230.0
+      ],
+      "s2_biofiber": [
+        0.5,
+        2.0
+      ],
+      "eps0_pct": [
+        5.5,
+        12.5
+      ],
+      "k_eps_E": [
+        2.0,
+        8.0
+      ],
+      "k_eps_el": [
+        5.0,
+        25.0
+      ],
+      "k_gardner": [
+        0.5,
+        1.5
+      ],
+      "G0_J": [
+        11.0,
+        21.0
+      ],
+      "G1_J_per_phi": [
+        80.0,
+        150.0
+      ],
+      "s2_biochar": [
+        0.2,
+        1.0
+      ]
+    },
+    "monotone_signs": {
+      "dMFI_dSEI": ">0",
+      "ddr_dSEI": "<0",
+      "dXc_dc_nuc": ">0",
+      "dE_dphi_f": ">0",
+      "dE_dphi_el": "<0",
+      "dIzod_ddr": "<0",
+      "dIzod_dSc": ">0",
+      "dHDT_dE": ">0"
+    }
+  },
+  "objective_template": {
+    "type": "weighted_squared_error_with_constraints",
+    "expr": "sum_j wj*((yhat_j - ystar_j)/sj)**2 + lambda_CF*CF_mix + mu*penalty_constraints",
+    "default_targets": {
+      "MFI_g10min": {
+        "target": 30.0,
+        "tol": 2.0,
+        "weight": 1.0
+      },
+      "sigma_y_MPa": {
+        "target": 20.0,
+        "tol": 2.0,
+        "weight": 0.8
+      },
+      "E_GPa": {
+        "target": 1.05,
+        "tol": 0.1,
+        "weight": 0.7
+      },
+      "Izod23_kJm2": {
+        "target": 40.0,
+        "tol": 5.0,
+        "weight": 1.2
+      },
+      "Izodm20_kJm2": {
+        "target": 6.8,
+        "tol": 1.0,
+        "weight": 1.5
+      },
+      "HDT_C": {
+        "target": 90.0,
+        "tol": 3.0,
+        "weight": 0.7
+      },
+      "Shrink_pct": {
+        "target": 1.1,
+        "tol": 0.2,
+        "weight": 0.3
+      }
+    }
+  },
+  "noise_model": {
+    "MFI_g10min": 0.5,
+    "sigma_y_MPa": 0.5,
+    "E_GPa": 0.05,
+    "Izod23_kJm2": 2.0,
+    "Izodm20_kJm2": 0.5,
+    "HDT_C": 1.0,
+    "Shrink_pct": 0.05
+  },
+  "usage_notes": [
+    "Treat equations as differentiable black-box; evaluate per candidate; pass to BO surrogate.",
+    "Constrain formulation: phi_PP + phi_el + sum(phi_f) = 1 (volume basis).",
+    "Compute SME from torque & speed; if Torque unknown, back-compute SME via P/Q alternative.",
+    "Use priors as parameter bounds for first calibration on DOE.",
+    "Calibrate on lab-scale DOE, then lock parameters with small regularization for pilot scale."
+  ]
+}

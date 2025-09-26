@@ -1,0 +1,38 @@
+{
+  "literature_consistency_score": 0.55,
+  "realism_penalty": 0.5,
+  "recommended_bo_weight": 0.55,
+  "confidence": "High",
+  "confidence_factor": 1.0,
+  "property_scores": {
+    "E_GPa": {
+      "score": 0.2,
+      "notes": "Unrealistically low. A modulus of 0.56 GPa is more typical for PP-TPOs with >40% elastomer, not 25% with 7% filler. Expected range would be 0.8-1.1 GPa."
+    },
+    "MFI_g10min": {
+      "score": 0.8,
+      "notes": "Plausible but low value, consistent with high elastomer and filler loading which increases viscosity. May limit processability for thin-walled parts."
+    },
+    "sigma_y_MPa": {
+      "score": 0.9,
+      "notes": "Yield strength of ~20 MPa is consistent with literature values for high-impact PP copolymers with ~25% elastomer content."
+    },
+    "Izod_23_kJm2": {
+      "score": 0.7,
+      "notes": "Very high toughness, characteristic of 'super-tough' PP grades. While achievable, its combination with the extremely low modulus is suspect."
+    },
+    "Izod_m20_kJm2": {
+      "score": 0.85,
+      "notes": "A value of ~8.6 kJ/m2 represents a reasonable ductile-to-brittle transition behavior, showing a significant but expected drop from room temperature toughness."
+    },
+    "HDT_C": {
+      "score": 0.4,
+      "notes": "The value is consistent with the predicted low modulus, but is unrealistically low for a filled PP compound. The presence of 7% filler should result in a higher HDT."
+    }
+  },
+  "r2_izod_vs_elastomer": null,
+  "r2_modulus_vs_elastomer": null,
+  "outlier_fraction": null,
+  "notes": "### Evaluation Report\n\n**Overall Assessment:** The prediction exhibits a significant contradiction between composition and mechanical properties, primarily in stiffness. While some properties like yield strength and MFI are plausible, the core stiffness-toughness profile is highly suspect.\n\n**Key Observations:**\n\n1.  **Unrealistic Modulus and HDT:** The predicted tensile modulus (0.56 GPa) is extremely low for a PP compound containing only 25 wt% elastomer and 7 wt% bio-filler. Literature values for similar TPO formulations are typically in the 0.8-1.1 GPa range. The filler should provide a stiffening effect, which appears to be entirely absent or even reversed in the prediction. Consequently, the Heat Deflection Temperature (HDT) of 72\u00b0C is also far too low and would not meet typical automotive requirements.\n\n2.  **Questionable Stiffness-Toughness Balance:** The combination of an exceptionally low modulus (0.56 GPa) and very high room-temperature Izod impact strength (50 kJ/m\u00b2) pushes the boundaries of the known stiffness-toughness trade-off for PP TPOs. Achieving such high toughness typically requires a greater sacrifice in stiffness, but the predicted stiffness is already at a floor level typically seen in much softer materials.\n\n3.  **Plausible Melt Flow and Impact Behavior:** The low MFI (5 g/10min) is consistent with a high loading of elastomer and filler. The significant drop in impact strength from 23\u00b0C to -20\u00b0C is also a classic and realistic representation of the ductile-to-brittle transition in these materials.\n\n**Conclusion:** The model appears to be severely under-predicting the modulus and HDT for this composition, making the overall prediction unrealistic. The formulation should be heavily penalized by the optimizer.",
+  "extras": null
+}

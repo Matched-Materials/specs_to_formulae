@@ -1,0 +1,52 @@
+{
+  "literature_consistency_score": 0.25,
+  "realism_penalty": 0.1,
+  "recommended_bo_weight": 0.025,
+  "confidence": "High",
+  "confidence_factor": 1.0,
+  "property_scores": {
+    "E_GPa": {
+      "score": 0.6,
+      "notes": "Plausible value for a PP with ~9% elastomer and ~10% non-reinforcing filler. The decrease from a typical PP base is expected."
+    },
+    "MFI_g10min": {
+      "score": 0.8,
+      "notes": "A value of 25 is reasonable for an injection molding grade PP compound. No major inconsistencies."
+    },
+    "sigma_y_MPa": {
+      "score": 0.7,
+      "notes": "Yield strength of ~22.6 MPa is consistent with the addition of ~9% elastomer to a PP matrix."
+    },
+    "Izod_23_kJm2": {
+      "score": 0.7,
+      "notes": "High value (46.4 kJ/m^2), indicating super-tough behavior. Achievable with ~9% elastomer and good compatibilization, but on the optimistic side."
+    },
+    "Izod_m20_kJm2": {
+      "score": 0.65,
+      "notes": "The drop in toughness from 23C is expected, and a value of 8.0 kJ/m^2 is plausible for a well-formulated compound below its DBTT."
+    },
+    "HDT_C": {
+      "score": 0.7,
+      "notes": "An HDT of 88C is reasonable for a PP compound without reinforcing fillers like talc, consistent with the formulation where talc_wtpct is zero."
+    },
+    "rho_gcc": {
+      "score": 0.0,
+      "notes": "Completely unrealistic. A density of 0.897 g/cm^3 is lower than base PP and physically impossible for a compound containing 9.8 wt% of any common mineral filler (expected >0.97 g/cm^3)."
+    },
+    "Tm_C": {
+      "score": 0.0,
+      "notes": "Predicted melting point of 203.6 C is physically incorrect for polypropylene, which typically melts at 160-170 C. This value is more typical for PBT or PET."
+    },
+    "Torque_Nm": {
+      "score": 0.0,
+      "notes": "A torque of 0.25 Nm is unrealistically low for a twin-screw extruder processing a filled polymer compound at this throughput and screw speed. It suggests an idle or near-idle state."
+    }
+  },
+  "r2_izod_vs_elastomer": null,
+  "r2_modulus_vs_elastomer": null,
+  "outlier_fraction": null,
+  "notes": "### Evaluation Report\n\n**Overall Assessment:** The prediction is highly unrealistic and inconsistent with fundamental materials science principles for polypropylene compounds. While some mechanical property trends (e.g., impact vs. stiffness) are qualitatively plausible, they are overshadowed by severe, physically impossible predictions.\n\n**Key Contradictions:**\n1.  **Density (`rho_gcc`):** The predicted density of 0.897 g/cm\u00b3 is physically impossible. The formulation includes 9.8 wt% filler; assuming any common mineral filler (e.g., CaCO\u2083, talc, density ~2.7 g/cm\u00b3), the final compound density should be >0.97 g/cm\u00b3. The predicted value is even below that of neat PP.\n2.  **Melting Point (`Tm_C`):** A melting point of 203.6\u00b0C is far outside the established range for any type of polypropylene (typically 160-170\u00b0C). This suggests the model may be conflating PP with a different polymer like PBT.\n3.  **Processing Torque (`Torque_Nm`):** The predicted torque of 0.25 Nm is extremely low and not representative of actual processing conditions for a filled compound on a twin-screw extruder. Expected values would be at least an order of magnitude higher.\n4.  **Formulation Ambiguity:** The formulation specifies 9.8 wt% `filler_wtpct`, but all specific filler types (`talc_wtpct`, `phi_f_*`) are zero. The identity of this significant component is unknown, making a full evaluation difficult, but the density contradiction holds for any common filler.\n\n**Conclusion:** Due to these fundamental flaws, the prediction should be heavily penalized. The model appears to have critical errors in its understanding of basic material properties (density, Tm) and processing relationships (torque).",
+  "extras": {
+    "estimated_density_g_cm3": 0.976
+  }
+}

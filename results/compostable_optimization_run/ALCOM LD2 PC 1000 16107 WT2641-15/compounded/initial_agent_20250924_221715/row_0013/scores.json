@@ -1,0 +1,54 @@
+{
+  "literature_consistency_score": 0.63,
+  "realism_penalty": 0.4,
+  "recommended_bo_weight": 0.252,
+  "confidence": "High",
+  "confidence_factor": 1.0,
+  "property_scores": {
+    "E_GPa": {
+      "score": 0.4,
+      "notes": "Extremely low value (490 MPa) for a PP compound, even with 25% elastomer. Borderline unrealistic for most applications."
+    },
+    "MFI_g10min": {
+      "score": 0.9,
+      "notes": "Plausible MFI for an injection molding grade TPO. Within typical range."
+    },
+    "sigma_y_MPa": {
+      "score": 0.9,
+      "notes": "Consistent with literature values for PP-TPOs with ~25% elastomer content."
+    },
+    "Izod_23_kJm2": {
+      "score": 0.8,
+      "notes": "Very high, indicating 'super-tough' behavior. Achievable but at the upper end for a well-compatibilized system."
+    },
+    "Izod_m20_kJm2": {
+      "score": 0.7,
+      "notes": "Plausible value, but the large drop from room temperature indicates a DBTT that is likely too high for demanding automotive applications."
+    },
+    "HDT_C": {
+      "score": 0.6,
+      "notes": "Low value, but consistent with the predicted very low modulus and high elastomer content. Limits application scope."
+    },
+    "rho_gcc": {
+      "score": 0.1,
+      "notes": "Fundamentally inconsistent with a composition containing 12.72 wt% of any conventional mineral filler. Predicted density should be >0.95 g/cc."
+    }
+  },
+  "r2_izod_vs_elastomer": null,
+  "r2_modulus_vs_elastomer": null,
+  "outlier_fraction": null,
+  "notes": "### Evaluation Report\n\n**Primary Findings:**\nThis prediction exhibits critical inconsistencies that undermine its physical realism. The optimizer should heavily penalize this result.\n\n**1. Composition and Density Contradiction (Severe Issue):**\n- **Mass Balance Failure:** The sum of component weight percentages is 100.9%, violating the law of conservation of mass.\n- **Density Mismatch:** The predicted density of **0.889 g/cm\u00b3** is physically impossible for a formulation containing 12.72 wt% of any conventional mineral filler (e.g., talc, CaCO\u2083, density > 2.5 g/cm\u00b3). A simple rule-of-mixtures calculation predicts a density closer to 0.97 g/cm\u00b3. This suggests the model has fundamentally misunderstood the effect of fillers on density.\n\n**2. Mechanical Property Assessment:**\n- **Tensile Modulus (`E_GPa`):** The predicted modulus of **490 MPa** is extremely low for a PP-based compound. Typical TPOs for automotive applications are in the 600-900 MPa range. This value is borderline unrealistic.\n- **Impact Strength (`Izod`):** The room temperature Izod of **51.1 kJ/m\u00b2** is very high, characteristic of a \"super-tough\" TPO. However, the low-temperature Izod at -20\u00b0C (**8.8 kJ/m\u00b2**) shows a significant drop, indicating a ductile-to-brittle transition temperature (DBTT) well above typical automotive targets.\n- **Thermal Properties (`HDT_C`):** The low HDT of **68.6\u00b0C** is a direct and expected consequence of the very low modulus and high amorphous (elastomer) content.\n\n**Conclusion:**\nThe fundamental errors in mass balance and density prediction render this data point highly unreliable. While some individual properties appear plausible in isolation, they exist within a physically inconsistent context.",
+  "extras": {
+    "composition_sum_check": {
+      "value": 100.9,
+      "status": "FAIL",
+      "note": "Sum of wt% is not 100."
+    },
+    "density_check": {
+      "predicted_rho_gcc": 0.889,
+      "estimated_rho_gcc": 0.973,
+      "status": "FAIL",
+      "note": "Predicted density is impossible given 12.72% mineral filler content."
+    }
+  }
+}

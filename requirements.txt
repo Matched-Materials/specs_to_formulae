@@ -1,0 +1,35 @@
+# --- Core scientific stack ---
+numpy>=1.26
+pandas>=2.2
+scipy>=1.11
+scikit-learn>=1.4
+scikit-optimize>=0.9.0
+
+# plotting (if you really need seaborn keep it; matplotlib is enough for CI)
+matplotlib>=3.8
+seaborn>=0.13
+
+# config & utils
+PyYAML>=6.0
+python-dotenv>=1.0
+pydantic>=2.6,<3
+tqdm>=4.66
+rich>=13.7
+tenacity>=8.2
+typer>=0.12  # if your CLI uses Typer; safe to keep
+
+# I/O helpers
+openpyxl>=3.1    # reading/writing .xlsx spec sheets
+
+# --- Google / ADK / Vertex ---
+google-genai>=0.6       # NEW SDK your code imports: google.genai.*
+google-adk>=0.2         # Agent Development Kit used by Runner/InMemorySessionService
+google-cloud-aiplatform>=1.67
+google-cloud-discoveryengine>=0.12
+
+# Model Context Protocol (your logs complained about this)
+mcp>=1.0
+
+# gRPC/protobuf versions that play nicely with google-cloud libs
+protobuf>=4.25.3,<5.0.0
+grpcio>=1.64

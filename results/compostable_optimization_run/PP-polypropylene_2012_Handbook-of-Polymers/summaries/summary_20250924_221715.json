@@ -1,0 +1,22 @@
+{
+  "best_score": 0.95,
+  "best_parameters": {
+    "elastomer_wtpct": 13.09309866699937,
+    "filler_wtpct": 0.0,
+    "compat_wtpct": 1.6716049253728869,
+    "N_rps": 4.287816083824643,
+    "Tm_C": 220.52141663796786,
+    "Q_kgh": 3.887772302013647,
+    "Torque_Nm": 220.34306927397736
+  },
+  "search_space": [
+    "Real(low=8.0, high=18.0, prior='uniform', transform='normalize')",
+    "Real(low=0.0, high=20.0, prior='uniform', transform='normalize')",
+    "Real(low=0.5, high=3.0, prior='uniform', transform='normalize')",
+    "Real(low=2.5, high=8.33, prior='uniform', transform='normalize')",
+    "Real(low=200.0, high=240.0, prior='uniform', transform='normalize')",
+    "Real(low=1.0, high=10.0, prior='uniform', transform='normalize')",
+    "Real(low=50.0, high=250.0, prior='uniform', transform='normalize')"
+  ],
+  "max_iterations": 10
+}

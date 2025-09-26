@@ -1,0 +1,271 @@
+{
+  "base_resins": [
+    {
+      "name": "PP ICP Virgin",
+      "type": "PP-ICP",
+      "mfr_range": [
+        10,
+        40
+      ],
+      "cost_usd_per_kg": 1.5,
+      "ef_kgCO2e_per_kg": 1.85,
+      "notes": "Virgin Polypropylene Impact Copolymer"
+    },
+    {
+      "name": "rPP ICP (injection grade)",
+      "type": "rPP-ICP",
+      "cost_usd_per_kg": 1.22,
+      "ef_kgCO2e_per_kg": 0.7,
+      "notes": "Recycled Polypropylene Impact Copolymer. EF can vary based on source."
+    },
+    {
+      "name": "Mass-Balance Bio-PP ICP",
+      "type": "Bio-PP-ICP",
+      "cost_usd_per_kg": 2.1,
+      "ef_kgCO2e_per_kg": 1.85,
+      "notes": "ISCC+ certified mass-balance bio-attributed PP. Track bio-content separately."
+    }
+  ],
+  "elastomers": [
+    {
+      "name": "ENGAGE\u2122 POE (e.g., 8180)",
+      "type": "POE",
+      "cost_usd_per_kg": 2.65,
+      "ef_kgCO2e_per_kg": 2.0,
+      "range_wt_pct": [
+        8,
+        18
+      ],
+      "notes": "Polyolefin Elastomer"
+    },
+    {
+      "name": "Vistamaxx\u2122 (e.g., 6102FL)",
+      "type": "PBE",
+      "cost_usd_per_kg": 2.41,
+      "ef_kgCO2e_per_kg": 1.8,
+      "range_wt_pct": [
+        8,
+        18
+      ],
+      "notes": "Propylene-Based Elastomer"
+    }
+  ],
+  "compatibilizers": [
+    {
+      "name": "Fusabond\u00ae P (PP-g-MAH)",
+      "type": "PP-g-MAH",
+      "mah_pct": 0.8,
+      "cost_usd_per_kg": 4.46,
+      "ef_kgCO2e_per_kg": 2.0,
+      "range_wt_pct": [
+        0.5,
+        2.0
+      ]
+    }
+  ],
+  "nucleators": [
+    {
+      "name": "Hyperform\u00ae HPN-715",
+      "type": "HPN",
+      "cost_usd_per_kg": 8.8,
+      "ef_kgCO2e_per_kg": 3.0,
+      "range_ppm": [
+        300,
+        1500
+      ],
+      "notes": "High performance nucleator. EF is high but mass is tiny."
+    },
+    {
+      "name": "Millad\u00ae NX\u2122 8000",
+      "type": "Sorbitol",
+      "cost_usd_per_kg": 17.6,
+      "ef_kgCO2e_per_kg": 6.0,
+      "range_wt_pct": [
+        0.05,
+        0.3
+      ]
+    }
+  ],
+  "mineral_fillers": [
+    {
+      "name": "Talc (e.g., Mistron\u00ae)",
+      "type": "Talc",
+      "particle_size_um": 5,
+      "aspect_ratio": 10,
+      "cost_usd_per_kg": 0.4,
+      "ef_kgCO2e_per_kg": 0.3,
+      "range_wt_pct": [
+        10,
+        20
+      ]
+    },
+    {
+      "name": "CaCO3 (e.g., Omyacarb\u00ae)",
+      "type": "CaCO3",
+      "particle_size_um": 3,
+      "aspect_ratio": 1,
+      "cost_usd_per_kg": 0.3,
+      "ef_kgCO2e_per_kg": 0.3,
+      "range_wt_pct": [
+        10,
+        20
+      ],
+      "notes": "Cost from costs.csv ($7.70/kg) was anomalous; a more typical market value is used."
+    }
+  ],
+  "fibrous_fillers": [
+    {
+      "name": "Short Glass Fiber",
+      "type": "SGF",
+      "cost_usd_per_kg": 2.0,
+      "ef_kgCO2e_per_kg": 1.5,
+      "range_wt_pct": [
+        10,
+        30
+      ],
+      "notes": "Use requires higher compatibilizer loading."
+    },
+    {
+      "name": "Hemp Fiber",
+      "type": "BioFiber",
+      "density_gcc": 1.45,
+      "aspect_ratio": 60,
+      "Ef_GPa": 35.0,
+      "sustainability": {
+        "origin": "bio-based",
+        "bio_content_pct": 100,
+        "recycled_content_pct": 0
+      },
+      "range_wt_pct": [
+        0,
+        20
+      ],
+      "cost_usd_per_kg": 1.8,
+      "ef_kgCO2e_per_kg": 0.15,
+      "notes": "Natural bast fiber; dry; couple with PP-g-MAH."
+    },
+    {
+      "name": "Flax Fiber",
+      "type": "BioFiber",
+      "density_gcc": 1.5,
+      "aspect_ratio": 70,
+      "Ef_GPa": 45.0,
+      "sustainability": {
+        "origin": "bio-based",
+        "bio_content_pct": 100,
+        "recycled_content_pct": 0
+      },
+      "range_wt_pct": [
+        0,
+        20
+      ],
+      "cost_usd_per_kg": 2.0,
+      "ef_kgCO2e_per_kg": 0.15,
+      "notes": "Natural bast fiber; higher modulus; dry; couple with PP-g-MAH."
+    }
+  ],
+  "stabilizers": [
+    {
+      "name": "Generic AO/UV Package",
+      "type": "StabPackage",
+      "cost_usd_per_kg": 15.0,
+      "ef_kgCO2e_per_kg": 5.0,
+      "range_wt_pct": [
+        0.1,
+        0.6
+      ],
+      "notes": "Represents a typical blend of AO/HALS. Cost is an estimate."
+    },
+    {
+      "name": "Irganox\u00ae 1010",
+      "type": "PrimaryAO",
+      "cost_usd_per_kg": 17.82,
+      "ef_kgCO2e_per_kg": 6.0,
+      "range_wt_pct": [
+        0.05,
+        0.3
+      ],
+      "notes": "Primary antioxidant (phenolic)"
+    },
+    {
+      "name": "Irgafos\u00ae 168",
+      "type": "SecondaryAO",
+      "cost_usd_per_kg": 10.01,
+      "ef_kgCO2e_per_kg": 5.0,
+      "range_wt_pct": [
+        0.05,
+        0.3
+      ],
+      "notes": "Secondary antioxidant (phosphite)"
+    },
+    {
+      "name": "Tinuvin\u00ae 770",
+      "type": "HALS",
+      "cost_usd_per_kg": 29.92,
+      "ef_kgCO2e_per_kg": 8.0,
+      "range_wt_pct": [
+        0.1,
+        0.5
+      ],
+      "notes": "Hindered Amine Light Stabilizer (UV)"
+    },
+    {
+      "name": "DHT-4A (Hydrotalcite)",
+      "type": "AcidScavenger",
+      "cost_usd_per_kg": 0.4,
+      "ef_kgCO2e_per_kg": 1.2,
+      "range_wt_pct": [
+        0.05,
+        0.2
+      ],
+      "notes": "Acid scavenger"
+    }
+  ],
+  "bio_extenders": [
+    {
+      "name": "Cellulose Fiber",
+      "type": "Cellulose",
+      "cost_usd_per_kg": 2.25,
+      "ef_kgCO2e_per_kg": 0.1,
+      "range_wt_pct": [
+        5,
+        25
+      ],
+      "notes": "Biogenic carbon content should be tracked. Check moisture sensitivity."
+    }
+  ],
+  "colorants": [
+    {
+      "name": "Carbon Black",
+      "type": "Colorant",
+      "cost_usd_per_kg": 1.83,
+      "ef_kgCO2e_per_kg": 3.0,
+      "range_wt_pct": [
+        0.2,
+        2.0
+      ],
+      "notes": "Also provides UV protection."
+    }
+  ],
+  "bio_fillers": [
+    {
+      "name": "Biochar (fine, <10 \u00b5m)",
+      "type": "Biochar",
+      "density_gcc": 1.8,
+      "aspect_ratio": 1,
+      "Ef_GPa": 10.0,
+      "sustainability": {
+        "origin": "bio-based",
+        "bio_content_pct": 100,
+        "recycled_content_pct": 100
+      },
+      "range_wt_pct": [
+        0,
+        15
+      ],
+      "cost_usd_per_kg": 0.9,
+      "ef_kgCO2e_per_kg": 0.1,
+      "notes": "Carbonized biomass; filler + black colorant."
+    }
+  ]
+}

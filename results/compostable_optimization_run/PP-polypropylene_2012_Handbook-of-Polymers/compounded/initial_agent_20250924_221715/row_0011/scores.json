@@ -1,0 +1,46 @@
+{
+  "literature_consistency_score": 0.9,
+  "realism_penalty": 0.95,
+  "recommended_bo_weight": 0.855,
+  "confidence": "High",
+  "confidence_factor": 1.0,
+  "property_scores": {
+    "E_GPa": {
+      "score": 0.9,
+      "notes": "Plausible modulus for a TPO with ~16% elastomer. Consistent with the expected reduction from a base PP modulus (typically 1.2-1.5 GPa)."
+    },
+    "MFI_g10min": {
+      "score": 0.95,
+      "notes": "Typical MFI for an injection molding grade TPO. Balances processability and mechanical properties."
+    },
+    "sigma_y_MPa": {
+      "score": 0.9,
+      "notes": "Expected reduction in yield strength due to the soft elastomer phase. Consistent with the modulus and elastomer content."
+    },
+    "Izod_23_kJm2": {
+      "score": 0.9,
+      "notes": "High value, indicating effective toughening by the elastomer at room temperature. Plausible for a well-compatibilized system."
+    },
+    "Izod_m20_kJm2": {
+      "score": 0.8,
+      "notes": "The value is realistic, but the large drop from room temperature suggests a ductile-to-brittle transition temperature (DBTT) between -20\u00b0C and 23\u00b0C. This is common for non-nucleated PP TPOs."
+    },
+    "HDT_C": {
+      "score": 0.95,
+      "notes": "Consistent with the addition of a significant amorphous elastomer phase and the lack of reinforcing fillers like talc."
+    },
+    "rho_gcc": {
+      "score": 0.9,
+      "notes": "Value is slightly low but within a reasonable range for a PP/elastomer blend, which typically have densities just below neat PP."
+    },
+    "Xc": {
+      "score": 0.95,
+      "notes": "Predicted crystallinity is consistent with the dilution effect of adding ~16 wt% amorphous elastomer to a PP matrix."
+    }
+  },
+  "r2_izod_vs_elastomer": null,
+  "r2_modulus_vs_elastomer": null,
+  "outlier_fraction": null,
+  "notes": "### Evaluation Report\n\n**Overall Assessment:**\nThe predicted properties for this formulation are highly consistent with established materials science principles for polypropylene thermoplastic olefins (TPOs). The data reflects the expected trade-offs between stiffness, strength, and impact performance when an elastomer is added to a PP matrix. The values are realistic and fall within typical ranges for commercial TPO grades.\n\n**Key Observations:**\n*   **Composition-Property Correlation:** The formulation contains ~16 wt% elastomer, which correctly leads to a predicted decrease in modulus (0.78 GPa), yield strength (21.5 MPa), and HDT (81.7 \u00b0C) compared to a neat PP base.\n*   **Impact Performance:** A high room-temperature Izod impact strength (43.2 kJ/m\u00b2) is predicted, indicating effective toughening. However, the significant drop in low-temperature Izod impact (7.4 kJ/m\u00b2 at -20\u00b0C) is noteworthy. This suggests a ductile-to-brittle transition temperature (DBTT) above -20\u00b0C, which is a common characteristic for PP TPOs but may limit its use in demanding low-temperature automotive applications.\n*   **Crystallinity & MFI:** The predicted crystallinity (39.2%) is logically reduced due to the presence of the amorphous elastomer phase. The MFI of 10 g/10min is appropriate for general-purpose injection molding.\n*   **Bio-Content:** The high biogenic mass fraction (83.8%) is a defining feature. The predicted physical properties are plausible under the assumption that the bio-based PP resins behave similarly to their fossil-derived counterparts.\n\n**Confidence:**\nConfidence in this evaluation is **High**. The formulation is a standard TPO type, and the predicted properties align very well with extensive academic and industrial literature. No anomalous or contradictory values were identified.",
+  "extras": null
+}

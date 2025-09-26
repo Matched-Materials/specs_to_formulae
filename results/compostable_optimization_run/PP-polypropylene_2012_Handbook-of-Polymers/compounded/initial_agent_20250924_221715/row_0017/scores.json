@@ -1,0 +1,48 @@
+{
+  "literature_consistency_score": 0.75,
+  "realism_penalty": 0.8,
+  "recommended_bo_weight": 0.39,
+  "confidence": "Medium",
+  "confidence_factor": 0.65,
+  "property_scores": {
+    "E_GPa": {
+      "score": 0.5,
+      "notes": "Value of 0.68 GPa is unusually low for a formulation with ~20% elastomer and 6.6% stiff bio-filler. Literature values for similar TPOs are typically in the 0.8-1.1 GPa range. This is the primary point of concern."
+    },
+    "MFI_g10min": {
+      "score": 0.9,
+      "notes": "A value of 13.4 is well within the typical range for injection molding grade PP compounds."
+    },
+    "sigma_y_MPa": {
+      "score": 0.8,
+      "notes": "Yield strength of 21 MPa is low, but it is consistent with the predicted low modulus. The relationship between the two properties is plausible."
+    },
+    "Izod_23_kJm2": {
+      "score": 0.9,
+      "notes": "High room temperature impact strength (47 kJ/m^2) is expected and achievable for a TPO with 20% elastomer content."
+    },
+    "Izod_m20_kJm2": {
+      "score": 0.8,
+      "notes": "The drop in impact strength to 8.1 kJ/m^2 at -20C is significant but realistic. This indicates a DBTT between -20C and 23C, which is common for such materials. Bio-fillers can impair low-temp impact, making this value plausible."
+    },
+    "HDT_C": {
+      "score": 0.7,
+      "notes": "The HDT of 77.4C (assumed at 0.45 MPa) is directly correlated with the low modulus. While consistent internally, it is on the low side for a compound containing 6.6% reinforcing filler."
+    },
+    "rho_gcc": {
+      "score": 1.0,
+      "notes": "Predicted density of 0.915 g/cc aligns perfectly with rule-of-mixtures calculations based on the specified composition and typical component densities."
+    },
+    "Xc": {
+      "score": 0.9,
+      "notes": "Overall crystallinity of 37.7% is a very reasonable value for a PP block copolymer compound containing a significant amorphous elastomer phase."
+    }
+  },
+  "r2_izod_vs_elastomer": null,
+  "r2_modulus_vs_elastomer": null,
+  "outlier_fraction": null,
+  "notes": "### Evaluation Report\n\n**Overall Assessment:**\nThe predicted properties describe a soft, tough thermoplastic olefin (TPO) with a bio-filler. The property relationships are mostly self-consistent (e.g., low modulus correlates with low yield strength and low HDT). However, the absolute value of the modulus is questionable.\n\n**Key Observations:**\n*   **Modulus (`E_GPa`):** The predicted modulus of 0.68 GPa is the main concern. For a PP compound with ~20 wt% elastomer and ~7 wt% stiff bio-filler, a modulus in the 0.8-1.1 GPa range would be more typical. The predicted value is about 20-30% lower than expected from literature, suggesting the model may be overestimating the softening effect of the elastomer or underestimating the stiffening effect of the bio-filler.\n*   **Impact Performance:** The high room-temperature Izod (47 kJ/m\u00b2) and moderate low-temperature Izod (8 kJ/m\u00b2 at -20\u00b0C) are characteristic of a high-impact TPO. The performance drop at cold temperatures is realistic, especially with a bio-filler that can act as a stress concentrator.\n*   **Internal Consistency:** Properties such as density (`rho_gcc`) and crystallinity (`Xc`) show excellent agreement with theoretical calculations based on the formulation, increasing confidence in the model's compositional awareness.\n*   **Data Quality:** The sum of weight percentages in the formulation is 101.49%, which is a minor data quality issue but does not significantly impact the overall evaluation.\n\n**Confidence:**\nConfidence is 'Medium' because while most trends are correct, the key stiffness-related properties (Modulus, HDT) deviate notably from typical values for automotive-grade TPOs with this level of filler and elastomer, and the specific grades of the base resins are unknown.",
+  "extras": {
+    "composition_wt_sum": 101.49
+  }
+}

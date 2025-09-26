@@ -1,0 +1,52 @@
+{
+  "literature_consistency_score": 0.45,
+  "realism_penalty": 0.3,
+  "recommended_bo_weight": 0.135,
+  "confidence": "High",
+  "confidence_factor": 1.0,
+  "property_scores": {
+    "E_GPa": {
+      "score": 0.8,
+      "notes": "Plausible modulus for a PP blend with ~11% elastomer and a low level of non-reinforcing filler. Consistent with other mechanical properties."
+    },
+    "MFI_g10min": {
+      "score": 0.7,
+      "notes": "A value of 25 is common for injection molding grades. It is consistent with the predicted low torque, but the torque and temperature values themselves are suspect."
+    },
+    "sigma_y_MPa": {
+      "score": 0.9,
+      "notes": "21.8 MPa is a very typical yield strength for a PP copolymer with this level of elastomer modification."
+    },
+    "Izod_23_kJm2": {
+      "score": 0.8,
+      "notes": "High, but achievable for a well-compatibilized TPO, indicating good toughness. The high compatibilizer content (2.85%) supports this."
+    },
+    "Izod_m20_kJm2": {
+      "score": 0.85,
+      "notes": "The drop from room temperature impact is expected. A value of 6.8 kJ/m^2 at -20C is good and realistic for an automotive-grade TPO."
+    },
+    "HDT_C": {
+      "score": 0.8,
+      "notes": "Consistent with the predicted modulus (E_GPa). A stiffness of ~880 MPa would typically correspond to an HDT in this range."
+    },
+    "rho_gcc": {
+      "score": 0.1,
+      "notes": "Major contradiction. A density of 0.896 g/cc is for an unfilled PP/elastomer blend. With 5.5 wt% of any common mineral filler, density should be >0.95 g/cc. This indicates a fundamental model flaw."
+    },
+    "Tm_C": {
+      "score": 0.1,
+      "notes": "Predicted melt temperature of 218.8\u00b0C is unrealistically high for polypropylene (typically 160-170\u00b0C) and suggests severe thermal degradation or a flawed thermal model, especially at a low screw speed."
+    },
+    "Torque_Nm": {
+      "score": 0.1,
+      "notes": "A torque of 0.25 Nm is unrealistically low for a twin-screw extruder, even for a high-MFI material. This points to a flawed rheological or process model."
+    }
+  },
+  "r2_izod_vs_elastomer": null,
+  "r2_modulus_vs_elastomer": null,
+  "outlier_fraction": null,
+  "notes": "### Evaluation Report\n\n**Overall Assessment:** The predicted mechanical property profile (stiffness, strength, impact) is internally consistent and represents an attractive, tough TPO. However, this is severely undermined by fundamental contradictions in the physical and processing predictions.\n\n**Key Contradictions & Flaws:**\n1.  **Density vs. Filler:** The most significant flaw is the predicted density (`rho_gcc` = 0.896 g/cc). This value is correct for an *unfilled* blend but ignores the presence of 5.5 wt% filler. A standard mineral filler (e.g., CaCO3, d=2.7 g/cc) would increase the blend density to ~0.97 g/cc. This suggests the model completely fails to account for filler density. The input data showing `filler_wtpct` > 0 while all specific filler volume fractions (`phi_f_*`) are 0 is also a direct contradiction.\n2.  **Processing Physics:** The combination of a very high melt temperature (`Tm_C` = 219\u00b0C), low screw speed (`N_rps` = 3.8), and extremely low torque (`Torque_Nm` = 0.25) is physically implausible. High melt temperatures in extrusion are driven by high shear (high screw speed/torque) or external heating. A low-speed, low-torque process should not generate such high temperatures in a PP system. This points to a flawed process simulation.\n3.  **Thermal Stability:** A melt temperature of 219\u00b0C is well into the degradation range for polypropylene, which would negatively impact all mechanical properties and MFI. The model does not appear to account for this degradation.\n\n**Conclusion:** Due to the unrealistic density, temperature, and torque predictions, the simulation results are not credible. The model requires significant recalibration, particularly in how it handles fillers and simulates the core physics of the extrusion process. The attractive mechanical properties should be disregarded as they are derived from a flawed foundation.",
+  "extras": {
+    "rule_of_mixtures_density_check_g_cc": 0.971
+  }
+}

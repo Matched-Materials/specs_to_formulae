@@ -1,0 +1,48 @@
+{
+  "literature_consistency_score": 0.81,
+  "realism_penalty": 0.7,
+  "recommended_bo_weight": 0.36855,
+  "confidence": "Medium",
+  "confidence_factor": 0.65,
+  "property_scores": {
+    "E_GPa": {
+      "score": 0.4,
+      "notes": "Value of 0.56 GPa is exceptionally low. While ~25% elastomer reduces modulus, the presence of 14% CaCO3 filler should provide significant stiffening. Expected value would be closer to 0.8-1.0 GPa. The model appears to overestimate the elastomer's effect or ignore the filler's contribution."
+    },
+    "MFI_g10min": {
+      "score": 0.8,
+      "notes": "A value of 4 g/10min is plausible for an extrusion-grade, high-viscosity compound. This is consistent with the high specific energy input (~0.31 kWh/kg) calculated from the provided process parameters."
+    },
+al"sigma_y_MPa": {
+      "score": 0.9,
+      "notes": "A yield strength of 20.3 MPa is a realistic prediction for a PP block copolymer modified with ~25 wt% elastomer, which acts as a plasticizer and reduces strength."
+    },
+    "Izod_23_kJm2": {
+      "score": 0.7,
+      "notes": "High impact strength (50.8 kJ/m^2) is expected with high elastomer content. However, this value may be optimistic given the presence of 14% filler and a very low predicted compatibility score (0.2), which typically leads to debonding and reduced toughness."
+    },
+    "Izod_m20_kJm2": {
+      "score": 0.9,
+      "notes": "The significant drop in impact strength to 8.7 kJ/m^2 at -20°C is highly characteristic of the ductile-to-brittle transition in these systems. This value is realistic, especially for a poorly compatibilized blend as suggested by the low compat_score."
+    },
+    "HDT_C": {
+      "score": 0.9,
+      "notes": "The predicted HDT of 71.3°C is low, but it is fully consistent with the very low predicted flexural modulus. This demonstrates good internal consistency in the model's predictions, even if the absolute modulus value is questionable."
+    },
+    "rho_gcc": {
+      "score": 1.0,
+      "notes": "The predicted density of 0.979 g/cc is in excellent agreement with a rule-of-mixtures calculation based on the component weight fractions and their typical densities (PP: ~0.905, POE: ~0.87, CaCO3: ~2.71)."
+    },
+    "Xc": {
+      "score": 0.9,
+      "notes": "A crystallinity of 35% is plausible. The high content of amorphous elastomer (~25%) acts as a diluent, reducing the overall crystallinity of the compound from a typical neat PP block copolymer baseline of 40-50%."
+    }
+  },
+  "r2_izod_vs_elastomer": null,
+  "r2_modulus_vs_elastomer": null,
+  "outlier_fraction": null,
+  "notes": "### Evaluation Report\n\n**Overall Assessment:** The model demonstrates good internal consistency, with properties like HDT and yield strength logically following from the predicted modulus and composition. However, there is a significant quantitative discrepancy with established literature, primarily concerning the flexural modulus.\n\n**1. Flexural Modulus (`E_GPa`):** The predicted modulus of 0.56 GPa is the primary concern. For a PP compound with ~25% elastomer and ~14% CaCO3, this value is unrealistically low. The stiffening effect of the mineral filler appears to be underestimated or negated, while the softening effect of the elastomer is likely overestimated. A value in the 0.8-1.0 GPa range would be more typical for this composition.\n\n**2. Impact Performance (`Izod`):** The predicted impact behavior is highly realistic. The large drop from room temperature (50.8 kJ/m²) to -20°C (8.7 kJ/m²) correctly captures the ductile-to-brittle transition. This behavior is consistent with a formulation having a very low compatibility score (0.2), which suggests poor interfacial adhesion and thus poor low-temperature performance, a key consideration for automotive parts.\n\n**3. Rheology and Density:** The MFI of 4 is plausible and consistent with the high viscosity implied by the process parameters. The predicted density (0.979 g/cc) shows excellent agreement with theoretical calculations, indicating the model handles component mass fractions correctly.\n\n**Confidence:** Confidence is 'Medium' because while the qualitative trends (e.g., more elastomer -> lower modulus) and inter-property relationships are sound, the absolute value of the modulus is a significant deviation from expected results, suggesting a potential flaw in the model's quantitative predictions for stiffness.",
+  "extras": {
+    "calculated_sei_kWh_per_kg": 0.3141592653589793
+  }
+}

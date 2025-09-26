@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "EvaluatorAdvisoryScores",
+  "type": "object",
+  "properties": {
+    "literature_consistency": { "type": "number", "minimum": 0.0, "maximum": 1.0 },
+    "realism_penalty": { "type": "number", "minimum": 0.0, "maximum": 1.0 },
+    "confidence": { "type": "string", "enum": ["High","Medium","Low","high","medium","low"] },
+    "recommended_bo_weight": { "type": "number", "minimum": 0.0, "maximum": 1.0 },
+    "notes": { "type": "string" }
+  },
+  "required": [
+    "literature_consistency",
+    "realism_penalty",
+    "confidence",
+    "recommended_bo_weight"
+  ]
+}

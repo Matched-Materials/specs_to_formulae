@@ -1,0 +1,46 @@
+{
+  "literature_consistency_score": 0.7,
+  "realism_penalty": 0.8,
+  "recommended_bo_weight": 0.364,
+  "confidence": "Medium",
+  "confidence_factor": 0.65,
+  "property_scores": {
+    "E_GPa": {
+      "score": 0.6,
+      "notes": "Predicted modulus of 0.84 GPa is low for a formulation with 18.2 wt% CaCO3 filler, even when accounting for 15.5 wt% elastomer. Literature values for similar filled TPOs are typically >1.0 GPa, suggesting the model may be underestimating the stiffening effect of the filler."
+    },
+    "MFI_g10min": {
+      "score": 0.6,
+      "notes": "MFI of 3.3 is very low, indicating high viscosity and potential processing challenges for injection molding. This is only realistic if the base PP resin has an intrinsically very high molecular weight (low MFI)."
+    },
+    "sigma_y_MPa": {
+      "score": 0.9,
+      "notes": "Yield strength of 21.4 MPa is a plausible outcome of the competing effects of the elastomer (softening) and CaCO3 filler (reinforcing)."
+    },
+    "Izod_23_kJm2": {
+      "score": 0.8,
+      "notes": "High room-temperature impact strength (45.1 kJ/m^2) is optimistic but achievable for a well-compatibilized PP/elastomer blend, indicating effective toughening."
+    },
+    "Izod_m20_kJm2": {
+      "score": 0.8,
+      "notes": "The value of 7.7 kJ/m^2 is reasonable for a filled TPO at low temperature. The significant drop from 23\u00b0C is expected and indicates a DBTT above -20\u00b0C."
+    },
+    "HDT_C": {
+      "score": 0.9,
+      "notes": "HDT of 82.3\u00b0C is consistent with the addition of 18.2 wt% CaCO3 to a PP copolymer, which generally increases heat deflection temperature."
+    },
+    "rho_gcc": {
+      "score": 1.0,
+      "notes": "The predicted density of 1.015 g/cc aligns perfectly with calculations based on the rule of mixtures for the given composition."
+    },
+    "Xc": {
+      "score": 0.9,
+      "notes": "Crystallinity of 38.7% is a typical value for a filled PP block copolymer/elastomer blend."
+    }
+  },
+  "r2_izod_vs_elastomer": null,
+  "r2_modulus_vs_elastomer": null,
+  "outlier_fraction": null,
+  "notes": "### Evaluation Report\n\n**Overall Assessment:** The predicted properties describe a highly tough and flexible material, but with very high viscosity and lower-than-expected stiffness for a filled compound. The property set is largely internally consistent (e.g., high toughness corresponds to lower stiffness) but shows some notable deviations from typical literature values.\n\n**Key Observations:**\n*   **Stiffness-Toughness Balance:** The combination of very high RT Izod impact (45.1 kJ/m\u00b2) and a low modulus (0.84 GPa) is the defining feature. While high toughness is expected from the elastomer content, the modulus seems unusually low given the 18.2 wt% CaCO3 filler loading. This could imply the model assumes poor filler dispersion or adhesion.\n*   **Melt Flow (MFI):** An MFI of 3.3 g/10min is extremely low for a typical automotive injection molding grade and suggests the material would be difficult to process. This prediction is only plausible if the base PP resin (`baseB_wtpct`) is a very high molecular weight grade, which is not specified.\n*   **Thermal & Physical Properties:** HDT, density, and crystallinity predictions are all well-aligned with expectations for this type of formulation and are considered highly realistic.\n\n**Confidence:** Medium. The evaluation is based on established knowledge of PP composites, but the lack of information on the base resin properties (especially MFI and modulus) introduces uncertainty, particularly in assessing the predicted MFI.",
+  "extras": null
+}

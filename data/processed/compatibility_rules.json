@@ -1,0 +1,94 @@
+{
+  "version": "0.1",
+  "families": [
+    "polyolefin/PP",
+    "polyolefin/PE",
+    "polyolefin/POE",
+    "polyester/PLA",
+    "polyester/PHA-PHB",
+    "polyester/PBAT",
+    "compatibilizer/PP-g-MA"
+  ],
+  "pair_matrix": {
+    "polyolefin/PP::polyolefin/PP": {
+      "score": 1.0
+    },
+    "polyolefin/PP::polyolefin/POE": {
+      "score": 0.9
+    },
+    "polyolefin/PP::polyolefin/PE": {
+      "score": 0.8
+    },
+    "polyolefin/PP::polyester/PLA": {
+      "score": 0.0,
+      "block": true,
+      "note": "Immiscible; PP/PLA blend brittle"
+    },
+    "polyolefin/PP::polyester/PHA-PHB": {
+      "score": 0.1,
+      "block": true
+    },
+    "polyolefin/PP::polyester/PBAT": {
+      "score": 0.2,
+      "note": "Processable in some films with compatibilizer; not for PP stream"
+    },
+    "polyester/PLA::polyester/PBAT": {
+      "score": 0.7,
+      "note": "Common in compostable films"
+    },
+    "polyester/PLA::polyester/PHA-PHB": {
+      "score": 0.6,
+      "note": "Partial compatibility; often needs compatibilizer"
+    },
+    "polyester/PHA-PHB::polyester/PBAT": {
+      "score": 0.5
+    },
+    "polyolefin/POE::polyolefin/PE": {
+      "score": 0.9
+    },
+    "polyolefin/POE::polyester/PLA": {
+      "score": 0.0,
+      "block": true
+    }
+  },
+  "recycling_stream_by_family": {
+    "polyolefin/PP": "PP",
+    "polyolefin/PE": "PE",
+    "polyolefin/POE": "Mixed-Polyolefin",
+    "polyester/PLA": "PLA",
+    "polyester/PHA-PHB": "Compostable",
+    "polyester/PBAT": "Compostable",
+    "compatibilizer/PP-g-MA": "PP"
+  },
+  "thresholds": {
+    "doe_hard_block_threshold": 0.2,
+    "needs_compat_threshold": 0.7
+  },
+  "processing_rules": {
+    "mfr_ratio_max": 4.0,
+    "melt_T_overlap_good": 25.0,
+    "melt_T_overlap_min": 10.0,
+    "drying_mismatch_penalty": 0.2
+  },
+  "compatibilizer_suggestions": {
+    "polyolefin/PP::polyester/PLA": {
+      "agents": [
+        "PP-g-MA"
+      ],
+      "boost_to": 0.5
+    },
+    "polyolefin/PP::polyester/PBAT": {
+      "agents": [
+        "PP-g-MA"
+      ],
+      "boost_to": 0.6
+    },
+    "polyester/PLA::polyester/PHA-PHB": {
+      "agents": [
+        "epoxy chain extender",
+        "PLA-g-MA"
+      ],
+      "boost_to": 0.8
+    }
+  }
+}

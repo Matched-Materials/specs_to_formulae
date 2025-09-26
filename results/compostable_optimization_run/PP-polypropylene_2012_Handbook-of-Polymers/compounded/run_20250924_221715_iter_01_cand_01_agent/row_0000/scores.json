@@ -1,0 +1,53 @@
+{
+  "literature_consistency_score": 0.65,
+  "realism_penalty": 0.7,
+  "recommended_bo_weight": 0.455,
+  "confidence": "High",
+  "confidence_factor": 1.0,
+  "property_scores": {
+    "E_GPa": {
+      "score": 0.9,
+      "notes": "Plausible reduction in modulus to 0.76 GPa given the 16% elastomer content. Consistent with TPO formulations."
+    },
+    "MFI_g10min": {
+      "score": 0.7,
+      "notes": "A value of 25 is plausible for an injection molding grade, but its realism depends heavily on the MFI of the unknown base PP resins."
+    },
+    "sigma_y_MPa": {
+      "score": 0.9,
+      "notes": "The reduction in yield strength to 21.2 MPa is a realistic trade-off for the high elastomer content and is consistent with the predicted modulus."
+    },
+    "Izod_23_kJm2": {
+      "score": 0.95,
+      "notes": "Excellent room-temperature impact strength (49.4 kJ/m^2) is expected and highly desirable for a TPO with 16% elastomer and compatibilizer."
+    },
+    "Izod_m20_kJm2": {
+      "score": 0.9,
+      "notes": "Good low-temperature toughness (8.5 kJ/m^2). The drop from room temperature is typical and aligns with automotive requirements."
+    },
+    "HDT_C": {
+      "score": 0.85,
+      "notes": "The predicted HDT of 81\u00b0C is a realistic consequence of the significant modulus reduction caused by the elastomer."
+    },
+    "rho_gcc": {
+      "score": 0.1,
+      "notes": "Highly unrealistic. The predicted density of 0.894 g/cm^3 is too high for a blend containing 16% low-density elastomer (typically 0.86-0.88 g/cm^3). The value should be lower than the base PP."
+    },
+    "Xc": {
+      "score": 0.8,
+      "notes": "Crystallinity of 39% is a plausible outcome, reflecting the dilution of the PP crystalline phase by the amorphous elastomer and compatibilizer."
+    }
+  },
+  "r2_izod_vs_elastomer": null,
+  "r2_modulus_vs_elastomer": null,
+  "outlier_fraction": null,
+  "notes": "### Evaluation Report\n\n**Overall Assessment:** The model correctly predicts the key mechanical property trade-offs for a toughened polypropylene (TPO) formulation. The predicted decrease in modulus, yield strength, and HDT, coupled with a significant increase in room-temperature and low-temperature Izod impact strength, is highly consistent with scientific literature for PP/elastomer blends.\n\n**Critical Issues & Inconsistencies:**\n1.  **Density (`rho_gcc`):** The predicted density (0.894 g/cm\u00b3) is a major outlier. Adding 16 wt% of a low-density elastomer (typically <0.88 g/cm\u00b3) to polypropylene (~0.905 g/cm\u00b3) should result in a final density significantly lower than that of the base PP. The predicted value is unrealistically high and suggests a fundamental flaw in the density prediction model.\n2.  **Formulation Definition:** There is a contradiction in the input data. `filler_wtpct` is 1.7%, but all specific filler types (`talc_wtpct`, etc.) are 0.0. The model's basis for prediction is unclear.\n3.  **Processing Parameters:** The predicted melt temperature (`Tm_C` = 233\u00b0C) is at the very high end of the typical PP processing window, risking thermal degradation. The predicted torque (0.25 Nm) seems abnormally low for any realistic twin-screw extruder, even at lab scale.\n\n**Conclusion:** While the mechanical property profile is plausible, the severe inconsistency in the predicted density and ambiguities in the formulation/processing data reduce confidence in the overall prediction. The density prediction should be heavily penalized.",
+  "extras": {
+    "identified_issues": [
+      "Predicted density is unrealistically high for a PP/elastomer blend.",
+      "Contradictory filler definition: total filler is non-zero while specific fillers are zero.",
+      "Melt temperature is at the upper limit for PP processing.",
+      "Predicted extruder torque is unrealistically low."
+    ]
+  }
+}

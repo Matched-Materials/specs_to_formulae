@@ -1,0 +1,76 @@
+{
+  "version": "1.0",
+  "properties": {
+    "HDT_C_66psi": {
+      "aliases": ["HDT 66 psi", "DTUL_66psi_C", "Heat Deflection Temperature @ 0.45 MPa"],
+      "unit": "C"
+    },
+    "MFI_g_10min_230C_2p16kg": {
+      "aliases": ["MFR 230C/2.16kg", "MFI (230/2.16)", "Melt Flow Rate (230°C/2.16 kg)", "Melt Mass-Flow Rate (230°C/2.16 kg)"],
+      "unit": "g/10min"
+    },
+    "density_g_cc": {
+      "aliases": ["density", "Specific Gravity"],
+      "unit": "g/cm3"
+    },
+    "tensile_strength_yield_MPa": {
+      "aliases": ["Tensile Strength at Yield", "Yield Strength"],
+      "unit": "MPa"
+    },
+    "flexural_modulus_GPa": {
+      "aliases": ["Flex Modulus", "Flexural Modulus", "Flexural Modulus (1% Secant)"],
+      "unit": "GPa"
+    },
+    "izod_impact_notched_23C_J_m": {
+      "aliases": ["Notched Izod Impact (23C)", "Izod Impact, Notched @ 23C"],
+      "unit": "J/m"
+    },
+    "izod_impact_notched_minus18C_J_m": {
+      "aliases": ["Notched Izod Impact (-18C)", "Izod Impact, Notched @ -18C"],
+      "unit": "J/m"
+    },
+    "Izod_23_kJm2": {
+      "aliases": ["izod_impact_notched_23C_kJ_m2", "Notched Izod Impact Strength (23C)"],
+      "unit": "kJ/m^2"
+    },
+    "Izod_m20_kJm2": {
+      "aliases": ["izod_impact_notched_minus20C_kJ_m2", "Notched Izod Impact Strength (-20C)"],
+      "unit": "kJ/m^2"
+    },
+    "elongation_yield_pct": {
+      "aliases": ["eps_y_pct", "Elongation at Yield", "Tensile Strain at Yield"],
+      "unit": "%"
+    },
+    "crystallinity_pct": {
+      "aliases": ["Xc", "Crystallinity"],
+      "unit": "%"
+    },
+    "gardner_impact_minus29C_J": {
+      "aliases": ["Gardner Impact (-29C)"],
+      "unit": "J"
+    },
+    "specific_heat_capacity_J_gC": {
+      "aliases": ["Specific Heat Capacity", "Cp"],
+      "unit": "J/g-C"
+    },
+    "thermal_conductivity_W_mK": {
+      "aliases": ["Thermal Conductivity", "k"],
+      "unit": "W/m-K"
+    },
+    "viscosity_cross_wlf_eta0_Pa_s": {
+      "aliases": ["Zero-Shear Viscosity", "eta0"],
+      "unit": "Pa-s"
+    },
+    "viscosity_cross_wlf_tau_star_Pa": {
+      "aliases": ["Critical Stress", "tau*"],
+      "unit": "Pa"
+    },
+    "viscosity_cross_wlf_n": {
+      "aliases": ["Power-Law Index", "n"],
+      "unit": null
+    }
+  },
+  "metadata": {
+    "description": "Maps various spec sheet property names to a canonical internal name and defines the standard unit."
+  }
+}
