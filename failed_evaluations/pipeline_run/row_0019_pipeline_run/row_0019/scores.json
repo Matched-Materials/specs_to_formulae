@@ -1,5 +1,0 @@
-{
-  "error": "Agent returned invalid output. Error: Agent output not found in session state. run_status=ok, info=None",
-  "run_status": "ok",
-  "run_info": null
-}

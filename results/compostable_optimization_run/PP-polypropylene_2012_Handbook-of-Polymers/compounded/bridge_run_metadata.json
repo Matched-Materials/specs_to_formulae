@@ -1,9 +1,0 @@
-{
-  "cycle": "iter_unlabeled",
-  "in_csv": "results/compostable_optimization_run/PP-polypropylene_2012_Handbook-of-Polymers/formulations/run_20250924_221715_iter_10_cand_04.csv",
-  "out_csv": "results/compostable_optimization_run/PP-polypropylene_2012_Handbook-of-Polymers/compounded/run_20250924_221715_iter_10_cand_04_prediction.csv",
-  "model": "/Users/daniel/Library/CloudStorage/GoogleDrive-daniel@matchedmaterials.com/My Drive/Matched Materials/Platform/synthetic_data_generation/spec_sheets_to_formulas/data/processed/pp_elastomer_TSE_hybrid_model_v1.json",
-  "ingredient_library": "/Users/daniel/Library/CloudStorage/GoogleDrive-daniel@matchedmaterials.com/My Drive/Matched Materials/Platform/synthetic_data_generation/spec_sheets_to_formulas/data/processed/ingredient_library.json",
-  "process": "results/compostable_optimization_run/PP-polypropylene_2012_Handbook-of-Polymers/compounded/run_20250924_221715_iter_10_cand_04_process.json",
-  "rows_written": 1
-}
