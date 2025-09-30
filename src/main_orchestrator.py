@@ -143,6 +143,11 @@ def run_optimization_loop(
         print(f"Building targets from spec file: {spec_file}")
         # Ingest and enrich the spec file to build dynamic targets
         normalized_spec = normalize_spec(Path(spec_file))
+        # --- Save the normalized spec for debugging ---
+        normalized_spec_path = Path(base_results_dir) / f"normalized_spec_{run_timestamp}.json"
+        with open(normalized_spec_path, 'w') as f:
+            json.dump(normalized_spec, f, indent=2)
+        print(f"Saved normalized spec to: {normalized_spec_path}")
         enriched_spec = gapfill(normalized_spec)
         targets_constraints = build_targets_constraints(enriched_spec)
     else:

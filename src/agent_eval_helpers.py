@@ -32,23 +32,26 @@ logger = logging.getLogger(__name__)
 from src.run_evaluator_with_adk import evaluate_context
 from evaluator.matsi_property_evaluator.eval_schema import EvalInput
 
+# This map is now more critical. It bridges the generic property names from spec sheets
+# to the specific, condition-aware canonical names used by the models and optimizer.
 PROPERTY_MAP = {
-    # Map human names (in your target_properties.json) to prediction column names
-    "Melt Mass-Flow Rate (MFR)": {"key": "MFI_g10min"},
-    "Tensile Strength at Yield": {"key": "sigma_y_MPa"},
-    # For properties with multiple conditions, use a list of condition-to-key maps
+    # Generic Name -> List of specific mappings
+    "Melt Mass-Flow Rate (MFR)": [{"key": "MFI_g_10min_230C_2p16kg", "conditions_must_contain": ["230", "2.16"]}],
+    "Tensile Strength at Yield": [{"key": "tensile_strength_yield_MPa"}],
     "Flexural Modulus": [
-        {"conditions_must_contain": "ISO 178", "key": "E_GPa"}
+        {"key": "flexural_modulus_GPa"} # A generic fallback
     ],
     "Notched Izod Impact Strength": [
-        {"conditions_must_contain": "-20", "key": "Izod_m20_kJm2"},
-        {"conditions_must_contain": "23", "key": "Izod_23_kJm2"}
+        {"key": "izod_impact_notched_minus18C_J_m", "conditions_must_contain": ["-18"]},
+        {"key": "izod_impact_notched_23C_J_m", "conditions_must_contain": ["23"]}
     ],
-    "Heat Deflection Temperature": {"key": "HDT_C"},
-    # --- Add remaining properties from the model ---
-    "Density": {"key": "rho_gcc"},
-    "Elongation at Yield": {"key": "eps_y_pct"},
-    "Gardner Impact": {"key": "Gardner_J"},
+    "Heat Deflection Temperature": [
+        {"key": "HDT_C_66psi", "conditions_must_contain": ["0.45", "66"]},
+        {"key": "HDT_C_1p8MPa", "conditions_must_contain": ["1.8"]}
+    ],
+    "Density": [{"key": "density_g_cc"}],
+    "Elongation at Yield": [{"key": "elongation_yield_pct"}],
+    "Gardner Impact": [{"key": "gardner_impact_minus29C_J", "conditions_must_contain": ["-29"]}],
 }
 
 
@@ -96,18 +99,19 @@ def build_targets_constraints(targets_input: Union[str, Path, Dict[str, Any]]) -
         
         if not found_mapping:
             continue
-
+        
         # Normalize to a list to handle both single and multiple mappings
         mappings = found_mapping if isinstance(found_mapping, list) else [found_mapping]
 
         for condition_map in mappings:
             key = condition_map.get("key")
             if not key: continue
-
+            
             # Check if a condition is required for this mapping
-            condition_str = condition_map.get("conditions_must_contain")
-            if condition_str and condition_str not in prop.get("conditions", "") and condition_str not in prop.get("test_method", ""):
-                continue # This mapping doesn't apply, try the next one
+            required_conds = condition_map.get("conditions_must_contain", [])
+            prop_cond_text = str(prop.get("conditions", "")) + str(prop.get("test_method", ""))
+            if required_conds and not all(cond in prop_cond_text for cond in required_conds):
+                continue # This mapping's conditions don't match the property's conditions.
             
             constraints[key] = {
                 "value": _coerce_number(prop.get("value")),
@@ -261,7 +265,9 @@ def evaluate_with_agent(
         # --- Handle evaluation result (success or failure) ---
         score = out.get("score") or {}
         if "error" in score:
-            print(f"      -> Evaluation failed for row {idx}. Reason: {score.get('error', 'Unknown')}. Moving artifacts.")
+            error_reason = score.get('error', 'Unknown')
+            print(f"      -> Evaluation failed for row {idx}. Reason: {error_reason}. Moving artifacts.")
+            logger.warning(f"Agent evaluation failed for row {idx} (run: {run_identifier}). Reason: {error_reason}")
             # Move the failed evaluation directory for later inspection
             try:
                 # Use a unique name in the failed directory to avoid collisions from different runs

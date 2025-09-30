@@ -1,424 +1,621 @@
 {
+  "schema_version": "1.2.0",
+  "library_name": "spec_sheets_to_formulas_ingredient_library",
+  "last_updated": "2025-09-29",
+  "notes": "Commercially available materials prioritized. Suitability gates added to protect recycling and composting streams. All prices, EF and supply are indicative ranges; tune per region/vendor.",
+  "global_rules": {
+    "streams": [
+      "PP",
+      "PET",
+      "HDPE",
+      "PLA",
+      "Compostable",
+      "Mixed-Polyolefin"
+    ],
+    "default_max_additive_wt_pct_by_stream": {
+      "PP": 5.0,
+      "PET": 3.0,
+      "HDPE": 3.0,
+      "PLA": 10.0,
+      "Compostable": 10.0,
+      "Mixed-Polyolefin": 5.0
+    },
+    "banned_pairs": [
+      {"a_family": "polyester/PLA", "b_family": "polyolefin/PP", "reason": "Immiscible; brittleness and delamination in PP stream"},
+      {"a_family": "polyester/PHA-PHB", "b_family": "polyolefin/PP", "reason": "Chemistry/immiscibility; contaminates PP stream"},
+      {"a_family": "polyester/PLA", "b_family": "polyester/PET", "reason": "PLA depresses PET IV and contaminates melt filtering"},
+      {"a_family": "filler/fiber", "b_family": "Compostable", "max_wt_pct": 25, "reason": "Keep mineral loadings moderate to preserve disintegration/biodegradation kinetics"}
+    ],
+    "suitability_levels": ["Approved", "Caution", "Not Allowed"],
+    "default_processing": {
+      "dry_blend": true,
+      "pre_dry_pct": 0.02,
+      "blend_type": "batch"
+    }
+  },
+
   "base_resins": [
     {
       "name": "PP ICP Virgin",
       "type": "PP-ICP",
       "family": "Polypropylene",
-      "mfr_range": [
-        10,
-        40
-      ],
+      "mfr_range": [10, 40],
       "cost_usd_per_kg": 1.5,
+      "price_usd_per_kg_range": [1.3, 1.8],
       "ef_kgCO2e_per_kg": 1.85,
-      "notes": "Virgin Polypropylene Impact Copolymer",
+      "chem_family": "polyolefin/PP",
+      "recycling_stream": "PP",
       "sustainability": {
         "origin": "fossil",
         "bio_content_pct": 0,
-        "recycled_content_pct": 0
+        "recycled_content_pct": 0,
+        "certifications": []
       },
       "compatibility": {
-        "elastomer_types": [
-          "POE",
-          "PBE"
-        ],
-        "compatibilizer_types": [
-          "PP-g-MAH"
-        ],
-        "filler_types": [
-          "Talc",
-          "CaCO3",
-          "SGF"
-        ]
+        "elastomer_types": ["POE", "PBE"],
+        "compatibilizer_types": ["PP-g-MAH"],
+        "filler_types": ["Talc", "CaCO3", "SGF"]
       },
-      "chem_family": "polyolefin/PP",
-      "recycling_stream": "PP"
+      "suitability": {
+        "recyclability": {
+          "PP": {"level": "Approved", "max_wt_pct": 100, "notes": "Native stream"},
+          "PET": {"level": "Not Allowed"},
+          "HDPE": {"level": "Caution", "max_wt_pct": 5, "notes": "Only for mixed PO lines"}
+        },
+        "compostability": {"industrial": "Not Allowed", "home": "Not Allowed"}
+      },
+      "supply": {
+        "vendors_example": ["SABIC", "LyondellBasell", "Borealis"],
+        "regions": ["NA", "EU", "APAC"],
+        "lead_time_weeks": [2, 6]
+      },
+      "notes": "Virgin Polypropylene Impact Copolymer"
     },
     {
       "name": "rPP ICP (injection grade)",
       "type": "rPP-ICP",
       "family": "Polypropylene",
       "cost_usd_per_kg": 1.22,
+      "price_usd_per_kg_range": [0.9, 1.5],
       "ef_kgCO2e_per_kg": 0.7,
-      "notes": "Recycled Polypropylene Impact Copolymer. EF can vary based on source.",
+      "chem_family": "polyolefin/PP",
+      "recycling_stream": "PP",
       "sustainability": {
         "origin": "recycled",
         "bio_content_pct": 0,
-        "recycled_content_pct": 100
+        "recycled_content_pct": 100,
+        "certifications": ["RIC#5", "APR compatible (article-level)"]
       },
       "compatibility": {
-        "elastomer_types": [
-          "POE",
-          "PBE"
-        ],
-        "compatibilizer_types": [
-          "PP-g-MAH"
-        ],
-        "filler_types": [
-          "Talc",
-          "CaCO3",
-          "SGF"
-        ]
+        "elastomer_types": ["POE", "PBE"],
+        "compatibilizer_types": ["PP-g-MAH"],
+        "filler_types": ["Talc", "CaCO3", "SGF"]
       },
-      "chem_family": "polyolefin/PP",
-      "recycling_stream": "PP"
+      "suitability": {
+        "recyclability": {
+          "PP": {"level": "Approved", "max_wt_pct": 100},
+          "PET": {"level": "Not Allowed"},
+          "HDPE": {"level": "Caution", "max_wt_pct": 5}
+        },
+        "compostability": {"industrial": "Not Allowed", "home": "Not Allowed"}
+      },
+      "supply": {
+        "vendors_example": ["Avangard", "PureCycle", "MBA Polymers"],
+        "regions": ["NA", "EU"],
+        "lead_time_weeks": [3, 8]
+      },
+      "notes": "Recycled PP; EF varies widely by source and allocation."
     },
     {
       "name": "Mass-Balance Bio-PP ICP",
       "type": "Bio-PP-ICP",
       "family": "Polypropylene",
       "cost_usd_per_kg": 2.1,
+      "price_usd_per_kg_range": [1.9, 2.6],
       "ef_kgCO2e_per_kg": 1.85,
-      "notes": "ISCC+ certified mass-balance bio-attributed PP. Track bio-content separately.",
+      "chem_family": "polyolefin/PP",
+      "recycling_stream": "PP",
       "sustainability": {
         "origin": "bio-attributed",
-        "recycled_content_pct": 0,
         "scheme": "ISCC+ mass balance",
-        "notes": "Bio-attributed via mass balance; effective biogenic content allocated by certificate."
+        "recycled_content_pct": 0,
+        "certifications": ["ISCC+ (mass balance)"]
       },
       "compatibility": {
-        "elastomer_types": [
-          "POE",
-          "PBE"
-        ],
-        "compatibilizer_types": [
-          "PP-g-MAH"
-        ],
-        "filler_types": [
-          "Talc",
-          "CaCO3",
-          "SGF"
-        ]
+        "elastomer_types": ["POE", "PBE"],
+        "compatibilizer_types": ["PP-g-MAH"],
+        "filler_types": ["Talc", "CaCO3", "SGF"]
       },
-      "chem_family": "polyolefin/PP",
-      "recycling_stream": "PP"
+      "suitability": {
+        "recyclability": {"PP": {"level": "Approved", "max_wt_pct": 100}},
+        "compostability": {"industrial": "Not Allowed", "home": "Not Allowed"}
+      },
+      "supply": {
+        "vendors_example": ["Braskem", "LyondellBasell", "SABIC"],
+        "regions": ["NA", "EU", "APAC"],
+        "lead_time_weeks": [4, 10]
+      },
+      "notes": "Bio-attributed PP; identical in performance to fossil grades. Track certificates for claims."
     },
+
+    {
+      "name": "PET (bottle-grade, virgin)",
+      "type": "PET",
+      "family": "Polyester",
+      "mfr_range": [6, 30],
+      "cost_usd_per_kg": 1.4,
+      "price_usd_per_kg_range": [1.2, 1.6],
+      "ef_kgCO2e_per_kg": 2.5,
+      "chem_family": "polyester/PET",
+      "recycling_stream": "PET",
+      "sustainability": {
+        "origin": "fossil",
+        "bio_content_pct": 0,
+        "recycled_content_pct": 0,
+        "certifications": ["RIC#1"]
+      },
+      "compatibility": {
+        "elastomer_types": [],
+        "compatibilizer_types": ["Epoxy-ADR"],
+        "filler_types": ["Talc", "CaCO3", "Glass (SGF)"]
+      },
+      "suitability": {
+        "recyclability": {
+          "PET": {"level": "Approved", "max_wt_pct": 100, "notes": "Additives must meet APR PET guidelines"},
+          "PP": {"level": "Not Allowed"},
+          "HDPE": {"level": "Not Allowed"}
+        },
+        "compostability": {"industrial": "Not Allowed", "home": "Not Allowed"}
+      },
+      "supply": {
+        "vendors_example": ["Indorama", "Nan Ya", "DAK Americas"],
+        "regions": ["NA", "EU", "APAC"],
+        "lead_time_weeks": [2, 6]
+      },
+      "notes": "Use epoxy chain extenders sparingly in PET stream to maintain recyclability."
+    },
+    {
+      "name": "rPET (flake/pellet, food-contact capable)",
+      "type": "rPET",
+      "family": "Polyester",
+      "mfr_range": [6, 20],
+      "cost_usd_per_kg": 1.1,
+      "price_usd_per_kg_range": [0.9, 1.5],
+      "ef_kgCO2e_per_kg": 0.7,
+      "chem_family": "polyester/PET",
+      "recycling_stream": "PET",
+      "sustainability": {
+        "origin": "recycled",
+        "bio_content_pct": 0,
+        "recycled_content_pct": 100,
+        "certifications": ["RIC#1", "APR compatible (article-level)"]
+      },
+      "compatibility": {
+        "elastomer_types": [],
+        "compatibilizer_types": ["Epoxy-ADR"],
+        "filler_types": ["Talc", "CaCO3", "Glass (SGF)"]
+      },
+      "suitability": {
+        "recyclability": {"PET": {"level": "Approved", "max_wt_pct": 100}},
+        "compostability": {"industrial": "Not Allowed", "home": "Not Allowed"}
+      },
+      "supply": {
+        "vendors_example": ["Indorama", "Placon", "Loop"],
+        "regions": ["NA", "EU"],
+        "lead_time_weeks": [3, 8]
+      },
+      "notes": "Target high IV and low contaminants; ADR usage should respect APR limits."
+    },
+
+    {
+      "name": "HDPE (bottle/IM grade, virgin)",
+      "type": "HDPE",
+      "family": "Polyethylene",
+      "mfr_range": [5, 30],
+      "cost_usd_per_kg": 1.3,
+      "price_usd_per_kg_range": [1.1, 1.5],
+      "ef_kgCO2e_per_kg": 1.9,
+      "chem_family": "polyolefin/PE",
+      "recycling_stream": "HDPE",
+      "sustainability": {
+        "origin": "fossil",
+        "bio_content_pct": 0,
+        "recycled_content_pct": 0,
+        "certifications": ["RIC#2"]
+      },
+      "compatibility": {
+        "elastomer_types": ["POE"],
+        "compatibilizer_types": ["PE-g-MAH"],
+        "filler_types": ["Talc", "CaCO3"]
+      },
+      "suitability": {
+        "recyclability": {"HDPE": {"level": "Approved", "max_wt_pct": 100}},
+        "compostability": {"industrial": "Not Allowed", "home": "Not Allowed"}
+      },
+      "supply": {
+        "vendors_example": ["Dow", "ExxonMobil", "INEOS"],
+        "regions": ["NA", "EU", "APAC"],
+        "lead_time_weeks": [2, 6]
+      },
+      "notes": "Use additive packages compatible with HDPE stream."
+    },
+    {
+      "name": "Bio-PE (mass-balance or bio-ethanol based)",
+      "type": "Bio-HDPE",
+      "family": "Polyethylene",
+      "mfr_range": [5, 30],
+      "cost_usd_per_kg": 1.7,
+      "price_usd_per_kg_range": [1.5, 2.2],
+      "ef_kgCO2e_per_kg": 1.9,
+      "chem_family": "polyolefin/PE",
+      "recycling_stream": "HDPE",
+      "sustainability": {
+        "origin": "bio-attributed",
+        "scheme": "ISCC+ mass balance or bio-ethanol route",
+        "recycled_content_pct": 0,
+        "certifications": ["ISCC+ (mass balance)"]
+      },
+      "compatibility": {
+        "elastomer_types": ["POE"],
+        "compatibilizer_types": ["PE-g-MAH"],
+        "filler_types": ["Talc", "CaCO3"]
+      },
+      "suitability": {
+        "recyclability": {"HDPE": {"level": "Approved", "max_wt_pct": 100}},
+        "compostability": {"industrial": "Not Allowed", "home": "Not Allowed"}
+      },
+      "supply": {
+        "vendors_example": ["Braskem I'm green™", "SABIC TRUCIRCLE™"],
+        "regions": ["NA", "EU", "APAC"],
+        "lead_time_weeks": [4, 10]
+      },
+      "notes": "Bio-attributed PE; identical performance, use for scope 3 reductions."
+    },
+
     {
       "name": "PLA (general-purpose)",
       "type": "PLA",
       "family": "biopolymer",
-      "mfr_range": [
-        3,
-        30
-      ],
+      "mfr_range": [3, 30],
       "cost_usd_per_kg": 2.6,
+      "price_usd_per_kg_range": [2.2, 3.2],
       "ef_kgCO2e_per_kg": 1.83,
+      "chem_family": "polyester/PLA",
+      "recycling_stream": "PLA",
       "sustainability": {
         "origin": "bio-based",
         "bio_content_pct": 100,
-        "recycled_content_pct": 0
+        "recycled_content_pct": 0,
+        "certifications": ["EN 13432 (grade-dependent)", "ASTM D6400 (grade-dependent)", "OK Compost Industrial (grade-dependent)"]
       },
       "compatibility": {
-        "elastomer_types": [
-          "PBAT",
-          "PHA"
-        ],
-        "compatibilizer_types": [
-          "PLA-g-MAH",
-          "Joncryl"
-        ],
-        "filler_types": [
-          "Talc",
-          "CaCO3",
-          "BioFiber",
-          "Biochar",
-          "Cellulose"
-        ]
+        "elastomer_types": ["PBAT", "PHA"],
+        "compatibilizer_types": ["PLA-g-MAH", "Epoxy-ADR"],
+        "filler_types": ["Talc", "CaCO3", "BioFiber", "Biochar", "Cellulose"]
       },
-      "notes": "Polylactic Acid; high stiffness, low impact; Tg~60\u00b0C, Tm~160-170\u00b0C.",
+      "suitability": {
+        "recyclability": {
+          "PLA": {"level": "Approved", "max_wt_pct": 100},
+          "PP": {"level": "Not Allowed"},
+          "PET": {"level": "Not Allowed"}
+        },
+        "compostability": {
+          "industrial": "Approved",
+          "home": "Caution"
+        }
+      },
+      "supply": {
+        "vendors_example": ["NatureWorks Ingeo", "TotalEnergies Corbion"],
+        "regions": ["NA", "EU", "APAC"],
+        "lead_time_weeks": [4, 12]
+      },
       "automotive": {
         "interior_suitability": "Interior trim in low-heat zones; use stabilized blends.",
-        "odor_vda270_target": "Aim \u22643 at 60\u00b0C (OEM-dependent); use low-lactide grades and drying.",
-        "fogging_vda278_guideline": "Select low-VOC additives; verify per VDA 278 / ISO 6452; avoid excess waxes.",
-        "heat_aging_guideline": "Stabilize with AO/HALS; verify 80\u201390\u00b0C for 500\u20131000 h; monitor embrittlement/cracking.",
-        "uv_guideline": "Use UV absorber + HALS; consider pigment package for lightfastness.",
-        "scratch_mar": "Mineral/bio fillers raise stiffness but can reduce mar resistance; consider slip or coatings.",
-        "squeak_rattle": "Control friction at interfaces; surface texture helpful; avoid stick-slip.",
-        "recyclability": "Mechanical recycling feasible as dedicated PLA stream; segregate from PP/ABS.",
-        "processing_notes": "Dry to \u22640.02% moisture; avoid long residence; watch hydrolysis above ~200\u00b0C."
+        "odor_vda270_target": "≤3 at 60°C; select low-lactide, dry well.",
+        "fogging_vda278_guideline": "Prefer low-VOC additives.",
+        "heat_aging_guideline": "Stabilize with AO/HALS; validate 80–90°C aging."
       },
-      "meta": {
-        "last_updated": "2025-08-29",
-        "sources_hint": [
-          "NatureWorks 2015 Ingeo EcoProfile",
-          "IMARC/PriceWatch 2025"
-        ]
-      },
-      "chem_family": "polyester/PLA",
-      "recycling_stream": "PLA"
+      "notes": "Dry to ≤0.02% moisture; avoid long residence."
     },
     {
       "name": "PHA (copolymer grade)",
       "type": "PHA",
       "family": "biopolymer",
-      "mfr_range": [
-        2,
-        8
-      ],
+      "mfr_range": [2, 8],
       "cost_usd_per_kg": 3.5,
+      "price_usd_per_kg_range": [3.0, 4.5],
       "ef_kgCO2e_per_kg": 3.0,
+      "chem_family": "polyester/PHA-PHB",
+      "recycling_stream": "Compostable",
       "sustainability": {
         "origin": "bio-based",
         "bio_content_pct": 100,
-        "recycled_content_pct": 0
+        "recycled_content_pct": 0,
+        "certifications": ["OK Compost Industrial (grade-dependent)"]
       },
       "compatibility": {
-        "elastomer_types": [
-          "PBAT"
-        ],
-        "compatibilizer_types": [
-          "Joncryl"
-        ],
-        "filler_types": [
-          "Talc",
-          "CaCO3",
-          "BioFiber"
-        ]
+        "elastomer_types": ["PBAT"],
+        "compatibilizer_types": ["Epoxy-ADR"],
+        "filler_types": ["Talc", "CaCO3", "BioFiber"]
       },
-      "notes": "Polyhydroxyalkanoate; ductility depends on comonomer; biodegradable; thermal stability lower than PLA.",
-      "automotive": {
-        "interior_suitability": "Interior trim where ductility is engineered via blends; avoid sustained high-heat zones.",
-        "odor_vda270_target": "Aim \u22643 at 60\u00b0C; manage residual monomers/volatiles; thorough drying.",
-        "fogging_vda278_guideline": "Use low-volatility additives; confirm fogging/FOG per VDA 278.",
-        "heat_aging_guideline": "Thermal stability lower than PLA; verify 70\u201385\u00b0C aging; add AO package.",
-        "uv_guideline": "UV stabilization recommended; copolymers may discolor without protection.",
-        "scratch_mar": "Similar guidance to PLA; blend design and fillers influence mar.",
-        "squeak_rattle": "Ensure interface control; consider texture and low-friction skins.",
-        "recyclability": "Dedicated PHA stream recommended; blending with PLA common but manage sorting.",
-        "processing_notes": "Dry thoroughly; minimize shear/hold-up; avoid long residence to limit degradation."
+      "suitability": {
+        "recyclability": {"PP": {"level": "Not Allowed"}, "PET": {"level": "Not Allowed"}},
+        "compostability": {"industrial": "Approved", "home": "Caution"}
       },
-      "meta": {
-        "last_updated": "2025-08-29",
-        "sources_hint": [
-          "PHA LCA reviews (1\u20136 kgCO2e/kg)",
-          "IMARC 2025"
-        ]
+      "supply": {
+        "vendors_example": ["Danimer", "RWDC", "CJ Bio"],
+        "regions": ["NA", "APAC"],
+        "lead_time_weeks": [6, 16]
       },
-      "chem_family": "polyester/PHA-PHB",
-      "recycling_stream": "Compostable"
+      "notes": "Thermal stability lower than PLA; blends common."
     },
     {
       "name": "PHB (homopolymer)",
       "type": "PHB",
       "family": "biopolymer",
-      "mfr_range": [
-        0.5,
-        5
-      ],
+      "mfr_range": [0.5, 5],
       "cost_usd_per_kg": 5.0,
+      "price_usd_per_kg_range": [4.0, 6.5],
       "ef_kgCO2e_per_kg": 3.0,
+      "chem_family": "polyester/PHA-PHB",
+      "recycling_stream": "Compostable",
       "sustainability": {
         "origin": "bio-based",
         "bio_content_pct": 100,
-        "recycled_content_pct": 0
+        "recycled_content_pct": 0,
+        "certifications": ["OK Compost Industrial (grade-dependent)"]
       },
       "compatibility": {
-        "elastomer_types": [
-          "PBAT"
-        ],
-        "compatibilizer_types": [
-          "Joncryl"
-        ],
-        "filler_types": [
-          "Talc",
-          "CaCO3",
-          "BioFiber"
-        ]
+        "elastomer_types": ["PBAT"],
+        "compatibilizer_types": ["Epoxy-ADR"],
+        "filler_types": ["Talc", "CaCO3", "BioFiber"]
       },
-      "notes": "Poly(3-hydroxybutyrate); high crystallinity, brittle; often blended or copolymerized for toughness.",
-      "automotive": {
-        "interior_suitability": "Use mainly in blends/copolymers (e.g., PHBV) due to brittleness; low-heat interior areas.",
-        "odor_vda270_target": "Aim \u22643 at 60\u00b0C; select low-odor grades; drying critical.",
-        "fogging_vda278_guideline": "Limit low-MW additives; verify per VDA 278.",
-        "heat_aging_guideline": "High crystallinity leads to embrittlement; test 70\u201380\u00b0C aging; strong AO needed.",
-        "uv_guideline": "UV sensitive; must use HALS/UV absorber.",
-        "scratch_mar": "Stiffness high; can be prone to brittle mar; consider elastomer toughening.",
-        "squeak_rattle": "Similar to PLA; manage interface; avoid stick-slip.",
-        "recyclability": "Prefer blending with PLA/PBAT for processability; track stream separately.",
-        "processing_notes": "Lower processing temp window; careful with shear; avoid prolonged melt residence."
+      "suitability": {
+        "recyclability": {"PP": {"level": "Not Allowed"}, "PET": {"level": "Not Allowed"}},
+        "compostability": {"industrial": "Approved", "home": "Caution"}
       },
-      "meta": {
-        "last_updated": "2025-08-29",
-        "sources_hint": [
-          "PHA/PHB LCA range; mid-point assumption"
-        ]
+      "supply": {
+        "vendors_example": ["Biomer", "Bluepha"],
+        "regions": ["EU", "APAC"],
+        "lead_time_weeks": [6, 20]
       },
-      "chem_family": "polyester/PHA-PHB",
-      "recycling_stream": "Compostable"
+      "notes": "High crystallinity; typically blended or copolymerized."
     }
   ],
+
   "elastomers": [
     {
-      "name": "ENGAGE\u2122 POE (e.g., 8180)",
+      "name": "ENGAGE POE (e.g., 8180)",
       "type": "POE",
       "cost_usd_per_kg": 2.65,
+      "price_usd_per_kg_range": [2.2, 3.0],
       "ef_kgCO2e_per_kg": 2.0,
-      "range_wt_pct": [
-        8,
-        18
-      ],
-      "notes": "Polyolefin Elastomer",
-      "sustainability": {
-        "origin": "fossil",
-        "bio_content_pct": 0,
-        "recycled_content_pct": 0
-      },
+      "range_wt_pct": [8, 18],
       "chem_family": "polyolefin/POE",
-      "recycling_stream": "Mixed-Polyolefin"
+      "recycling_stream": "Mixed-Polyolefin",
+      "sustainability": {"origin": "fossil", "bio_content_pct": 0, "recycled_content_pct": 0},
+      "suitability": {
+        "recyclability": {
+          "PP": {"level": "Approved", "max_wt_pct": 15, "notes": "Use PP-compatible grades for PP stream"},
+          "HDPE": {"level": "Approved", "max_wt_pct": 10},
+          "PET": {"level": "Not Allowed"}
+        },
+        "compostability": {"industrial": "Not Allowed", "home": "Not Allowed"}
+      },
+      "supply": {"vendors_example": ["Dow"], "regions": ["Global"], "lead_time_weeks": [2, 6]},
+      "notes": "Polyolefin elastomer for PO toughening."
     },
     {
-      "name": "Vistamaxx\u2122 (e.g., 6102FL)",
+      "name": "Vistamaxx (e.g., 6102FL)",
       "type": "PBE",
       "cost_usd_per_kg": 2.41,
+      "price_usd_per_kg_range": [2.0, 2.8],
       "ef_kgCO2e_per_kg": 1.8,
-      "range_wt_pct": [
-        8,
-        18
-      ],
-      "notes": "Propylene-Based Elastomer",
-      "sustainability": {
-        "origin": "fossil",
-        "bio_content_pct": 0,
-        "recycled_content_pct": 0
-      },
+      "range_wt_pct": [8, 18],
       "chem_family": "polyolefin/POE",
-      "recycling_stream": "Mixed-Polyolefin"
+      "recycling_stream": "Mixed-Polyolefin",
+      "sustainability": {"origin": "fossil", "bio_content_pct": 0, "recycled_content_pct": 0},
+      "suitability": {
+        "recyclability": {
+          "PP": {"level": "Approved", "max_wt_pct": 15},
+          "HDPE": {"level": "Approved", "max_wt_pct": 10},
+          "PET": {"level": "Not Allowed"}
+        },
+        "compostability": {"industrial": "Not Allowed", "home": "Not Allowed"}
+      },
+      "supply": {"vendors_example": ["ExxonMobil"], "regions": ["Global"], "lead_time_weeks": [2, 6]},
+      "notes": "Propylene-based elastomer compatible with PP stream."
     },
     {
       "name": "PBAT (impact modifier)",
       "type": "PBAT",
       "cost_usd_per_kg": 1.53,
+      "price_usd_per_kg_range": [1.3, 2.2],
       "ef_kgCO2e_per_kg": 5.89,
-      "range_wt_pct": [
-        10,
-        30
-      ],
-      "notes": "Biodegradable elastomer; toughens PLA/PHA blends; reduces brittleness; current PBAT is fossil-derived.",
-      "automotive": {
-        "role": "Impact modifier for PLA/PHA; maintains compostability but reduces bio-content.",
-        "interior_suitability": "Good for ductility in interior trim away from high-heat sources.",
-        "odor_vda270_target": "Aim \u22643 at 60\u00b0C; select low-odor grades; control residuals.",
-        "fogging_vda278_guideline": "Keep loading in target range; select low-volatility stabilizers.",
-        "heat_aging_guideline": "Lower heat resistance than PLA; validate 70\u201380\u00b0C aging when PBAT \u226515\u201320%.",
-        "uv_guideline": "Add UV stabilization; PBAT can yellow under UV without package.",
-        "recyclability": "Mechanically recyclable as PLA/PBAT stream; label clearly to avoid PP contamination.",
-        "processing_notes": "Typical use 10\u201330 wt%; compatibilization with PLA/PHA helps dispersion."
-      },
+      "range_wt_pct": [10, 30],
+      "chem_family": "polyester/PBAT",
+      "recycling_stream": "Compostable",
       "sustainability": {
         "origin": "fossil",
         "bio_content_pct": 0,
         "recycled_content_pct": 0,
-        "notes": "Biodegradable elastomer; fossil-sourced unless stated bio-based"
+        "notes": "Bio-PBAT variants emerging; track separately when available."
       },
-      "meta": {
-        "last_updated": "2025-08-29",
-        "sources_hint": [
-          "2024 PBAT LCA fossil=5.89 kgCO2e/kg",
-          "ChemAnalyst 2025 price"
-        ]
+      "suitability": {
+        "recyclability": {"PP": {"level": "Not Allowed"}, "PET": {"level": "Not Allowed"}},
+        "compostability": {"industrial": "Approved", "home": "Caution"}
       },
-      "chem_family": "polyester/PBAT",
-      "recycling_stream": "Compostable"
+      "supply": {"vendors_example": ["BASF", "Kingfa", "Xinfu"], "regions": ["Global"], "lead_time_weeks": [4, 10]},
+      "notes": "Toughens PLA/PHA blends; check compost certification at article level."
     }
   ],
+
   "compatibilizers": [
     {
-      "name": "Fusabond\u00ae P (PP-g-MAH)",
+      "name": "Fusabond P (PP-g-MAH)",
       "type": "PP-g-MAH",
       "mah_pct": 0.8,
       "cost_usd_per_kg": 4.46,
+      "price_usd_per_kg_range": [3.8, 5.5],
       "ef_kgCO2e_per_kg": 2.0,
-      "range_wt_pct": [
-        0.5,
-        2.0
-      ],
+      "range_wt_pct": [0.5, 2.0],
       "chem_family": "polyolefin/PP",
-      "recycling_stream": "PP"
+      "recycling_stream": "PP",
+      "suitability": {
+        "recyclability": {"PP": {"level": "Approved", "max_wt_pct": 2.0}},
+        "compostability": {"industrial": "Not Allowed", "home": "Not Allowed"}
+      },
+      "supply": {"vendors_example": ["DuPont/M&G"], "regions": ["Global"], "lead_time_weeks": [3, 8]}
+    },
+    {
+      "name": "PE-g-MAH (generic)",
+      "type": "PE-g-MAH",
+      "mah_pct": 0.8,
+      "cost_usd_per_kg": 3.8,
+      "price_usd_per_kg_range": [3.2, 4.8],
+      "ef_kgCO2e_per_kg": 2.0,
+      "range_wt_pct": [0.5, 2.0],
+      "chem_family": "polyolefin/PE",
+      "recycling_stream": "HDPE",
+      "suitability": {
+        "recyclability": {"HDPE": {"level": "Approved", "max_wt_pct": 2.0}},
+        "compostability": {"industrial": "Not Allowed", "home": "Not Allowed"}
+      },
+      "supply": {"vendors_example": ["Lotte", "SK"], "regions": ["Global"], "lead_time_weeks": [3, 8]}
     },
     {
       "name": "PLA-g-MAH (generic)",
       "type": "PLA-g-MAH",
       "mah_pct": 1.0,
       "cost_usd_per_kg": 5.5,
+      "price_usd_per_kg_range": [4.8, 6.5],
       "ef_kgCO2e_per_kg": 2.5,
-      "range_wt_pct": [
-        0.5,
-        2.0
-      ],
+      "range_wt_pct": [0.5, 2.0],
       "chem_family": "polyester/PLA",
-      "recycling_stream": "PLA"
+      "recycling_stream": "PLA",
+      "suitability": {
+        "recyclability": {"PLA": {"level": "Approved", "max_wt_pct": 2.0}},
+        "compostability": {"industrial": "Caution", "home": "Caution"}
+      },
+      "supply": {"vendors_example": ["Custom compounders"], "regions": ["NA", "EU"], "lead_time_weeks": [6, 12]}
     }
   ],
+
+  "chain_extenders": [
+    {
+      "name": "Epoxy-ADR (e.g., Joncryl ADR)",
+      "type": "Epoxy-ADR",
+      "functional_groups": "multi-epoxy",
+      "cost_usd_per_kg": 12.0,
+      "price_usd_per_kg_range": [10.0, 16.0],
+      "ef_kgCO2e_per_kg": 6.0,
+      "range_wt_pct": [0.1, 1.0],
+      "chem_family": "additive/chain_extender",
+      "recycling_stream": "PET",
+      "suitability": {
+        "recyclability": {
+          "PET": {"level": "Caution", "max_wt_pct": 0.5, "notes": "APR recommends tight limits; excess harms reprocessing"},
+          "PLA": {"level": "Approved", "max_wt_pct": 0.5}
+        },
+        "compostability": {"industrial": "Caution", "home": "Caution"}
+      },
+      "supply": {"vendors_example": ["BASF"], "regions": ["Global"], "lead_time_weeks": [3, 8]},
+      "notes": "IV restoration in PET; branching in PLA; respect per-stream limits."
+    }
+  ],
+
   "nucleators": [
     {
-      "name": "Hyperform\u00ae HPN-715",
+      "name": "Hyperform HPN-715",
       "type": "HPN",
       "cost_usd_per_kg": 8.8,
       "ef_kgCO2e_per_kg": 3.0,
-      "range_ppm": [
-        300,
-        1500
-      ],
-      "notes": "High performance nucleator. EF is high but mass is tiny.",
-      "chem_family": null,
-      "recycling_stream": null
+      "range_ppm": [300, 1500],
+      "chem_family": "additive/nucleator",
+      "recycling_stream": "Any",
+      "suitability": {
+        "recyclability": {"PP": {"level": "Approved", "max_wt_pct": 0.15}},
+        "compostability": {"industrial": "Caution", "home": "Caution"}
+      },
+      "supply": {"vendors_example": ["Milliken"], "regions": ["Global"], "lead_time_weeks": [2, 6]},
+      "notes": "High-performance PP nucleation; very low loadings."
     },
     {
-      "name": "Millad\u00ae NX\u2122 8000",
+      "name": "Millad NX 8000",
       "type": "Sorbitol",
       "cost_usd_per_kg": 17.6,
       "ef_kgCO2e_per_kg": 6.0,
-      "range_wt_pct": [
-        0.05,
-        0.3
-      ],
-      "chem_family": null,
-      "recycling_stream": null
+      "range_wt_pct": [0.05, 0.3],
+      "chem_family": "additive/clarifier",
+      "recycling_stream": "PP",
+      "suitability": {
+        "recyclability": {"PP": {"level": "Approved", "max_wt_pct": 0.3}},
+        "compostability": {"industrial": "Not Allowed", "home": "Not Allowed"}
+      },
+      "supply": {"vendors_example": ["Milliken"], "regions": ["Global"], "lead_time_weeks": [2, 6]}
     }
   ],
+
   "mineral_fillers": [
     {
-      "name": "Talc (e.g., Mistron\u00ae)",
+      "name": "Talc (e.g., Mistron)",
       "type": "Talc",
       "particle_size_um": 5,
       "aspect_ratio": 10,
       "cost_usd_per_kg": 0.4,
+      "price_usd_per_kg_range": [0.25, 0.6],
       "ef_kgCO2e_per_kg": 0.3,
-      "range_wt_pct": [
-        10,
-        20
-      ],
+      "range_wt_pct": [5, 20],
       "chem_family": "filler/unspecified",
-      "recycling_stream": "Any"
+      "recycling_stream": "Any",
+      "suitability": {
+        "recyclability": {
+          "PP": {"level": "Approved", "max_wt_pct": 20},
+          "PET": {"level": "Caution", "max_wt_pct": 10}
+        },
+        "compostability": {"industrial": "Caution", "home": "Caution"}
+      },
+      "supply": {"vendors_example": ["Imerys"], "regions": ["Global"], "lead_time_weeks": [2, 6]}
     },
     {
-      "name": "CaCO3 (e.g., Omyacarb\u00ae)",
+      "name": "CaCO3 (e.g., Omyacarb)",
       "type": "CaCO3",
       "particle_size_um": 3,
       "aspect_ratio": 1,
       "cost_usd_per_kg": 0.3,
+      "price_usd_per_kg_range": [0.2, 0.5],
       "ef_kgCO2e_per_kg": 0.3,
-      "range_wt_pct": [
-        10,
-        20
-      ],
-      "notes": "Cost from costs.csv ($7.70/kg) was anomalous; a more typical market value is used.",
+      "range_wt_pct": [5, 20],
       "chem_family": "filler/unspecified",
-      "recycling_stream": "Any"
+      "recycling_stream": "Any",
+      "suitability": {
+        "recyclability": {"PP": {"level": "Approved", "max_wt_pct": 20}},
+        "compostability": {"industrial": "Caution", "home": "Caution"}
+      },
+      "supply": {"vendors_example": ["Omya"], "regions": ["Global"], "lead_time_weeks": [2, 6]},
+      "notes": "Use coated grades to maintain flow/impact."
     }
   ],
+
   "fibrous_fillers": [
     {
       "name": "Short Glass Fiber",
       "type": "SGF",
       "cost_usd_per_kg": 2.0,
+      "price_usd_per_kg_range": [1.6, 2.6],
       "ef_kgCO2e_per_kg": 1.5,
-      "range_wt_pct": [
-        10,
-        30
-      ],
-      "notes": "Use requires higher compatibilizer loading.",
+      "range_wt_pct": [10, 30],
       "chem_family": "filler/fiber",
-      "recycling_stream": "Any"
+      "recycling_stream": "Any",
+      "suitability": {
+        "recyclability": {
+          "PP": {"level": "Caution", "max_wt_pct": 30, "notes": "APR typically discourages glass in bottles; acceptable in durables"},
+          "PET": {"level": "Caution", "max_wt_pct": 20}
+        },
+        "compostability": {"industrial": "Not Allowed", "home": "Not Allowed"}
+      },
+      "supply": {"vendors_example": ["Owens Corning", "Jushi"], "regions": ["Global"], "lead_time_weeks": [3, 8]},
+      "notes": "Use higher compatibilizer with SGF."
     },
     {
       "name": "Hemp Fiber",
@@ -426,20 +623,19 @@
       "density_gcc": 1.45,
       "aspect_ratio": 60,
       "Ef_GPa": 35.0,
-      "sustainability": {
-        "origin": "bio-based",
-        "bio_content_pct": 100,
-        "recycled_content_pct": 0
-      },
-      "range_wt_pct": [
-        0,
-        20
-      ],
       "cost_usd_per_kg": 1.8,
+      "price_usd_per_kg_range": [1.5, 2.2],
       "ef_kgCO2e_per_kg": 0.15,
-      "notes": "Natural bast fiber; dry; couple with PP-g-MAH.",
+      "range_wt_pct": [0, 20],
+      "sustainability": {"origin": "bio-based", "bio_content_pct": 100, "recycled_content_pct": 0},
       "chem_family": "filler/fiber",
-      "recycling_stream": "Any"
+      "recycling_stream": "Any",
+      "suitability": {
+        "recyclability": {"PP": {"level": "Caution", "max_wt_pct": 20}},
+        "compostability": {"industrial": "Caution", "home": "Caution"}
+      },
+      "supply": {"vendors_example": ["Mativ", "RAPTOR"], "regions": ["NA", "EU"], "lead_time_weeks": [4, 10]},
+      "notes": "Pre-dry; couple with MAH grafts in non-polar matrices."
     },
     {
       "name": "Flax Fiber",
@@ -447,146 +643,146 @@
       "density_gcc": 1.5,
       "aspect_ratio": 70,
       "Ef_GPa": 45.0,
-      "sustainability": {
-        "origin": "bio-based",
-        "bio_content_pct": 100,
-        "recycled_content_pct": 0
-      },
-      "range_wt_pct": [
-        0,
-        20
-      ],
       "cost_usd_per_kg": 2.0,
+      "price_usd_per_kg_range": [1.6, 2.6],
       "ef_kgCO2e_per_kg": 0.15,
-      "notes": "Natural bast fiber; higher modulus; dry; couple with PP-g-MAH.",
+      "range_wt_pct": [0, 20],
+      "sustainability": {"origin": "bio-based", "bio_content_pct": 100, "recycled_content_pct": 0},
       "chem_family": "filler/fiber",
-      "recycling_stream": "Any"
+      "recycling_stream": "Any",
+      "suitability": {
+        "recyclability": {"PP": {"level": "Caution", "max_wt_pct": 20}},
+        "compostability": {"industrial": "Caution", "home": "Caution"}
+      },
+      "supply": {"vendors_example": ["Bcomp", "Depestele"], "regions": ["EU"], "lead_time_weeks": [6, 12]}
     }
   ],
+
   "stabilizers": [
     {
       "name": "Generic AO/UV Package",
       "type": "StabPackage",
       "cost_usd_per_kg": 15.0,
+      "price_usd_per_kg_range": [12.0, 22.0],
       "ef_kgCO2e_per_kg": 5.0,
-      "range_wt_pct": [
-        0.1,
-        0.6
-      ],
-      "notes": "Represents a typical blend of AO/HALS. Cost is an estimate.",
+      "range_wt_pct": [0.1, 0.6],
       "chem_family": "additive/general",
-      "recycling_stream": "Any"
+      "recycling_stream": "Any",
+      "suitability": {
+        "recyclability": {
+          "PP": {"level": "Approved", "max_wt_pct": 0.6},
+          "HDPE": {"level": "Approved", "max_wt_pct": 0.6},
+          "PET": {"level": "Caution", "max_wt_pct": 0.3}
+        },
+        "compostability": {"industrial": "Caution", "home": "Caution"}
+      },
+      "supply": {"vendors_example": ["BASF", "Clariant", "Songwon"], "regions": ["Global"], "lead_time_weeks": [2, 6]}
     },
     {
-      "name": "Irganox\u00ae 1010",
+      "name": "Irganox 1010",
       "type": "PrimaryAO",
       "cost_usd_per_kg": 17.82,
+      "price_usd_per_kg_range": [15.0, 24.0],
       "ef_kgCO2e_per_kg": 6.0,
-      "range_wt_pct": [
-        0.05,
-        0.3
-      ],
-      "notes": "Primary antioxidant (phenolic)",
-      "chem_family": null,
-      "recycling_stream": null
+      "range_wt_pct": [0.05, 0.3],
+      "chem_family": "additive/phenolic",
+      "recycling_stream": "Any",
+      "suitability": {
+        "recyclability": {"PP": {"level": "Approved", "max_wt_pct": 0.3}, "HDPE": {"level": "Approved", "max_wt_pct": 0.3}},
+        "compostability": {"industrial": "Caution", "home": "Caution"}
+      },
+      "supply": {"vendors_example": ["BASF"], "regions": ["Global"], "lead_time_weeks": [2, 6]}
     },
     {
-      "name": "Irgafos\u00ae 168",
+      "name": "Irgafos 168",
       "type": "SecondaryAO",
       "cost_usd_per_kg": 10.01,
+      "price_usd_per_kg_range": [8.0, 14.0],
       "ef_kgCO2e_per_kg": 5.0,
-      "range_wt_pct": [
-        0.05,
-        0.3
-      ],
-      "notes": "Secondary antioxidant (phosphite)",
-      "chem_family": null,
-      "recycling_stream": null
+      "range_wt_pct": [0.05, 0.3],
+      "chem_family": "additive/phosphite",
+      "recycling_stream": "Any",
+      "suitability": {
+        "recyclability": {"PP": {"level": "Approved", "max_wt_pct": 0.3}, "HDPE": {"level": "Approved", "max_wt_pct": 0.3}},
+        "compostability": {"industrial": "Caution", "home": "Caution"}
+      },
+      "supply": {"vendors_example": ["BASF"], "regions": ["Global"], "lead_time_weeks": [2, 6]}
     },
     {
-      "name": "Tinuvin\u00ae 770",
+      "name": "Tinuvin 770",
       "type": "HALS",
       "cost_usd_per_kg": 29.92,
+      "price_usd_per_kg_range": [25.0, 36.0],
       "ef_kgCO2e_per_kg": 8.0,
-      "range_wt_pct": [
-        0.1,
-        0.5
-      ],
-      "notes": "Hindered Amine Light Stabilizer (UV)",
-      "chem_family": null,
-      "recycling_stream": null
+      "range_wt_pct": [0.1, 0.5],
+      "chem_family": "additive/UV",
+      "recycling_stream": "Any",
+      "suitability": {
+        "recyclability": {"PP": {"level": "Approved", "max_wt_pct": 0.5}, "HDPE": {"level": "Approved", "max_wt_pct": 0.5}},
+        "compostability": {"industrial": "Caution", "home": "Caution"}
+      },
+      "supply": {"vendors_example": ["BASF"], "regions": ["Global"], "lead_time_weeks": [2, 6]}
     },
     {
       "name": "DHT-4A (Hydrotalcite)",
       "type": "AcidScavenger",
       "cost_usd_per_kg": 0.4,
+      "price_usd_per_kg_range": [0.3, 0.8],
       "ef_kgCO2e_per_kg": 1.2,
-      "range_wt_pct": [
-        0.05,
-        0.2
-      ],
-      "notes": "Acid scavenger",
-      "chem_family": null,
-      "recycling_stream": null
+      "range_wt_pct": [0.05, 0.2],
+      "chem_family": "additive/acid_scavenger",
+      "recycling_stream": "Any",
+      "suitability": {
+        "recyclability": {"PP": {"level": "Approved", "max_wt_pct": 0.2}, "HDPE": {"level": "Approved", "max_wt_pct": 0.2}},
+        "compostability": {"industrial": "Caution", "home": "Caution"}
+      },
+      "supply": {"vendors_example": ["Kyowa"], "regions": ["Global"], "lead_time_weeks": [3, 8]}
     }
   ],
+
   "bio_extenders": [
     {
       "name": "Cellulose Fiber",
       "type": "Cellulose",
       "cost_usd_per_kg": 2.25,
+      "price_usd_per_kg_range": [1.8, 2.8],
       "ef_kgCO2e_per_kg": 0.1,
-      "range_wt_pct": [
-        5,
-        25
-      ],
-      "sustainability": {
-        "origin": "bio-based",
-        "bio_content_pct": 100,
-        "recycled_content_pct": 0
-      },
-      "notes": "Biogenic carbon content should be tracked. Check moisture sensitivity.",
+      "range_wt_pct": [5, 25],
       "chem_family": "filler/fiber",
-      "recycling_stream": "Any"
+      "recycling_stream": "Any",
+      "suitability": {
+        "recyclability": {"PP": {"level": "Caution", "max_wt_pct": 20}, "HDPE": {"level": "Caution", "max_wt_pct": 15}},
+        "compostability": {"industrial": "Caution", "home": "Caution"}
+      },
+      "supply": {"vendors_example": ["Borregaard", "MCC suppliers"], "regions": ["NA", "EU"], "lead_time_weeks": [4, 10]},
+      "notes": "Biogenic carbon content should be tracked."
     }
   ],
-  "colorants": [
-    {
-      "name": "Carbon Black",
-      "type": "Colorant",
-      "cost_usd_per_kg": 1.83,
-      "ef_kgCO2e_per_kg": 3.0,
-      "range_wt_pct": [
-        0.2,
-        2.0
-      ],
-      "notes": "Also provides UV protection.",
-      "chem_family": null,
-      "recycling_stream": null
-    }
-  ],
+
   "bio_fillers": [
     {
-      "name": "Biochar (fine, <10 \u00b5m)",
+      "name": "Biochar (fine, <10 µm)",
       "type": "Biochar",
       "density_gcc": 1.8,
       "aspect_ratio": 1,
       "Ef_GPa": 10.0,
+      "cost_usd_per_kg": 0.9,
+      "price_usd_per_kg_range": [0.6, 1.4],
+      "ef_kgCO2e_per_kg": 0.1,
+      "range_wt_pct": [0, 15],
+      "chem_family": "filler/unspecified",
+      "recycling_stream": "Any",
       "sustainability": {
         "origin": "bio-based",
         "bio_content_pct": 100,
         "recycled_content_pct": 0,
-        "notes": "Carbonized biomass; sequesters biogenic carbon; EF may be near-zero or negative depending on system boundaries."
+        "notes": "Potential carbon sequestration claim; verify methodology."
       },
-      "range_wt_pct": [
-        0,
-        15
-      ],
-      "cost_usd_per_kg": 0.9,
-      "ef_kgCO2e_per_kg": 0.1,
-      "notes": "Carbonized biomass; filler + black colorant.",
-      "chem_family": "filler/unspecified",
-      "recycling_stream": "Any"
+      "suitability": {
+        "recyclability": {"PP": {"level": "Caution", "max_wt_pct": 10}},
+        "compostability": {"industrial": "Caution", "home": "Caution"}
+      },
+      "supply": {"vendors_example": ["Carbo Culture", "Pyro suppliers"], "regions": ["NA", "EU"], "lead_time_weeks": [4, 12]}
     },
     {
       "name": "Microcrystalline Cellulose (MCC)",
@@ -594,71 +790,84 @@
       "density_gcc": 1.5,
       "aspect_ratio": 1,
       "Ef_GPa": 10.0,
-      "sustainability": {
-        "origin": "bio-based",
-        "bio_content_pct": 100,
-        "recycled_content_pct": 0
-      },
-      "range_wt_pct": [
-        1,
-        20
-      ],
       "cost_usd_per_kg": 2.2,
+      "price_usd_per_kg_range": [1.8, 2.8],
       "ef_kgCO2e_per_kg": 1.0,
-      "notes": "Cellulosic particulate filler; dry thoroughly; improves stiffness; watch moisture for PLA/PHA/PHB.",
-      "automotive": {
-        "interior_suitability": "Weight-saving, stiffness-boosting bio-filler for interior trim; use in low-heat areas.",
-        "odor_vda270_target": "Aim \u22643 at 60\u00b0C; ensure fiber is clean/low-odor; avoid residual volatiles.",
-        "fogging_vda278_guideline": "Low volatility; main risk from moisture; dry fully pre-compounding.",
-        "heat_aging_guideline": "Monitor embrittlement due to moisture uptake; validate 70\u201385\u00b0C aging.",
-        "uv_guideline": "Cellulose discolors under UV; protect via pigment/UV package and skin layers.",
-        "scratch_mar": "Particulate filler may reduce mar resistance; tune surface and additive package.",
-        "moisture_management": "Dry to \u22640.1% moisture; store sealed; consider coupling agent for adhesion.",
-        "processing_notes": "Pre-dry; add compatibilizer (e.g., MAH-grafted) when in non-polar matrices."
-      },
-      "meta": {
-        "last_updated": "2025-08-29",
-        "sources_hint": [
-          "US pulp/paper average ~0.94 kgCO2e/kg"
-        ]
-      },
+      "range_wt_pct": [1, 20],
       "chem_family": "filler/fiber",
-      "recycling_stream": "Any"
+      "recycling_stream": "Any",
+      "suitability": {
+        "recyclability": {"PP": {"level": "Caution", "max_wt_pct": 15}},
+        "compostability": {"industrial": "Caution", "home": "Caution"}
+      },
+      "supply": {"vendors_example": ["DuPont", "JRS"], "regions": ["Global"], "lead_time_weeks": [4, 12]},
+      "notes": "Dry thoroughly; compatibilize in non-polar matrices."
     }
   ],
+
   "processing_aids": [
     {
       "name": "EBS (Ethylene Bis Stearamide)",
       "type": "Lubricant",
       "cost_usd_per_kg": 2.2,
+      "price_usd_per_kg_range": [1.8, 2.8],
       "ef_kgCO2e_per_kg": 3.5,
-      "range_wt_pct": [
-        0.2,
-        1.0
-      ],
-      "sustainability": {
-        "origin": "bio-based",
-        "bio_content_pct": 100,
-        "recycled_content_pct": 0
-      },
-      "notes": "High-mp lubricant/flow aid; improves dispersion and mold release; suitable for durable parts.",
-      "automotive": {
-        "function": "Internal/external lubricant; flow/dispersant aid for compounding and molding.",
-        "odor_vda270_target": "Use low-odor grades; keep within 0.2\u20130.5 wt% when odor is critical.",
-        "fogging_vda278_guideline": "EBS can contribute to FOG if overdosed; verify per VDA 278; prefer higher mp grades.",
-        "paint_adhesion_risk": true,
-        "paint_adhesion_note": "Surface bloom may reduce paint/adhesion; evaluate if painting/printing is required.",
-        "squeak_rattle": "Can reduce stick-slip; validate in BSR tests.",
-        "processing_notes": "Add at hopper or side-feed with fillers to aid dispersion; avoid excess to limit mar/fogging."
-      },
-      "meta": {
-        "last_updated": "2025-08-29",
-        "sources_hint": [
-          "Fatty-acid derivative LCIs; conservative estimate"
-        ]
-      },
+      "range_wt_pct": [0.2, 1.0],
       "chem_family": "additive/general",
-      "recycling_stream": "Any"
+      "recycling_stream": "Any",
+      "suitability": {
+        "recyclability": {"PP": {"level": "Caution", "max_wt_pct": 0.5}, "HDPE": {"level": "Caution", "max_wt_pct": 0.5}},
+        "compostability": {"industrial": "Caution", "home": "Caution"}
+      },
+      "supply": {"vendors_example": ["Baerlocher", "PMC"], "regions": ["Global"], "lead_time_weeks": [3, 8]},
+      "notes": "High-mp lubricant; limit to avoid fogging and paint issues."
+    }
+  ],
+
+  "colorants": [
+    {
+      "name": "Carbon Black",
+      "type": "Colorant",
+      "cost_usd_per_kg": 1.83,
+      "price_usd_per_kg_range": [1.2, 2.4],
+      "ef_kgCO2e_per_kg": 3.0,
+      "range_wt_pct": [0.2, 2.0],
+      "chem_family": "additive/colorant",
+      "recycling_stream": "Any",
+      "suitability": {
+        "recyclability": {
+          "PP": {"level": "Caution", "max_wt_pct": 1.0, "notes": "Black may hinder NIR sorting in packaging"},
+          "HDPE": {"level": "Caution", "max_wt_pct": 1.0}
+        },
+        "compostability": {"industrial": "Caution", "home": "Caution"}
+      },
+      "supply": {"vendors_example": ["Cabot", "Orion"], "regions": ["Global"], "lead_time_weeks": [2, 6]},
+      "notes": "Also provides UV protection."
+    }
+  ],
+
+  "recycling_site_packages": [
+    {
+      "name": "IV Restore PET Package",
+      "type": "PET_IV_Package",
+      "components": [
+        {"ref": "Epoxy-ADR", "wt_pct": [0.2, 0.4]},
+        {"ref": "SecondaryAO", "wt_pct": [0.05, 0.15]}
+      ],
+      "target_stream": "PET",
+      "suitability": {"recyclability": {"PET": {"level": "Caution", "max_wt_pct": 0.6}}},
+      "notes": "Designed for mechanical recycling lines to restore IV and mitigate yellowing."
+    },
+    {
+      "name": "Odor Scavenger PP Package",
+      "type": "PP_Odor_Package",
+      "components": [
+        {"ref": "AcidScavenger", "wt_pct": [0.05, 0.15]},
+        {"ref": "PrimaryAO", "wt_pct": [0.05, 0.15]}
+      ],
+      "target_stream": "PP",
+      "suitability": {"recyclability": {"PP": {"level": "Approved", "max_wt_pct": 0.3}}},
+      "notes": "For rPP deodorization/quality uplift on the line."
     }
   ]
 }

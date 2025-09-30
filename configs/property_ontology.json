@@ -1,76 +1,227 @@
 {
   "version": "1.0",
   "properties": {
+
     "HDT_C_66psi": {
-      "aliases": ["HDT 66 psi", "DTUL_66psi_C", "Heat Deflection Temperature @ 0.45 MPa"],
+      "aliases": ["HDT 66 psi", "DTUL_66psi_C", "Heat Deflection Temperature @ 0.45 MPa", "Deflection Temp 66 psi", "HDT @ 66psi", "DTUL 66psi"],
       "unit": "C"
     },
     "MFI_g_10min_230C_2p16kg": {
-      "aliases": ["MFR 230C/2.16kg", "MFI (230/2.16)", "Melt Flow Rate (230°C/2.16 kg)", "Melt Mass-Flow Rate (230°C/2.16 kg)"],
+      "aliases": ["MFR 230C/2.16kg", "MFI (230/2.16)", "Melt Flow Rate (230C/2.16 kg)", "Melt Mass-Flow Rate (230C/2.16 kg)", "MFR 230/2.16", "MFI 230C 2.16kg", "ASTM D1238 230C/2.16kg", "ISO 1133 230/2.16", "melt mass-flow rate (mfr)", "melt mass-flow rate", "mfr (230°c/2.16 kg)"],
       "unit": "g/10min"
     },
     "density_g_cc": {
-      "aliases": ["density", "Specific Gravity"],
+      "aliases": ["Density", "Specific Gravity", "Apparent Density", "Bulk Density", "density"],
       "unit": "g/cm3"
     },
     "tensile_strength_yield_MPa": {
-      "aliases": ["Tensile Strength at Yield", "Yield Strength"],
+      "aliases": ["Tensile Strength at Yield", "Yield Strength", "Tensile Yield Strength", "σy tensile"],
       "unit": "MPa"
     },
     "flexural_modulus_GPa": {
-      "aliases": ["Flex Modulus", "Flexural Modulus", "Flexural Modulus (1% Secant)"],
+      "aliases": ["Flex Modulus", "Flexural Modulus", "Flexural Modulus (1% Secant)", "Flexural Secant Modulus"],
       "unit": "GPa"
     },
     "izod_impact_notched_23C_J_m": {
-      "aliases": ["Notched Izod Impact (23C)", "Izod Impact, Notched @ 23C"],
+      "aliases": ["Notched Izod Impact (23C)", "Izod Impact, Notched @ 23C", "Izod Notched 23C", "ASTM D256 Notched 23C", "notched izod impact", "notched izod impact strength"],
       "unit": "J/m"
     },
     "izod_impact_notched_minus18C_J_m": {
-      "aliases": ["Notched Izod Impact (-18C)", "Izod Impact, Notched @ -18C"],
+      "aliases": ["Notched Izod Impact (-18C)", "Izod Impact, Notched @ -18C", "Izod Notched -18C", "ASTM D256 Notched -18C", "notched izod impact", "notched izod impact strength"],
       "unit": "J/m"
     },
     "Izod_23_kJm2": {
-      "aliases": ["izod_impact_notched_23C_kJ_m2", "Notched Izod Impact Strength (23C)"],
-      "unit": "kJ/m^2"
+      "aliases": ["Izod Impact 23C (kJ/m2)", "Izod 23C, unnotched (kJ/m2)", "Izod 23 kJ/m2"],
+      "unit": "kJ/m2"
     },
     "Izod_m20_kJm2": {
-      "aliases": ["izod_impact_notched_minus20C_kJ_m2", "Notched Izod Impact Strength (-20C)"],
-      "unit": "kJ/m^2"
+      "aliases": ["Izod Impact -20C (kJ/m2)", "Izod -20C", "Izod m20 kJ/m2"],
+      "unit": "kJ/m2"
     },
     "elongation_yield_pct": {
-      "aliases": ["eps_y_pct", "Elongation at Yield", "Tensile Strain at Yield"],
+      "aliases": ["Elongation at Yield", "Tensile Elongation @ Yield", "εy"],
       "unit": "%"
     },
     "crystallinity_pct": {
-      "aliases": ["Xc", "Crystallinity"],
+      "aliases": ["Degree of Crystallinity", "Crystallinity", "Xc"],
       "unit": "%"
     },
     "gardner_impact_minus29C_J": {
-      "aliases": ["Gardner Impact (-29C)"],
+      "aliases": ["Gardner Impact @ -29C", "Gardner Impact (-29C)", "Gardner -29C"],
       "unit": "J"
     },
     "specific_heat_capacity_J_gC": {
-      "aliases": ["Specific Heat Capacity", "Cp"],
+      "aliases": ["Specific Heat Capacity", "Specific Heat", "Cp"],
       "unit": "J/g-C"
     },
     "thermal_conductivity_W_mK": {
-      "aliases": ["Thermal Conductivity", "k"],
+      "aliases": ["Thermal Conductivity", "k (thermal)"],
       "unit": "W/m-K"
     },
     "viscosity_cross_wlf_eta0_Pa_s": {
-      "aliases": ["Zero-Shear Viscosity", "eta0"],
+      "aliases": ["Zero-Shear Viscosity", "η0 (Cross/WLF)", "Zero Shear Viscosity"],
       "unit": "Pa-s"
     },
     "viscosity_cross_wlf_tau_star_Pa": {
-      "aliases": ["Critical Stress", "tau*"],
+      "aliases": ["Critical Stress", "Tau*", "τ* (Cross)"],
       "unit": "Pa"
     },
     "viscosity_cross_wlf_n": {
-      "aliases": ["Power-Law Index", "n"],
+      "aliases": ["Power-Law Index", "n (Cross)", "Flow Index n"],
       "unit": null
+    },
+
+    "melt_volume_rate_MVR_cm3_10min": {
+      "aliases": ["MVR", "Melt Volume-Flow Rate", "ISO 1133 MVR", "MVR (cm3/10min)", "Melt Volume Rate", "melt volume-flow rate", "mvr"],
+      "unit": "cm3/10min"
+    },
+    "melt_flow_rate_MFR_g_10min": {
+      "aliases": ["MFR (generic)", "MFI (generic)", "Melt Flow Rate", "Melt Mass-Flow Rate", "ASTM D1238", "ISO 1133", "melt mass-flow rate (mfr)", "melt mass-flow rate", "mfr (230°c/2.16 kg)", "mfr"],
+      "unit": "g/10min"
+    },
+    "moisture_content_pct": {
+      "aliases": ["Moisture Content", "Moisture", "Volatile Matter"],
+      "unit": "%"
+    },
+    "water_absorption_pct": {
+      "aliases": ["Water Absorption", "H2O Absorption", "Water Uptake"],
+      "unit": "%"
+    },
+    "HDT_C_1p8MPa": {
+      "aliases": ["HDT 1.8 MPa", "DTUL 1.8 MPa", "Heat Deflection Temperature @ 1.8 MPa", "HDT @ 1.8MPa", "heat deflection temperature", "deflection temperature under load", "dtul"],
+      "unit": "C"
+    },
+    "HDT_C_0p45MPa": {
+      "aliases": ["HDT 0.45 MPa", "DTUL 0.45 MPa", "Heat Deflection Temperature @ 0.45 MPa", "HDT @ 0.45MPa", "heat deflection temperature", "deflection temperature under load", "dtul"],
+      "unit": "C"
+    },
+    "Vicat_softening_temp_C": {
+      "aliases": ["Vicat", "Vicat Softening Temp", "VST", "Vicat A", "Vicat B", "ISO 306"],
+      "unit": "C"
+    },
+    "glass_transition_Tg_C": {
+      "aliases": ["Tg", "Glass Transition Temperature"],
+      "unit": "C"
+    },
+    "melting_temperature_Tm_C": {
+      "aliases": ["Tm", "Melting Temperature"],
+      "unit": "C"
+    },
+    "crystallization_temperature_Tc_C": {
+      "aliases": ["Tc", "Crystallization Temperature"],
+      "unit": "C"
+    },
+    "coefficient_thermal_expansion_ppm_K": {
+      "aliases": ["CTE", "Linear Thermal Expansion", "Coefficient of Thermal Expansion", "α (thermal)"],
+      "unit": "ppm/K"
+    },
+    "tensile_strength_break_MPa": {
+      "aliases": ["Tensile Strength @ Break", "Ultimate Tensile Strength", "UTS", "σb tensile"],
+      "unit": "MPa"
+    },
+    "tensile_modulus_GPa": {
+      "aliases": ["Tensile Modulus", "Young's Modulus", "Elastic Modulus (Tensile)", "E (tensile)"],
+      "unit": "GPa"
+    },
+    "elongation_break_pct": {
+      "aliases": ["Elongation at Break", "Tensile Elongation @ Break", "εb"],
+      "unit": "%"
+    },
+    "yield_strength_MPa": {
+      "aliases": ["Yield Stress", "σy", "0.2% Offset Yield Strength"],
+      "unit": "MPa"
+    },
+    "compression_strength_MPa": {
+      "aliases": ["Compressive Strength", "Compression Strength"],
+      "unit": "MPa"
+    },
+    "flexural_strength_MPa": {
+      "aliases": ["Flex Strength", "Flexural Strength", "σf"],
+      "unit": "MPa"
+    },
+    "shear_modulus_GPa": {
+      "aliases": ["Shear Modulus", "G (shear)"],
+      "unit": "GPa"
+    },
+    "hardness_ShoreD": {
+      "aliases": ["Hardness (Shore D)", "Shore D Hardness", "ASTM D2240 Shore D"],
+      "unit": null
+    },
+    "hardness_RockwellM": {
+      "aliases": ["Hardness (Rockwell M)", "Rockwell M Hardness", "ASTM D785 Rockwell M"],
+      "unit": null
+    },
+    "charpy_notched_kJ_m2": {
+      "aliases": ["Charpy Notched", "Charpy Impact, Notched", "ISO 179/1eA", "Charpy N", "charpy notched impact strength"],
+      "unit": "kJ/m2"
+    },
+    "charpy_unnotched_kJ_m2": {
+      "aliases": ["Charpy Unnotched", "Charpy Impact, Unnotched", "ISO 179/1eU", "Charpy U"],
+      "unit": "kJ/m2"
+    },
+    "dielectric_strength_kV_mm": {
+      "aliases": ["Dielectric Strength", "Breakdown Voltage", "BDV", "kV/mm"],
+      "unit": "kV/mm"
+    },
+    "volume_resistivity_Ohm_m": {
+      "aliases": ["Volume Resistivity", "ρv", "Ohm-m", "Ohm·m", "Ohm cm (volume)"],
+      "unit": "ohm-m"
+    },
+    "surface_resistivity_Ohm_per_sq": {
+      "aliases": ["Surface Resistivity", "ρs", "Ohm/sq", "Ohms/square", "Surface Ohms"],
+      "unit": "ohm/sq"
+    },
+    "relative_permittivity_1kHz": {
+      "aliases": ["Relative Permittivity", "Dielectric Constant", "εr (1kHz)"],
+      "unit": null
+    },
+    "dissipation_factor_1kHz": {
+      "aliases": ["Dissipation Factor", "DF", "tan δ (1kHz)", "Loss Tangent (1kHz)"],
+      "unit": null
+    },
+    "UL94_rating": {
+      "aliases": ["UL-94", "UL94", "Flammability Rating UL94", "UL 94 Class"],
+      "unit": null
+    },
+    "oxygen_index_pct": {
+      "aliases": ["Limiting Oxygen Index", "LOI", "Oxygen Index"],
+      "unit": "%"
+    },
+    "GWIT_C": {
+      "aliases": ["Glow Wire Ignition Temperature", "GWIT (C)"],
+      "unit": "C"
+    },
+    "GWFI_C": {
+      "aliases": ["Glow Wire Flammability Index", "GWFI (C)"],
+      "unit": "C"
+    },
+    "haze_pct": {
+      "aliases": ["Haze", "Haze (%)"],
+      "unit": "%"
+    },
+    "transmittance_pct": {
+      "aliases": ["Light Transmission", "Transmittance", "% T"],
+      "unit": "%"
+    },
+    "gloss_60deg": {
+      "aliases": ["Gloss 60°", "Gloss (60 deg)"],
+      "unit": null
+    },
+    "yellowness_index": {
+      "aliases": ["YI", "Yellowness Index (ASTM E313)"],
+      "unit": null
+    },
+    "recommended_melt_temp_C": {
+      "aliases": ["Melt Temperature (Recommended)", "Barrel/Melt Temp", "Processing Melt Temp", "Melt Temp"],
+      "unit": "C"
+    },
+    "mold_temp_C_min": {
+      "aliases": ["Mold Temperature (Min)", "Mould Temp Min", "Tool Temp Min"],
+      "unit": "C"
+    },
+    "mold_temp_C_max": {
+      "aliases": ["Mold Temperature (Max)", "Mould Temp Max", "Tool Temp Max"],
+      "unit": "C"
     }
-  },
-  "metadata": {
-    "description": "Maps various spec sheet property names to a canonical internal name and defines the standard unit."
   }
 }

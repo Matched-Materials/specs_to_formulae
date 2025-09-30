@@ -1,0 +1,139 @@
+{
+  "diagnostics": {
+    "file": "Industry_Polymer_handbook_PEEK-polyetheretherketone_2012_Handbook-of-Polymers.pdf",
+    "unmapped_fields": []
+  },
+  "extras": {
+    "properties": [
+      {
+        "conditions": {},
+        "confidence": 0.6,
+        "method": null,
+        "name": "MECHANICAL & RHEOLOGICAL PROPERTIES",
+        "provenance": {
+          "page": 3,
+          "row_idx": 0,
+          "source": "spec_sheet",
+          "table_idx": 3
+        },
+        "unit": null
+      },
+      {
+        "conditions": {},
+        "confidence": 0.6,
+        "method": null,
+        "name": "Tensile strength\nTensile modulus\nElongation\nFlexural strength\nFlexural modulus\nElastic modulus\nCompressive strength\nIzod impact strength, unnotched, \n23oC\nIzod impact strength, notched, \n23oC\nShear strength\nPoisson\u2019s ratio\nShore D hardness\nRockwell hardness\nShrinkage\nBrittleness temperature (ASTM \nD746)\nIntrinsic viscosity, 25oC\nMelt viscosity, shear rate=1000 \ns-1 \nMelt index, 230oC/3.8 kg",
+        "provenance": {
+          "page": 3,
+          "row_idx": 1,
+          "source": "spec_sheet",
+          "table_idx": 3
+        },
+        "unit": null
+      },
+      {
+        "conditions": {},
+        "confidence": 0.6,
+        "method": null,
+        "name": "Water absorption, 24h at 23oC\nMoisture absorption, equilibrium \n23oC/50% RH",
+        "provenance": {
+          "page": 4,
+          "row_idx": 0,
+          "source": "spec_sheet",
+          "table_idx": 4
+        },
+        "unit": null
+      },
+      {
+        "conditions": {},
+        "confidence": 0.6,
+        "method": null,
+        "name": "Emission wavelengths\nDepth of UV penetration",
+        "provenance": {
+          "page": 5,
+          "row_idx": 0,
+          "source": "spec_sheet",
+          "table_idx": 7
+        },
+        "unit": null
+      },
+      {
+        "conditions": {},
+        "confidence": 0.6,
+        "method": null,
+        "name": "x-ray diffraction peaks",
+        "provenance": {
+          "page": 6,
+          "row_idx": 0,
+          "source": "spec_sheet",
+          "table_idx": 10
+        },
+        "unit": null
+      }
+    ]
+  },
+  "material": {
+    "family": null,
+    "grade": "Industry_Polymer_handbook_PEEK-polyetheretherketone_2012_Handbook-of-Polymers",
+    "vendor": null
+  },
+  "properties": [],
+  "verbatim": {
+    "tables": [
+      {
+        "page": 3,
+        "rows": [
+          {
+            "PARAMETER\nMaximum service temperature\nContinuous use temperature\nHeat de(cid:3) ection temperature at \n1.8 MPa\nEnthalpy of crystallization\nHildebrand solubility parameter\nSurface tension\nVolume resistivity\nElectric strength K20/P50, \nd=0.60.8 mm\nCoef(cid:2) cient of friction\nContact angle of water, 20oC\nSpeed of sound": "MECHANICAL & RHEOLOGICAL PROPERTIES",
+            "REFERENCES\nPatel, P; Hull, T R; McCabe, R W; \nFlath, D; Grasmeder, J; Percy, M, \nPolym. Deg. Stab., 95, 709-18, \n2010.\nKuo, M C; Kuo, J S; Yang, M H; \nHuang, J C, Mater. Chem. Phys., \n123, 471-80, 2010.\nXiong, D; Xiong, L; Liu, L, J. \nBiomed. Mater. Res. B, 93, 492-96, \n2010.\nZhang, S; Awaja, F; James, N; \nMcKenzie, D R; Ruys, A J, Colloid \nSurfaces A: Physicochem. Eng. \nAspects, 374, 88-95, 2011.\nShekar, R I; Kotresh, T M; Rao, \nP M D; Kumar, K, J. Appl. Polym. \nSci., 112, 2497-2510, 2009.": "",
+            "UNIT\noC\noC\noC\nJ g-1\nMPa0.5\nmN m-1\nohm-m\nkV mm-1\n-\ndegree\nm s-1": "",
+            "VALUE\n315-400\n260\n155-162; 315 (30% glass (cid:2) ber and 30% carbon (cid:2) ber)\n18.59-48.72\n22.8\n21.2-22.6 (calc)\n1E14\n19\n0.22; 0.08-0.09 (lubricated conditions); 0.25-0.3 (dry \nconditions)\n90\n1,860-3,040": ""
+          },
+          {
+            "PARAMETER\nMaximum service temperature\nContinuous use temperature\nHeat de(cid:3) ection temperature at \n1.8 MPa\nEnthalpy of crystallization\nHildebrand solubility parameter\nSurface tension\nVolume resistivity\nElectric strength K20/P50, \nd=0.60.8 mm\nCoef(cid:2) cient of friction\nContact angle of water, 20oC\nSpeed of sound": "Tensile strength\nTensile modulus\nElongation\nFlexural strength\nFlexural modulus\nElastic modulus\nCompressive strength\nIzod impact strength, unnotched, \n23oC\nIzod impact strength, notched, \n23oC\nShear strength\nPoisson\u2019s ratio\nShore D hardness\nRockwell hardness\nShrinkage\nBrittleness temperature (ASTM \nD746)\nIntrinsic viscosity, 25oC\nMelt viscosity, shear rate=1000 \ns-1 \nMelt index, 230oC/3.8 kg",
+            "REFERENCES\nPatel, P; Hull, T R; McCabe, R W; \nFlath, D; Grasmeder, J; Percy, M, \nPolym. Deg. Stab., 95, 709-18, \n2010.\nKuo, M C; Kuo, J S; Yang, M H; \nHuang, J C, Mater. Chem. Phys., \n123, 471-80, 2010.\nXiong, D; Xiong, L; Liu, L, J. \nBiomed. Mater. Res. B, 93, 492-96, \n2010.\nZhang, S; Awaja, F; James, N; \nMcKenzie, D R; Ruys, A J, Colloid \nSurfaces A: Physicochem. Eng. \nAspects, 374, 88-95, 2011.\nShekar, R I; Kotresh, T M; Rao, \nP M D; Kumar, K, J. Appl. Polym. \nSci., 112, 2497-2510, 2009.": "Ramani, K; Zhao, W, Antec, 1160-\n64, 1997.",
+            "UNIT\noC\noC\noC\nJ g-1\nMPa0.5\nmN m-1\nohm-m\nkV mm-1\n-\ndegree\nm s-1": "MPa\nMPa\n%\nMPa\nMPa\nMPa\nMPa\nJ m-1\nJ m-1\nMPa\n-\n-\n-\n%\noC\ndl g-1\nPa s\ng/10 min",
+            "VALUE\n315-400\n260\n155-162; 315 (30% glass (cid:2) ber and 30% carbon (cid:2) ber)\n18.59-48.72\n22.8\n21.2-22.6 (calc)\n1E14\n19\n0.22; 0.08-0.09 (lubricated conditions); 0.25-0.3 (dry \nconditions)\n90\n1,860-3,040": "75-100; 158-162 (30% glass (cid:2) ber); 201-223 (30% carbon \n(cid:2)\n ber)\n3,500-4,400; 10,500-10,800 (30% glass (cid:2) ber); 19,700-20,900 \n(30% carbon (cid:2) ber)\n20-50; 2.7-2.8 (30% glass (cid:2) ber); 1.7-2.0 (30% carbon (cid:2) ber)\n146-170; 260-261 (30% glass (cid:2) ber); 317-321 (30% carbon \n(cid:2)\n ber)\n3,700-4,300; 10,400-10,500 (30% glass (cid:2) ber); 17,500-17,900 \n(30% carbon (cid:2) ber)\n3,500-4,000\n118-169\nno break; 640-850 (30% glass (cid:2) ber); 640-750 (30% carbon \n(cid:2)\n ber)\n77-91; 69 (30% glass (cid:2) ber); 64-69 (30% carbon (cid:2) ber)\n53\n0.4-0.41\n88; 91 (30% glass (cid:2) ber); 92 (30% carbon (cid:2) ber)\nR120\n1.2-1.8; 0.2-1.5 (30% glass (cid:2) ber); 0.1-1.6 (30% carbon (cid:2) ber)\n-65\n0.45-1.59\n380-440; 350 (30% glass (cid:2) ber)\n3-36; 0.7-14 (30% glass (cid:2) ber); 1.1-11 (30% carbon (cid:2) ber)"
+          }
+        ],
+        "table_idx": 3
+      },
+      {
+        "page": 4,
+        "rows": [
+          {
+            "PARAMETER": "Water absorption, 24h at 23oC\nMoisture absorption, equilibrium \n23oC/50% RH",
+            "REFERENCES": "",
+            "UNIT": "%\n%",
+            "VALUE": "0.1-0.5; 0.1 (30% glass (cid:2) ber)\n0.5"
+          }
+        ],
+        "table_idx": 4
+      },
+      {
+        "page": 5,
+        "rows": [
+          {
+            "PARAMETER": "Emission wavelengths\nDepth of UV penetration",
+            "REFERENCES": "Giancaterina, S; Rossi, A; Rivaton, \nA; Gardette, J L, Polym. Deg. \nStab., 68, 133-44, 2000.\nNakamura, H; Nakamura, T; No-\nguchi, T; Imagawa, K, Polym. Deg. \nStab., 91, 740-6, 2006.",
+            "UNIT": "nm\n(cid:5)m",
+            "VALUE": "315, 400\n<250"
+          }
+        ],
+        "table_idx": 7
+      },
+      {
+        "page": 6,
+        "rows": [
+          {
+            "PARAMETER": "x-ray diffraction peaks",
+            "REFERENCES": "Diez-Pascual, A M; Naffakh, M; \nGonzalez-Dominiguez, J M; Anson, \nA; Martizez-Rubi, Y; Martinez, M T; \nSimard, B; Gomez, M A, Carbon, \n48, 3485-99, 2010.",
+            "UNIT": "degree",
+            "VALUE": "18.7, 20.6, 22.9, 28.8"
+          }
+        ],
+        "table_idx": 10
+      }
+    ]
+  }
+}

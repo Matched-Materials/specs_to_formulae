@@ -33,3 +33,14 @@ mcp>=1.0
 # gRPC/protobuf versions that play nicely with google-cloud libs
 protobuf>=4.25.3,<5.0.0
 grpcio>=1.64
+
+# For PDF parsing
+pdfplumber>=0.11.0
+
+# For advanced PDF table extraction and parsing
+camelot-py[cv]>=0.11.0
+rapidfuzz>=3.0.0
+pint>=0.23
+python-Levenshtein>=0.25.0
+# For PDF parsing
+pdfplumber>=0.11.0

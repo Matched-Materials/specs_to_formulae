@@ -1,0 +1,591 @@
+{
+  "diagnostics": {
+    "file": "ALCOM LD2 PC 1000 16107 WT2641-15.pdf",
+    "unmapped_fields": []
+  },
+  "extras": {
+    "properties": [
+      {
+        "conditions": {},
+        "confidence": 0.6,
+        "method": null,
+        "name": "Injection molding",
+        "provenance": {
+          "page": 1,
+          "row_idx": 0,
+          "source": "spec_sheet",
+          "table_idx": 1
+        },
+        "unit": null
+      },
+      {
+        "conditions": {},
+        "confidence": 0.6,
+        "method": null,
+        "name": "Pre-Drying Conditions",
+        "provenance": {
+          "page": 1,
+          "row_idx": 1,
+          "source": "spec_sheet",
+          "table_idx": 1
+        },
+        "unit": null
+      },
+      {
+        "conditions": {},
+        "confidence": 0.6,
+        "method": null,
+        "name": "",
+        "provenance": {
+          "page": 1,
+          "row_idx": 2,
+          "source": "spec_sheet",
+          "table_idx": 1
+        },
+        "unit": null
+      },
+      {
+        "conditions": {},
+        "confidence": 0.6,
+        "method": null,
+        "name": "",
+        "provenance": {
+          "page": 1,
+          "row_idx": 3,
+          "source": "spec_sheet",
+          "table_idx": 1
+        },
+        "unit": null
+      },
+      {
+        "conditions": {},
+        "confidence": 0.6,
+        "method": null,
+        "name": "",
+        "provenance": {
+          "page": 1,
+          "row_idx": 4,
+          "source": "spec_sheet",
+          "table_idx": 1
+        },
+        "unit": null
+      },
+      {
+        "conditions": {},
+        "confidence": 0.6,
+        "method": null,
+        "name": "",
+        "provenance": {
+          "page": 1,
+          "row_idx": 5,
+          "source": "spec_sheet",
+          "table_idx": 1
+        },
+        "unit": null
+      },
+      {
+        "conditions": {},
+        "confidence": 0.6,
+        "method": null,
+        "name": "Processing Injection",
+        "provenance": {
+          "page": 1,
+          "row_idx": 6,
+          "source": "spec_sheet",
+          "table_idx": 1
+        },
+        "unit": null
+      },
+      {
+        "conditions": {},
+        "confidence": 0.6,
+        "method": null,
+        "name": "Moulding",
+        "provenance": {
+          "page": 1,
+          "row_idx": 7,
+          "source": "spec_sheet",
+          "table_idx": 1
+        },
+        "unit": null
+      },
+      {
+        "conditions": {},
+        "confidence": 0.6,
+        "method": null,
+        "name": "Processing Extrusion",
+        "provenance": {
+          "page": 1,
+          "row_idx": 8,
+          "source": "spec_sheet",
+          "table_idx": 1
+        },
+        "unit": null
+      },
+      {
+        "conditions": {},
+        "confidence": 0.6,
+        "method": null,
+        "name": "Storage",
+        "provenance": {
+          "page": 1,
+          "row_idx": 9,
+          "source": "spec_sheet",
+          "table_idx": 1
+        },
+        "unit": null
+      },
+      {
+        "conditions": {},
+        "confidence": 0.6,
+        "method": null,
+        "name": "MOCOM Compounds GmbH & Co. KG",
+        "provenance": {
+          "page": 2,
+          "row_idx": 0,
+          "source": "spec_sheet",
+          "table_idx": 2
+        },
+        "unit": null
+      },
+      {
+        "conditions": {},
+        "confidence": 0.6,
+        "method": null,
+        "name": "intended.",
+        "provenance": {
+          "page": 2,
+          "row_idx": 1,
+          "source": "spec_sheet",
+          "table_idx": 2
+        },
+        "unit": null
+      },
+      {
+        "conditions": {},
+        "confidence": 0.6,
+        "method": null,
+        "name": "The buyer is solely responsible for confirming the suitability of the product for a particular application, its utilization and processing and",
+        "provenance": {
+          "page": 2,
+          "row_idx": 2,
+          "source": "spec_sheet",
+          "table_idx": 2
+        },
+        "unit": null
+      },
+      {
+        "conditions": {},
+        "confidence": 0.6,
+        "method": null,
+        "name": "must observe any applicable laws and government regulations.NO EXPRESS OR IMPLIED RECOMMENDATION OR WARRANTY IS GIVEN",
+        "provenance": {
+          "page": 2,
+          "row_idx": 3,
+          "source": "spec_sheet",
+          "table_idx": 2
+        },
+        "unit": null
+      },
+      {
+        "conditions": {},
+        "confidence": 0.6,
+        "method": null,
+        "name": "WITH REGARD TO THE SUITABILITY OF THE PRODUCT FOR A PARTICULAR APPLICATION, SUCH AS, BUT NOT LIMITED TO, SAFETY-",
+        "provenance": {
+          "page": 2,
+          "row_idx": 4,
+          "source": "spec_sheet",
+          "table_idx": 2
+        },
+        "unit": null
+      },
+      {
+        "conditions": {},
+        "confidence": 0.6,
+        "method": null,
+        "name": "CRITICAL COMPONENTS OR SYSTEMS.",
+        "provenance": {
+          "page": 2,
+          "row_idx": 5,
+          "source": "spec_sheet",
+          "table_idx": 2
+        },
+        "unit": null
+      },
+      {
+        "conditions": {},
+        "confidence": 0.6,
+        "method": null,
+        "name": "Healthcare uses: the supply of any product by MOCOM for any medical, pharmaceutical or diagnostic application is conditional to an",
+        "provenance": {
+          "page": 2,
+          "row_idx": 6,
+          "source": "spec_sheet",
+          "table_idx": 2
+        },
+        "unit": null
+      },
+      {
+        "conditions": {},
+        "confidence": 0.6,
+        "method": null,
+        "name": "assessment by MOCOM in terms of compliance with MOCOM internal risk management policy \u2013 even for products which are in general",
+        "provenance": {
+          "page": 2,
+          "row_idx": 7,
+          "source": "spec_sheet",
+          "table_idx": 2
+        },
+        "unit": null
+      },
+      {
+        "conditions": {},
+        "confidence": 0.6,
+        "method": null,
+        "name": "designated for use in Healthcare applications.",
+        "provenance": {
+          "page": 2,
+          "row_idx": 8,
+          "source": "spec_sheet",
+          "table_idx": 2
+        },
+        "unit": null
+      },
+      {
+        "conditions": {},
+        "confidence": 0.6,
+        "method": null,
+        "name": "Important: irrespective of product type or designation, MOCOM does not recommend or support the use of any products it supplies which",
+        "provenance": {
+          "page": 2,
+          "row_idx": 9,
+          "source": "spec_sheet",
+          "table_idx": 2
+        },
+        "unit": null
+      },
+      {
+        "conditions": {},
+        "confidence": 0.6,
+        "method": null,
+        "name": "fall into the following medical, pharmaceutical or diagnostic application categories:",
+        "provenance": {
+          "page": 2,
+          "row_idx": 10,
+          "source": "spec_sheet",
+          "table_idx": 2
+        },
+        "unit": null
+      }
+    ]
+  },
+  "material": {
+    "family": null,
+    "grade": "ALCOM LD2 PC 1000 16107 WT2641-15",
+    "vendor": null
+  },
+  "properties": [
+    {
+      "conditions": {
+        "method": "ISO 1133"
+      },
+      "confidence": 0.7,
+      "method": "ISO 1133",
+      "name": "Melt volume-flow rate, MVR",
+      "provenance": {
+        "page": 1,
+        "row_idx": 10,
+        "source": "spec_sheet",
+        "table_idx": 0
+      },
+      "unit": null
+    },
+    {
+      "conditions": {
+        "method": "ISO 527-1"
+      },
+      "confidence": 0.7,
+      "method": "ISO 527-1",
+      "name": "Tensile modulus",
+      "provenance": {
+        "page": 1,
+        "row_idx": 14,
+        "source": "spec_sheet",
+        "table_idx": 0
+      },
+      "unit": null
+    },
+    {
+      "conditions": {
+        "method": "ISO 527-1"
+      },
+      "confidence": 0.7,
+      "method": "ISO 527-1",
+      "name": "Yield strain",
+      "provenance": {
+        "page": 1,
+        "row_idx": 16,
+        "source": "spec_sheet",
+        "table_idx": 0
+      },
+      "unit": null
+    },
+    {
+      "conditions": {
+        "method": "ISO 179/1",
+        "temp_C": 23.0
+      },
+      "confidence": 0.7,
+      "method": "ISO 179/1",
+      "name": "Charpy impact strength, +23\u00b0C",
+      "provenance": {
+        "page": 1,
+        "row_idx": 17,
+        "source": "spec_sheet",
+        "table_idx": 0
+      },
+      "unit": null
+    },
+    {
+      "conditions": {
+        "load_MPa": 1.8,
+        "method": "ISO 75-1",
+        "temp_C": 23.0
+      },
+      "confidence": 0.7,
+      "method": "ISO 75-1",
+      "name": "Charpy notched impact strength, +23\u00b0C",
+      "provenance": {
+        "page": 1,
+        "row_idx": 18,
+        "source": "spec_sheet",
+        "table_idx": 0
+      },
+      "unit": null
+    },
+    {
+      "conditions": {
+        "heating_rate_C_per_h": 50.0,
+        "method": "ISO 306",
+        "temp_C": 50.0
+      },
+      "confidence": 0.7,
+      "method": "ISO 306",
+      "name": "Vicat softening temperature, 50\u00b0C/h 50N",
+      "provenance": {
+        "page": 1,
+        "row_idx": 21,
+        "source": "spec_sheet",
+        "table_idx": 0
+      },
+      "unit": null
+    },
+    {
+      "conditions": {
+        "method": "ISO 1183"
+      },
+      "confidence": 0.7,
+      "method": "ISO 1183",
+      "name": "Density",
+      "provenance": {
+        "page": 1,
+        "row_idx": 23,
+        "source": "spec_sheet",
+        "table_idx": 0
+      },
+      "unit": null
+    }
+  ],
+  "verbatim": {
+    "tables": [
+      {
+        "page": 1,
+        "rows": [
+          {
+            "": "",
+            "CAMPUS\u00ae Datasheet": "ALCOM LD2 PC 1000 16107 WT2641-15 - PC"
+          },
+          {
+            "": "",
+            "CAMPUS\u00ae Datasheet": "MOCOM Compounds GmbH & Co. KG"
+          },
+          {
+            "": "",
+            "CAMPUS\u00ae Datasheet": "Product Texts"
+          },
+          {
+            "": "",
+            "CAMPUS\u00ae Datasheet": "Base Polymer\nPolycarbonate"
+          },
+          {
+            "": "",
+            "CAMPUS\u00ae Datasheet": "Filler/Additive System\nUV stabilised"
+          },
+          {
+            "": "",
+            "CAMPUS\u00ae Datasheet": "Special Features\nlight scattering"
+          },
+          {
+            "": "",
+            "CAMPUS\u00ae Datasheet": "Market Segment\nAutomotive,Lighting"
+          },
+          {
+            "": "",
+            "CAMPUS\u00ae Datasheet": "Application Area"
+          },
+          {
+            "": "",
+            "CAMPUS\u00ae Datasheet": "Typical Applications"
+          },
+          {
+            "": "Test Standard",
+            "CAMPUS\u00ae Datasheet": "Rheological properties"
+          },
+          {
+            "": "ISO 1133",
+            "CAMPUS\u00ae Datasheet": "Melt volume-flow rate, MVR"
+          },
+          {
+            "": "ISO 1133",
+            "CAMPUS\u00ae Datasheet": "Temperature"
+          },
+          {
+            "": "ISO 1133",
+            "CAMPUS\u00ae Datasheet": "Load"
+          },
+          {
+            "": "Test Standard",
+            "CAMPUS\u00ae Datasheet": "Mechanical properties"
+          },
+          {
+            "": "ISO 527-1/-2",
+            "CAMPUS\u00ae Datasheet": "Tensile modulus"
+          },
+          {
+            "": "ISO 527-1/-2",
+            "CAMPUS\u00ae Datasheet": "Yield stress"
+          },
+          {
+            "": "ISO 527-1/-2",
+            "CAMPUS\u00ae Datasheet": "Yield strain"
+          },
+          {
+            "": "ISO 179/1eU",
+            "CAMPUS\u00ae Datasheet": "Charpy impact strength, +23\u00b0C"
+          },
+          {
+            "": "ISO 179/1eA",
+            "CAMPUS\u00ae Datasheet": "Charpy notched impact strength, +23\u00b0C"
+          },
+          {
+            "": "Test Standard",
+            "CAMPUS\u00ae Datasheet": "Thermal properties"
+          },
+          {
+            "": "ISO 75-1/-2",
+            "CAMPUS\u00ae Datasheet": "Temp. of deflection under load, 1.80 MPa"
+          },
+          {
+            "": "ISO 306",
+            "CAMPUS\u00ae Datasheet": "Vicat softening temperature, 50\u00b0C/h 50N"
+          },
+          {
+            "": "Test Standard",
+            "CAMPUS\u00ae Datasheet": "Other properties"
+          },
+          {
+            "": "ISO 1183",
+            "CAMPUS\u00ae Datasheet": "Density"
+          }
+        ],
+        "table_idx": 0
+      },
+      {
+        "page": 1,
+        "rows": [
+          {
+            "": "",
+            "Other text information": "Injection molding"
+          },
+          {
+            "": "120 \u00b0C in a dry air (dessiccant) dryer",
+            "Other text information": "Pre-Drying Conditions"
+          },
+          {
+            "": "for 2-4 h",
+            "Other text information": ""
+          },
+          {
+            "": "120 \u00b0C in an air circulating dryer",
+            "Other text information": ""
+          },
+          {
+            "": "for 4-12 h",
+            "Other text information": ""
+          },
+          {
+            "": "max. moisture content <0,02 %",
+            "Other text information": ""
+          },
+          {
+            "": "melt temperature 270-310 \u00b0C",
+            "Other text information": "Processing Injection"
+          },
+          {
+            "": "mould temperature 80-110 \u00b0C",
+            "Other text information": "Moulding"
+          },
+          {
+            "": "melt temperature 240-280 \u00b0C",
+            "Other text information": "Processing Extrusion"
+          },
+          {
+            "": "dry, protected from light",
+            "Other text information": "Storage"
+          }
+        ],
+        "table_idx": 1
+      },
+      {
+        "page": 2,
+        "rows": [
+          {
+            "ALCOM LD2 PC 1000 16107 WT2641-15 - PC": "MOCOM Compounds GmbH & Co. KG"
+          },
+          {
+            "ALCOM LD2 PC 1000 16107 WT2641-15 - PC": "intended."
+          },
+          {
+            "ALCOM LD2 PC 1000 16107 WT2641-15 - PC": "The buyer is solely responsible for confirming the suitability of the product for a particular application, its utilization and processing and"
+          },
+          {
+            "ALCOM LD2 PC 1000 16107 WT2641-15 - PC": "must observe any applicable laws and government regulations.NO EXPRESS OR IMPLIED RECOMMENDATION OR WARRANTY IS GIVEN"
+          },
+          {
+            "ALCOM LD2 PC 1000 16107 WT2641-15 - PC": "WITH REGARD TO THE SUITABILITY OF THE PRODUCT FOR A PARTICULAR APPLICATION, SUCH AS, BUT NOT LIMITED TO, SAFETY-"
+          },
+          {
+            "ALCOM LD2 PC 1000 16107 WT2641-15 - PC": "CRITICAL COMPONENTS OR SYSTEMS."
+          },
+          {
+            "ALCOM LD2 PC 1000 16107 WT2641-15 - PC": "Healthcare uses: the supply of any product by MOCOM for any medical, pharmaceutical or diagnostic application is conditional to an"
+          },
+          {
+            "ALCOM LD2 PC 1000 16107 WT2641-15 - PC": "assessment by MOCOM in terms of compliance with MOCOM internal risk management policy \u2013 even for products which are in general"
+          },
+          {
+            "ALCOM LD2 PC 1000 16107 WT2641-15 - PC": "designated for use in Healthcare applications."
+          },
+          {
+            "ALCOM LD2 PC 1000 16107 WT2641-15 - PC": "Important: irrespective of product type or designation, MOCOM does not recommend or support the use of any products it supplies which"
+          },
+          {
+            "ALCOM LD2 PC 1000 16107 WT2641-15 - PC": "fall into the following medical, pharmaceutical or diagnostic application categories:"
+          }
+        ],
+        "table_idx": 2
+      }
+    ]
+  }
+}

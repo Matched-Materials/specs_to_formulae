@@ -216,8 +216,9 @@ def generate_formulation_doe(
                     baseB = rng.choice([b for b in compatible_bases if b.get("name") != baseA.get("name")])
 
                 # elastomer
-                e_lo, e_hi = e.get("range_wt_pct",[8,18])
-                elast_wt = rng.uniform(float(e_lo), float(e_hi))
+                # Allow elastomer content to go to zero to explore formulations without it.
+                _, e_hi = e.get("range_wt_pct",[8,18])
+                elast_wt = rng.uniform(0.0, float(e_hi))
 
                 # filler
                 filler = rng.choice(filler_pool) if filler_pool else None

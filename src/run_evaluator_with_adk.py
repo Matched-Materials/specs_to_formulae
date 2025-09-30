@@ -263,7 +263,11 @@ def evaluate_context(
 
     # Threaded run with timeout
     q: queue.Queue = queue.Queue()
-    t = threading.Thread(target=_drain_runner, args=(runner, user_id, session_id, user_message, events_dump, q), daemon=True) # type: ignore
+    # Set daemon=False. This prevents the thread from becoming a "zombie" that
+    # continues to run after the main process is interrupted with Ctrl+C. The
+    # main process will now wait for this thread to complete, making shutdown
+    # cleaner.
+    t = threading.Thread(target=_drain_runner, args=(runner, user_id, session_id, user_message, events_dump, q), daemon=False) # type: ignore
     t.start()
     try:
         status, info = q.get(timeout=timeout_s)
