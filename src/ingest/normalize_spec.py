@@ -1,6 +1,12 @@
 from typing import Dict, Any, List, Optional, Tuple
-import csv, json, os
+import csv, json, os, logging
 from pathlib import Path
+from io import BytesIO
+try:
+    import PIL.Image
+    from pdf2image import convert_from_path
+except ImportError:
+    PIL = None
 import re
 
 # Optional deps (we degrade gracefully)
@@ -8,14 +14,26 @@ try:
     import camelot
 except Exception:
     camelot = None
+
 try:
     import pdfplumber
-except Exception:
+    _PDFPLUMBER_IMPORT_ERR = None
+except Exception as e:
     pdfplumber = None
+    _PDFPLUMBER_IMPORT_ERR = repr(e)
+
 try:
     import pandas as pd
 except Exception:
     pd = None
+
+# --- New: Import the agent-based parser ---
+try:
+    from .run_text_extractor import run_text_extraction as run_parser
+    _RUN_PARSER_IMPORT_ERR = None
+except Exception as e:  # catch ANY import-time failure, not just ImportError
+    run_parser = None
+    _RUN_PARSER_IMPORT_ERR = repr(e)
 
 # --- Regex for parsing values, conditions, and methods ---
 NUM_RE = re.compile(r"(?<![A-Za-z])(-?\d+(?:[.,]\d+)?)(?:\s*(?:–|-|to)\s*(-?\d+(?:[.,]\d+)?))?")
@@ -570,61 +588,35 @@ def normalize_spec(spec_path: Path, assume_json: bool = False, ontology_path: Op
             diagnostics["error"] = f"csv_parse_error: {e}"
     
     elif p.suffix.lower() == ".pdf":
-        tables = _extract_pdf_tables(p)
-        if not tables:
-            diagnostics["warning"] = "no_tables_extracted"
+        missing = []
+        try:
+            from pdf2image import convert_from_path as _cfp
+        except Exception as e:
+            _cfp = None
+            missing.append(f"pdf2image import failed: {e!r}")
 
-        for p_idx, t_idx, rows in tables:
-            stitched = _stitch_two_column_rows(rows) if rows and len(rows[0].keys()) == 2 else []
-            if stitched:
-                # Map stitched records through alias + unit normalization
-                for idx, rec0 in enumerate(stitched):
-                    prov = {"page": p_idx + 1, "table_idx": t_idx, "row_idx": rec0.get("provenance", {}).get("row_idx", idx), "source": "spec_sheet"}
-                    name = rec0.get("name","").strip()
-                    alias = _match_alias(name)
-                    rec = {
-                        "name": (alias or {}).get("canonical") or name,
-                        "conditions": rec0.get("conditions") or {},
-                        "method": rec0.get("method") or (rec0.get("conditions") or {}).get("method"),
-                        "provenance": prov,
-                        "confidence": 0.9 if any(k in rec0 for k in ("value","value_min","value_max","special_value")) else 0.7
-                    }
-                    for k in ("value","value_min","value_max","special_value"):
-                        if k in rec0: rec[k] = rec0[k]
-                    unit_src = _normalize_unit_symbol(rec0.get("unit"))
-                    target_unit = ((alias or {}).get("unit")) or ONTOLOGY.get("units", {}).get(rec["name"])
-                    if target_unit and ("value" in rec or "value_min" in rec) and unit_src:
-                        if "value" in rec:
-                            nv = _convert_value(rec["value"], unit_src, target_unit)
-                            if nv is not None:
-                                rec["value"] = nv; rec["unit"] = target_unit; rec["confidence"] = min(1.0, rec["confidence"] + 0.1)
-                            else:
-                                rec["unit"] = unit_src
-                        else: # ranges
-                            lo = _convert_value(rec.get("value_min"), unit_src, target_unit) if "value_min" in rec else None
-                            hi = _convert_value(rec.get("value_max"), unit_src, target_unit) if "value_max" in rec else None
-                            if lo is not None and hi is not None:
-                                rec["value_min"], rec["value_max"], rec["unit"] = lo, hi, target_unit
-                                rec["confidence"] = min(1.0, rec["confidence"] + 0.1)
-                            else:
-                                rec["unit"] = unit_src
-                    else:
-                        rec["unit"] = unit_src or target_unit
-                    
-                    # unit hygiene: avoid bare "C" unless the property is a temperature metric
-                    if rec.get("unit") in {"C","c"} and not re.search(r"(temp|temperature|hdt|dtul|vicat)", rec["name"], re.I):
-                        rec["unit"] = None
+        if run_parser is None or pdfplumber is None:
+            diagnostics["error"] = "agent_parser_dependency_missing"
+            if _RUN_PARSER_IMPORT_ERR:
+                missing.append(f"run_parser failed: {_RUN_PARSER_IMPORT_ERR}")
+            if _PDFPLUMBER_IMPORT_ERR:
+                missing.append(f"pdfplumber failed: {_PDFPLUMBER_IMPORT_ERR}")
+            diagnostics["warning"] = "; ".join(missing) or "Unknown import failure"
+        else:
+            try:
+                print(f"  -> Using agent-based parser for: {p.name}")
+                
+                # Call the text-based extractor
+                agent_result = run_parser(str(p))
 
-                    if _looks_like_section(name):
-                        continue
-                    properties.append(rec)
-            else: # Fallback to row-by-row normalization
-                if rows:
-                    for r_idx, row in enumerate(rows):
-                        if not any(str(v).strip() for v in row.values()): continue
-                        rec, mapped = _normalize_pdf_row(row, p_idx, t_idx, r_idx)
-                        (properties if mapped else extras).append(rec)
-            verbatim_tables.append({"page": p_idx + 1, "table_idx": t_idx, "rows": rows})
+                print("-" * 80)
+                print(f"START AGENT RESPONSE for {p.name}")
+                print(agent_result)
+                print(f"END AGENT RESPONSE for {p.name}")
+                print("-" * 80)
+
+            except Exception as e:
+                diagnostics["error"] = f"pdf_agent_pipeline_error: {e}"
 
     else:
         diagnostics["warning"] = f"unsupported_file_type: {p.suffix}"

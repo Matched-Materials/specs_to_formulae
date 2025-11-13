@@ -1,107 +1,144 @@
-# Project Rivian: Low-Carbon PP Compound Development
+Awesome—let’s merge those two docs into one clean, practical README. Below is a single-file replacement you can drop in at the repo root.
 
-This project aims to develop and optimize a low-carbon polypropylene (PP) impact copolymer compound that meets the performance targets of a material like Exceed™ Tough PP8285E1.
+---
 
-We use a data-driven approach, combining machine-readable material libraries, Design of Experiments (DOE), dimensionality reduction, and physics-informed modeling to accelerate the formulation process.
+# Spec Sheets → Formulas (STF)
 
-## Overview
+A closed-loop system that converts polymer **spec sheets** into **credible candidate formulations**, predicts properties, scores them for realism vs. targets, and iteratively improves formulas via **Bayesian optimization**. It supports sustainability guardrails for **recyclable**, **compostable**, and **bio-based / mass-balance** material streams.
 
-This project is built around a closed-loop optimization workflow:
+## What this system does
 
-1.  **Formulation Generation**: A set of candidate material formulations is generated, either via a Design of Experiments (DOE) for an initial run, or suggested by a Bayesian Optimizer in subsequent loops.
-2.  **Simulation & Prediction**: The properties of these candidates are predicted using physics-informed models (e.g., processing simulation, performance prediction).
-3.  **Evaluation**: An "evaluator agent" scores the predicted outcomes against desired targets and scientific plausibility.
-4.  **Optimization**: The scores are fed to a Bayesian Optimizer, which learns from the results and suggests the next most promising formulation to evaluate.
-5.  This loop continues until the performance of the suggested formulations converges or a set number of iterations is reached.
+1. **Generate candidates** (DOE/BO) within a defined search space of formulation and process levers.&#x20;
+2. **Predict properties** for each candidate via a bridge script and a physics/empirical hybrid model.&#x20;
+3. **Evaluate** each candidate with an agentic evaluator that compares predictions to targets, checks plausibility, and emits a JSON score payload.&#x20;
+4. **Optimize** using scores as the objective; generate plots and a run summary.&#x20;
 
-The main entrypoint for running this workflow is `src/main_orchestrator.py`.
+Guardrails restrict ingredient pools up-front based on sustainability goals so you **don’t** generate chemically incompatible or non-compliant formulas (e.g., compostable stream excludes non-compostable components; recyclable stream stays “clean”).&#x20;
 
-## Running the Full Workflow
+---
 
-This section describes how to set up the environment and run the optimization loop.
+## Repo structure
 
-### 1. Setup
+```
+configs/                 # Processing lever configs, thresholds, etc.
+data/
+  raw/                   # Vendor/supplier raw info
+  processed/             # Machine-readable libs & targets (e.g., ingredient_library.json, target_properties.json)
+docs/                    # Plans & notes
+results/
+  formulations/          # DOE/BO candidates + metadata
+  compounded/            # Predicted properties + per-row agent artifacts
+  plots/                 # Convergence & PDP plots
+  summaries/             # Run summaries (JSON)
+src/
+  main_orchestrator.py   # End-to-end loop controller
+  formulation_doe_generator_V1.py  # Initial DOE generation
+  bridge_formulations_to_properties.py  # Property prediction bridge
+  analysis/              # Tidy/plots of results
+  prefilter.py           # Goal-based ingredient filtering
+  agent_eval_helpers.py  # Agent I/O + row evaluation
+evaluator/matsi_property_evaluator/
+  agent.py               # ADK agent definition + prompt config
+  root_agent.prompt      # Instructions (returns one JSON object)
+```
 
-It is recommended to use a virtual environment to manage project dependencies.
+Key references: orchestrator entrypoint & structure, DOE generator, and evaluation tooling. &#x20;
+
+---
+
+## Quickstart
+
+### 1) Environment
 
 ```bash
-# Create and activate a virtual environment
-python3 -m venv venv
-source venv/bin/activate
+# Use the repo's preferred Python
+conda create -n stf python=3.11 -y
+conda activate stf
 
-# Install required packages from the requirements file
+# Install dependencies
 pip install -r requirements.txt
 ```
 
-### 2. Running the Optimization
+> The orchestrator loads `.env` from the **project root**, and the evaluator agent also looks for a `.env` inside `evaluator/matsi_property_evaluator/`. Put your Vertex/Google credentials and model config in one (or both) as needed. &#x20;
 
-The main script `src/main_orchestrator.py` drives the entire closed-loop process. To start the optimization, run the script from the project's root directory.
+### 2) Data you need
+
+* `data/processed/ingredient_library.json` – inputs & metadata
+* `data/processed/processing_levers.json` – process bounds & defaults
+* `data/processed/pp_elastomer_TSE_hybrid_model_v1.json` – bridge model
+* `data/processed/target_properties.json` – “spec sheet” targets the evaluator will score against
+
+The orchestrator builds the **targets & constraints** dictionary directly from `target_properties.json`. &#x20;
+
+### 3) Run the full loop
 
 ```bash
-# Run from the project root directory
 python src/main_orchestrator.py
 ```
 
-## Directory Structure
+What happens:
 
-- **configs/**: Configuration files for agents and models.
-- **data/**: All project data.
-  - `raw/`: Original, immutable data files (e.g., supplier cost sheets).
-  - `processed/`: Cleaned, machine-readable data libraries (e.g., `ingredient_library.json`).
+* **Initial DOE** candidates are generated and saved under `results/formulations`.&#x20;
+* **Predictions** are produced by the bridge script and written back under `results/compounded`.&#x20;
+* **Evaluator** runs per row and drops artifacts:
 
-- **docs/**: Project documentation, plans, and reports.
+  * `row_XXXX/scores.json` and `row_XXXX/evaluation_report.md`
+  * Failures are moved into `results/failed_evaluations/<run_id>/row_XXXX_<run_id>/` so they don’t block progress. &#x20;
+* **Optimizer** updates with these scores and then iterates (ask → predict → evaluate → tell), producing **convergence** and **partial dependence** plots plus a **JSON summary**. &#x20;
 
-- **results/**: All generated outputs from the scripts.
-  - `datasets/`: Generated CSV files, like the DOE candidates.
-  - `plots/`: Generated visualizations, like PCA plots.
-  - `models/`: (Future) Saved machine learning models.
+---
 
-- **src/**: All Python source code.
-  - `main_orchestrator.py`: The main script for running the closed-loop optimization workflow.
-  - `formulation_doe_generator_V1.py`: Script to generate initial experimental designs.
-  - `evaluator/tools.py`: A module containing statistical and scoring helper functions used by the main orchestrator.
+## Sustainability guardrails & focus modes
 
-- **notebooks/**: (Future) Jupyter notebooks for exploratory data analysis and visualization.
+Before generating candidates, the orchestrator **filters ingredient pools** using your chosen goals (e.g., `compostable`, `recyclable`, `bio-based`). This ensures the generator only samples compliant inputs. You can also group runs by polymer family (PP, PET, etc.).&#x20;
 
-#To get formulas with different suites of additives you'll need to call for them: 
+---
 
-python src/formulation_doe_generatorV1.py \
-  --ingredient_library ../data/processed/ingredient_library.json \
-  --cycle iter_001 --include-biofiber --use-intune -n 200
-# -> ../results/datasets/formulations/iter_001/doe_iter_001.csv
-# -> ../results/datasets/formulations/iter_001/doe_run_metadata.json
+## How scoring works (evaluator)
 
- 
-Other examples
-------------------
-This generator broadens the search to include biofiber, biochar, and optional INTUNE compatibilizer.
-It also allows categorical elastomer choice (PBE, POE, OBC) via split runs.
+For each candidate row:
 
-Examples:
-  python formulation_doe_generator_v2.py -n 60 --include-biofiber --use-intune -o doe_biofiber_intune.csv
-  python formulation_doe_generator_v2.py -n 60 --include-biochar -o doe_biochar.csv
-  python formulation_doe_generator_v2.py -n 80 --elastomer_family POE --include-biofiber --include-biochar -o doe_POE_bio.csv
+1. We build a **JSON context** with predictions, process settings + recipe, and target constraints. Everything is coerced to JSON-safe primitives to avoid type/NaN issues.&#x20;
+2. We call the **ADK agent** (Gemini) and extract a single JSON object from its last message, even if the model mixes text/function parts. &#x20;
+3. We parse/validate the JSON; if the model omitted a recommended weight, we compute a reasonable fallback so the optimizer can keep going. &#x20;
 
-The output includes estimated cost, CO2e, and biogenic mass fraction based on ingredient_library.json metadata.
+We also emit quick **pre-flight deltas** vs targets (largest normalized errors) to make failures explainable in the console.&#x20;
 
-Then bridge:
+---
 
-bash
-Copy code
-python src/bridge_formulations_to_properties.py \
-  --cycle iter_001 \
-  --ingredient-library ../data/processed/ingredient_library.json \
-  --model ../data/processed/pp_elastomer_TSE_hybrid_model_v1_gpt.json
-# -> ../results/datasets/properties/iter_001/props_iter_001.csv
-# -> ../results/datasets/properties/iter_001/bridge_run_metadata.json
-Then orchestrate:
+## Outputs (per run)
 
-bash
-Copy code
-python src/evaluator_orchestrator.py \
-  --provider dummy --model-name placeholder \
-  --context ../results/datasets/properties/iter_001/context_iter_001.json \
-  --cycle iter_001
-# -> ../results/evaluations/iter_001/evaluator_report_iter_001.md
-# -> ../results/evaluations/iter_001/advisory_scores_iter_001.json
-# -> ../results/evaluations/iter_001/evaluator_run_metadata.json
+* `results/formulations/<timestamp>.csv` – DOE/BO candidates
+* `results/compounded/<timestamp>_prediction.csv` – predicted properties
+* `results/compounded/<timestamp>_agent/row_XXXX/` – evaluator artifacts
+* `results/plots/convergence_<timestamp>.png`, `partial_dependence_<timestamp>.png` – optimizer diagnostics &#x20;
+* `results/summaries/summary_<timestamp>.json` – best score and params&#x20;
+
+---
+
+## Troubleshooting
+
+* **Agent “session has no history” / “no text output” / “non-text parts”**
+  The runner now pulls the **last agent message** from ADK session history and can serialize function-call args when needed. This recovers valid JSON in cases where the model returns tool-ish structures.&#x20;
+* **Invalid JSON**
+  We search for a fenced \`\`\`json block in the agent response and fall back to raw leading “{…}” when fences are missing, then validate with Pydantic. &#x20;
+* **Bad rows shouldn’t derail the run**
+  Failures are **quarantined** to `results/failed_evaluations/<run_id>/…`, and the optimizer receives a safe low weight so the loop can continue.&#x20;
+
+---
+
+## Useful standalone commands
+
+Generate larger DOE batches or alternative additive suites (biofiber, biochar, compatibilizer) as needed; examples are included in the original generator docs.&#x20;
+
+---
+
+## Roadmap (short)
+
+* Programmatic (non-agentic) baseline evaluator for sanity-checks (thresholds, physics filters)
+* Automated **gap-filling** agent to pull missing property ranges from literature/DBs
+* Expanded ingredient curation: redundant sources per stream/vendor
+
+---
+
+If you want, I can drop this into your repo as `README.md` and retire the other file, or add a short `docs/CHANGELOG.md` to track cleanup steps next.

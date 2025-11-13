@@ -1,7 +1,7 @@
 # spec_sheets_to_formulas/src/cli.py
 from __future__ import annotations
 import argparse, json
-import os, sys
+import os, sys, logging
 from pathlib import Path
 from typing import Dict, Any, Optional
 
@@ -28,6 +28,12 @@ def main():
     # This makes path resolution robust, regardless of where the script is called from.
 
     ap = argparse.ArgumentParser(prog="spec-sheets-to-formulas")
+    ap.add_argument(
+        "--log-level",
+        default=os.getenv("LOGLEVEL", "INFO"),
+        choices=["DEBUG", "INFO", "WARNING", "ERROR"],
+        help="Set the logging level for the run."
+    )
     sub = ap.add_subparsers(dest="cmd", required=True)
 
     s_norm = sub.add_parser("normalize-spec")
@@ -68,6 +74,14 @@ def main():
     s_opt_batch.add_argument("--log-file", help="Path to a central log file for the batch run.")
 
     args = ap.parse_args()
+
+    # --- Configure Logging ---
+    # Set up basic logging based on the provided log level.
+    logging.basicConfig(
+        level=getattr(logging, args.log_level.upper()),
+        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+        stream=sys.stdout
+    )
 
     if args.cmd == "normalize-spec":
         norm = normalize_spec(Path(args.spec), assume_json=args.assume_json)
